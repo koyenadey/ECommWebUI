@@ -1,14 +1,14 @@
-//import { Products } from "../misc/type";
 import { useEffect } from "react";
 import Products from "../components/products/Products";
-import { useAppDispatch } from "../components/store/store";
-import { fetchProducts } from "../components/store/slices/productSlices";
+import { GETURL } from "../constants";
+
+import { useAppDispatch } from "../redux/store";
+import fetchProducts from "../redux/thunks/fetchProducts";
 
 const ProductsPage = () => {
-  const url = "https://fakestoreapi.com/products";
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchProducts(url));
+    dispatch(fetchProducts(GETURL));
   }, [dispatch]);
 
   return <Products />;
