@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import { Box, styled } from "@mui/system";
-import { AppBar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Container,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
 
 export const StyledLink = styled(Link)({
   textDecoration: "none",
   color: "#030303",
-  margin: "0rem 1rem",
   fontFamily: "Roboto, sans-serif",
 });
 
@@ -81,3 +86,72 @@ export const StyledItem = styled(Typography)(({ theme }) => ({
     fontSize: "1rem",
   },
 }));
+
+export const SaveButton = styled("input")({
+  backgroundColor: "#393b39",
+  color: "white",
+  margin: "1%",
+  width: "100%",
+  padding: "1%",
+  textAlign: "center",
+  borderRadius: "6px",
+  transition: "background-color 0.3s ease",
+  fontSize: "1rem",
+  cursor: "pointer",
+  "&:hover": {
+    backgroundColor: "white",
+    color: "#393b39",
+  },
+});
+
+export const EditButton = styled(Button)({
+  backgroundColor: "#393b39",
+  color: "white",
+  marginTop: "1%",
+  width: "100%",
+  "&:hover": {
+    backgroundColor: "white",
+    color: "#393b39",
+    border: "1px solid #393b39",
+    cursor: "pointer",
+  },
+});
+
+export const CreateAccountBtn = styled(Button)({
+  color: "#393b39",
+  "&:hover": {
+    backgroundColor: "white",
+  },
+  "&:active": {
+    backgroundColor: "white",
+  },
+  "&:focus": {
+    backgroundColor: "white",
+  },
+});
+
+export const RegisterButton = styled(Button)({
+  color: "#393b39",
+  width: "50%",
+  padding: "2%",
+  margin: "5%",
+  border: "1px solid #393b39",
+  "&:hover": {
+    border: "1px solid #393b39",
+  },
+});
+
+export const RegisterContainer = styled(Container)({
+  marginTop: "13%",
+  width: "50%",
+  border: "1px solid black",
+  textAlign: "center",
+});
+
+export const FormInput = styled(Box)({
+  margin: "5%",
+});
+
+export const ProductItemIcon = styled(IconButton)({
+  color: "rgba(255, 255, 255, 0.54)",
+});

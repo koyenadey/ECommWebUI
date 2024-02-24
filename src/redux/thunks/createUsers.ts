@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UsersList } from "../../misc/type";
+import { RegisterFormType, UserType } from "../../misc/type";
 
 export interface CreateUser {
   baseUrl: string;
-  user: UsersList;
+  user: RegisterFormType;
 }
 
 const createUsers = createAsyncThunk(
@@ -20,7 +20,7 @@ const createUsers = createAsyncThunk(
       const response: Response = await fetch(baseUrl, options);
       if (!response.ok) throw new Error("Failed to fetch the data");
       else {
-        const data: UsersList[] = await response.json();
+        const data: UserType = await response.json();
         return data;
       }
     } catch (e) {

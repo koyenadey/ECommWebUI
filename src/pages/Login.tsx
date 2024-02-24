@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
+import { CreateAccountBtn } from "../styles/styles";
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +16,11 @@ import { AppState, useAppDispatch } from "../redux/store";
 
 import { USER_LOGINURL } from "../constants";
 
-import Logo from "../images/Mtrans.png";
 import createUserLogin from "../redux/thunks/createUserLogin";
 import { useSelector } from "react-redux";
+
+import { SaveButton } from "../styles/styles";
+import Logo from "../images/Mtrans.png";
 
 type InitialValues = {
   email: string;
@@ -30,35 +33,47 @@ const initialValues: InitialValues = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const refreshToken = useSelector(
-    (state: AppState) => state.userReducer.tokens.refresh_token
+
+  const isLoggedIn: boolean = useSelector(
+    (state: AppState) => state.userReducer.isLoggedIn
   );
+
+  const error: string = useSelector(
+    (state: AppState) => state.userReducer.error
+  );
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm({ defaultValues: initialValues });
 
-  const navigate = useNavigate();
-
   const submitHandler = (data: InitialValues) => {
-    dispatch(createUserLogin({ baseUrl: USER_LOGINURL, userData: data }));
+    if (isSubmitSuccessful) {
+      dispatch(createUserLogin({ baseUrl: USER_LOGINURL, userData: data }));
+    }
   };
 
   useEffect(() => {
-    if (refreshToken !== "") navigate("/");
-  }, [refreshToken, navigate]);
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn, navigate, error]);
 
   return (
     <Container>
-      <IconButton onClick={() => navigate("/")}>
-        <Avatar
-          sx={{ width: 56, height: 56, margin: "15% 45%", cursor: "default" }}
-          variant="square"
-          src={Logo}
-        />
-      </IconButton>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <IconButton>
+          <Avatar
+            sx={{ width: 56, height: 56, margin: "15% 45%", cursor: "default" }}
+            variant="square"
+            src={Logo}
+          />
+        </IconButton>
+        <CreateAccountBtn variant="text" onClick={() => navigate("/register")}>
+          CREATE ACCOUNT
+        </CreateAccountBtn>
+      </Box>
       <Typography variant="h4">Log in to ModaMorph</Typography>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Box>
@@ -96,9 +111,14 @@ const Login = () => {
           </FormControl>
           <br />
           <br />
-          <input type="submit" />
+          <SaveButton type="submit" value="SUBMIT" />
         </Box>
       </form>
+      {error && (
+        <Typography variant="h6" color="error">
+          Incorrect credentials. Please try again!
+        </Typography>
+      )}
     </Container>
   );
 };

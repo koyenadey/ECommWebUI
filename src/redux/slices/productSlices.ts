@@ -1,10 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Product, ProductsList } from "../../misc/type";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Category, Product, ProductsList } from "../../misc/type";
 import fetchProducts from "../thunks/fetchProducts";
 import createProducts from "../thunks/createProducts";
+import fetchAllCategories from "../thunks/fetchAllCategories";
 
 type InitialState = {
   products: ProductsList[];
+  categories: Category[];
   productDetails: Product | undefined;
   isLoading: boolean;
   error: string;
@@ -13,6 +15,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   products: [],
+  categories: [],
   productDetails: undefined,
   isLoading: false,
   error: "",
@@ -73,6 +76,34 @@ const productSlice = createSlice({
           error: action.payload.message,
         };
       }
+    });
+
+    builder.addCase(fetchAllCategories.pending, (state) => {
+      return {
+        ...state,
+        isLoading: true,
+        categories: [],
+      };
+    });
+
+    builder.addCase(
+      fetchAllCategories.fulfilled,
+      (state, action: PayloadAction<Category[]>) => {
+        return {
+          ...state,
+          categories: action.payload,
+          isLoading: false,
+        };
+      }
+    );
+
+    builder.addCase(fetchAllCategories.rejected, (state, action) => {
+      const payload = action.payload as Error;
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
     });
   },
 });

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UsersList } from "../../misc/type";
+import { UserType } from "../../misc/type";
 
 const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
@@ -8,7 +8,7 @@ const fetchUsers = createAsyncThunk(
       const response: Response = await fetch(baseUrl);
       if (!response.ok) throw new Error("Failed to fetch the data");
       else {
-        const data: UsersList[] = await response.json();
+        const data: UserType[] = await response.json();
         return data;
       }
     } catch (e) {

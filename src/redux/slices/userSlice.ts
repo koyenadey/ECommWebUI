@@ -1,54 +1,97 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { UsersList } from "../../misc/type";
+import { UserType } from "../../misc/type";
+import { Token } from "../../misc/type";
 
-import fetchUsers from "../thunks/fetchUsers";
+import fetchUser from "../thunks/fetchUser";
 import createUserLogin from "../thunks/createUserLogin";
-
-type Token = {
-  access_token: string;
-  refresh_token: string;
-};
+import updateUser from "../thunks/updateUsers";
+import fetchAcessToken from "../thunks/fetchAccessToken";
+import fetchUsers from "../thunks/fetchUsers";
+import createUsers from "../thunks/createUsers";
 
 type InitialState = {
-  users: UsersList[];
+  user: UserType | undefined;
+  users: UserType[];
   tokens: Token;
   isLoading: boolean;
+  isLoggedIn: boolean;
   error: string;
 };
 
 const initialState: InitialState = {
+  user: undefined,
+  users: [],
   tokens: {
     access_token: "",
     refresh_token: "",
   },
-  users: [],
   isLoading: true,
   error: "",
+  isLoggedIn: false,
 };
 
 const userSlice = createSlice({
   name: "users",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    resetLogin: (state) => {
+      state.isLoggedIn = false;
+      state.tokens.access_token = "";
+      state.tokens.refresh_token = "";
+    },
+  },
   extraReducers(builder) {
-    builder.addCase(fetchUsers.pending, (state, action) => {
+    //Fetch all users
+    builder.addCase(fetchUsers.pending, (state) => {
       return {
         ...state,
         isLoading: true,
       };
     });
+
     builder.addCase(
       fetchUsers.fulfilled,
-      (state, action: PayloadAction<UsersList[]>) => {
+      (state, action: PayloadAction<UserType[]>) => {
         return {
           ...state,
-          users: action.payload,
           isLoading: false,
+          users: action.payload,
         };
       }
     );
+
     builder.addCase(fetchUsers.rejected, (state, action) => {
+      const payload = action.payload as { message: string };
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
+
+    //Fetch User Pending
+
+    builder.addCase(fetchUser.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(
+      fetchUser.fulfilled,
+      (state, action: PayloadAction<UserType>) => {
+        return {
+          ...state,
+          user: action.payload,
+          isLoading: false,
+          isLoggedIn: true,
+        };
+      }
+    );
+
+    builder.addCase(fetchUser.rejected, (state, action) => {
       if (action.payload instanceof Error) {
         return {
           ...state,
@@ -57,19 +100,124 @@ const userSlice = createSlice({
         };
       }
     });
+
+    //Create User Login
+    builder.addCase(createUserLogin.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
     builder.addCase(
       createUserLogin.fulfilled,
       (state, action: PayloadAction<Token>) => {
+        localStorage.setItem("refresh-token", action.payload.refresh_token);
         return {
           ...state,
           isLoading: false,
           tokens: action.payload,
+          isLoggedIn: true,
+          error: "",
         };
       }
     );
+
+    builder.addCase(createUserLogin.rejected, (state, action) => {
+      const payload = action.payload as { message: string };
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+        isLoggedIn: false,
+      };
+    });
+
+    //Update user pending
+
+    builder.addCase(updateUser.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(
+      updateUser.fulfilled,
+      (state, action: PayloadAction<UserType>) => {
+        return {
+          ...state,
+          isLoading: false,
+          user: action.payload,
+        };
+      }
+    );
+    builder.addCase(updateUser.rejected, (state, action) => {
+      const payload = action.payload as { message: string };
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
+
+    //Fetch User Access Token
+
+    builder.addCase(fetchAcessToken.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(
+      fetchAcessToken.fulfilled,
+      (state, action: PayloadAction<Token>) => {
+        return {
+          ...state,
+          isLoading: true,
+          tokens: action.payload,
+        };
+      }
+    );
+    builder.addCase(fetchAcessToken.rejected, (state, action) => {
+      if (action.payload instanceof Error) {
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload.message,
+        };
+      }
+    });
+
+    builder.addCase(createUsers.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+    builder.addCase(
+      createUsers.fulfilled,
+      (state, action: PayloadAction<UserType>) => {
+        return {
+          ...state,
+          isLoading: false,
+          user: action.payload,
+        };
+      }
+    );
+
+    builder.addCase(createUsers.rejected, (state, action) => {
+      const payload = action.payload as { message: string };
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
   },
 });
 
 const userReducer = userSlice.reducer;
-//export const {} = userSlice.actions;
+export const { resetLogin } = userSlice.actions;
 export default userReducer;

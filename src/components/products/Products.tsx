@@ -7,24 +7,23 @@ import { useNavigate } from "react-router-dom";
 import Paging from "../pagination/Paging";
 import * as Constants from "../../constants/index";
 import { ProductsList } from "../../misc/type";
-import Navbar from "../navigation/NavBar";
+import { ProductItemIcon } from "../../styles/styles";
 
 import { Container } from "@mui/system";
-import {
-  IconButton,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from "@mui/material";
+import { ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const Products = () => {
   const [pageNo, setPageNo] = useState<number>(1);
 
   const navigate = useNavigate();
+
   const products = useSelector(
     (state: AppState) => state.productReducer.products
   );
+
+  //console.log(products);
+
   const isLoading = useSelector(
     (state: AppState) => state.productReducer.isLoading
   );
@@ -52,7 +51,6 @@ const Products = () => {
 
   return (
     <>
-      <Navbar />
       <Container sx={{ marginTop: "10%" }}>
         <ImageList sx={{}} cols={2} gap={70}>
           {paginatedData.map((item) => (
@@ -64,16 +62,15 @@ const Products = () => {
                 loading="lazy"
               />
               <ImageListItemBar
-                title={item.title}
-                subtitle={item.category.name}
+                title={item?.title}
+                subtitle={item?.category?.name}
                 actionIcon={
-                  <IconButton
-                    sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                  <ProductItemIcon
                     aria-label={`show details ${item.title}`}
-                    onClick={() => productDetailsHandler(item.id)}
+                    onClick={() => productDetailsHandler(item?.id)}
                   >
                     <VisibilityIcon />
-                  </IconButton>
+                  </ProductItemIcon>
                 }
               />
             </ImageListItem>

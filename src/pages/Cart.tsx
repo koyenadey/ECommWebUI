@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../redux/store";
 
 import { removeFromCart, updateCart } from "../redux/slices/cartSlices";
+import MasterPage from "../components/master-page/MasterPage";
 
 import CartDialogue from "../components/cart/CartDialogue";
 import { ProductCart, UpdateProductCart } from "../misc/type";
@@ -60,7 +61,7 @@ const Cart = () => {
   };
 
   return (
-    <>
+    <MasterPage>
       <CartDialogue isOpen={dialogueIsOpen} onClose={confirmDeleteHandler} />
       <h1>This is cart page</h1>
       {cartData.map((item) => (
@@ -104,7 +105,7 @@ const Cart = () => {
         </Card>
       ))}
       <p>The cart has {cartDataQty} product</p>
-    </>
+    </MasterPage>
   );
 };
 

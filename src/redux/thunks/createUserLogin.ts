@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { Token } from "../../misc/type";
+
 export type UserLoginData = {
   email: string;
   password: string;
@@ -8,11 +10,6 @@ export type UserLoginData = {
 export type LoginDetails = {
   baseUrl: string;
   userData: UserLoginData;
-};
-
-type Result = {
-  access_token: string;
-  refresh_token: string;
 };
 
 const createUserLogin = createAsyncThunk(
@@ -24,12 +21,12 @@ const createUserLogin = createAsyncThunk(
         method: "POST",
         body: JSON.stringify(userData),
       });
-      if (!response.ok) throw new Error("The data fetch failed!");
-      const result: Result = await response.json();
+      if (!response.ok) throw new Error(response.statusText);
+      const result: Token = await response.json();
       return result;
     } catch (e) {
       const error = e as Error;
-      return rejectWithValue(error.message);
+      return rejectWithValue({ message: error.message });
     }
   }
 );
