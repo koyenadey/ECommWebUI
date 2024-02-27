@@ -3,6 +3,7 @@ import { Category, Product, ProductsList } from "../../misc/type";
 import fetchProducts from "../thunks/fetchProducts";
 import createProducts from "../thunks/createProducts";
 import fetchAllCategories from "../thunks/fetchAllCategories";
+import updateProduct from "../thunks/updateProduct";
 
 type InitialState = {
   products: ProductsList[];
@@ -11,6 +12,7 @@ type InitialState = {
   isLoading: boolean;
   error: string;
   productCount: number;
+  searchText: string;
 };
 
 const initialState: InitialState = {
@@ -20,12 +22,17 @@ const initialState: InitialState = {
   isLoading: false,
   error: "",
   productCount: 0,
+  searchText: "",
 };
 
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    addSearchText: (state, action: PayloadAction<string>) => {
+      state.searchText = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchProducts.pending, (state, action) => {
       return {
@@ -105,10 +112,37 @@ const productSlice = createSlice({
         error: payload.message,
       };
     });
+
+    builder.addCase(updateProduct.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(
+      updateProduct.fulfilled,
+      (state, action: PayloadAction<Product>) => {
+        return {
+          ...state,
+          isLoading: false,
+          productDetails: action.payload,
+        };
+      }
+    );
+
+    builder.addCase(updateProduct.rejected, (state, action) => {
+      const payload = action.payload as Error;
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
   },
 });
 
 const productReducer = productSlice.reducer;
-//export const {} = productSlice.actions;
+export const { addSearchText } = productSlice.actions;
 
 export default productReducer;

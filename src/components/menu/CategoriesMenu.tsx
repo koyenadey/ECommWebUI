@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Divider, ListItemText, Menu, MenuItem, Paper } from "@mui/material";
+import { Divider, ListItemText, Menu, MenuItem } from "@mui/material";
 
 import { AppState, useAppDispatch } from "../../redux/store";
 import fetchAllCategories from "../../redux/thunks/fetchAllCategories";
@@ -12,7 +12,7 @@ import { StyledLink } from "../../styles/styles";
 interface CategoriesMenuProps {
   anchorEl: null | HTMLElement;
   open: boolean;
-  handleClose: (index?: number) => void;
+  handleClose: (catName?: string, index?: number) => void;
 }
 
 const CategoriesMenu = (props: CategoriesMenuProps) => {
@@ -28,26 +28,25 @@ const CategoriesMenu = (props: CategoriesMenuProps) => {
   );
 
   return (
-    <Paper sx={{ width: 320, maxWidth: "100%" }}>
-      <Menu
-        id="category-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => handleClose()}
-        onClick={() => handleClose()}
-      >
-        <MenuItem>
-          <StyledLink to="/products">All Products</StyledLink>
-        </MenuItem>
-        <Divider />
-        {categories.map((category, index) => [
-          <MenuItem onClick={() => handleClose(index)}>
-            <ListItemText>{category.name}</ListItemText>
-          </MenuItem>,
-          <Divider />,
-        ])}
-      </Menu>
-    </Paper>
+    <Menu
+      sx={{ width: 320, maxWidth: "100%" }}
+      id="category-menu"
+      anchorEl={anchorEl}
+      open={open}
+      onClose={() => handleClose()}
+      onClick={() => handleClose()}
+    >
+      <MenuItem>
+        <StyledLink to="/products/all">All Products</StyledLink>
+      </MenuItem>
+      <Divider />
+      {categories.map((category, index) => [
+        <MenuItem onClick={() => handleClose(category.name, index)}>
+          <ListItemText>{category.name}</ListItemText>
+        </MenuItem>,
+        <Divider />,
+      ])}
+    </Menu>
   );
 };
 

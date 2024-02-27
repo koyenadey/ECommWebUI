@@ -8,7 +8,8 @@ import Footer from "../footer/Footer";
 import NavigationBar from "../navigation/NavBar";
 import { useNavigate } from "react-router-dom";
 import fetchAcessToken from "../../redux/thunks/fetchAccessToken";
-import { LOGGEDIN_USERURL } from "../../constants";
+import { ATOKEN_URL } from "../../constants";
+import ActiveBreadcrumbs from "../breadcrumbs/ActiveBreadcrumbs";
 
 interface MasterPageProps {
   children: ReactNode;
@@ -21,6 +22,7 @@ const MasterPage = ({ children }: MasterPageProps) => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const localRToken = localStorage.getItem("refresh-token");
   const token = {
     refreshToken: localRToken as string,
@@ -28,7 +30,7 @@ const MasterPage = ({ children }: MasterPageProps) => {
 
   useEffect(() => {
     if (!isLoggedIn && localRToken) {
-      dispatch(fetchAcessToken({ baseUrl: LOGGEDIN_USERURL, token }));
+      dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
     } else {
       //navigate("/");
     }
@@ -37,6 +39,7 @@ const MasterPage = ({ children }: MasterPageProps) => {
   return (
     <>
       <NavigationBar isLoggedIn={isLoggedIn} />
+      <ActiveBreadcrumbs />
       {children}
       <Footer />
     </>

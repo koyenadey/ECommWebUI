@@ -15,6 +15,7 @@ const initialState = {
   isLoading: false,
   error: "",
   productCount: 0,
+  searchText: "",
 };
 
 beforeAll(() => {

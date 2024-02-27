@@ -5,10 +5,16 @@ import {
   Button,
   Container,
   IconButton,
+  ListItemText,
+  TextField,
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export const StyledLink = styled(Link)({
   textDecoration: "none",
@@ -62,7 +68,7 @@ export const StyledInformation = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledItem = styled(Typography)(({ theme }) => ({
+export const StyledBtnFooter = styled(Button)(({ theme }) => ({
   margin: "3rem 1rem",
   color: "white",
   opacity: "60%",
@@ -71,14 +77,14 @@ export const StyledItem = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   [theme.breakpoints.down("sm")]: {
     margin: "3rem 0rem",
-    fontSize: "0.8rem",
+    fontSize: "0.5rem",
   },
   [theme.breakpoints.up("sm")]: {
-    fontSize: "2rem",
+    fontSize: "0.8rem",
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",
-    fontSize: "1.5rem",
+    fontSize: "1rem",
     margin: "3rem 0.5rem",
   },
   [theme.breakpoints.up("lg")]: {
@@ -90,9 +96,9 @@ export const StyledItem = styled(Typography)(({ theme }) => ({
 export const SaveButton = styled("input")({
   backgroundColor: "#393b39",
   color: "white",
-  margin: "1%",
+  marginTop: "1%",
   width: "100%",
-  padding: "1%",
+  padding: "2%",
   textAlign: "center",
   borderRadius: "6px",
   transition: "background-color 0.3s ease",
@@ -154,4 +160,65 @@ export const FormInput = styled(Box)({
 
 export const ProductItemIcon = styled(IconButton)({
   color: "rgba(255, 255, 255, 0.54)",
+});
+
+export const SubscribeBox = styled(Box)({
+  margin: "auto",
+  width: "70%",
+  textAlign: "center",
+});
+
+export const SubscribeText = styled(TextField)({
+  border: "1px solid white",
+  color: "white",
+  width: "30%",
+  marginTop: "2%",
+  "&:active": {
+    border: "2px solid white",
+    color: "white",
+  },
+});
+
+export const SubscribeBtn = styled(Button)({
+  margin: "3% 2%",
+  padding: "1%",
+  backgroundColor: "white",
+  color: "#393b39",
+  width: "20%",
+  "&:hover": {
+    backgroundColor: "#393b39",
+    color: "white",
+  },
+});
+
+export const StyledFacebookIcon = styled(FacebookIcon)({
+  color: "white",
+  margin: "3% 2%",
+});
+export const StyledInstagramIcon = styled(InstagramIcon)({
+  color: "white",
+  margin: "3% 2%",
+});
+export const StyledYoutubeIcon = styled(YouTubeIcon)({
+  color: "white",
+  margin: "3% 2%",
+});
+export const StyledCopyrightIcon = styled(CopyrightIcon)({
+  color: "white",
+  fontSize: "90%",
+  opacity: "40%",
+});
+export const StyledCopyrightText = styled("span")({
+  color: "white",
+  opacity: "40%",
+});
+
+export const StyledInfoSections = styled(Typography)({
+  padding: "5%",
+  borderBottom: "1px solid #393b39",
+  color: "#393b39",
+});
+
+export const StyledListItem = styled(ListItemText)({
+  textAlign: "center",
 });

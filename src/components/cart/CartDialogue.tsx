@@ -9,7 +9,7 @@ import {
 
 interface CartDialogueProps {
   isOpen: boolean;
-  onClose: (isClose: boolean, removeText?: string) => void;
+  onClose: (isClose: boolean) => void;
 }
 
 const CartDialogue = (props: CartDialogueProps) => {
@@ -22,10 +22,10 @@ const CartDialogue = (props: CartDialogueProps) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Remove Item"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to Delete this item?
+            Do you want to remove this item from cart?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

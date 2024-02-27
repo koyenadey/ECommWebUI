@@ -20,12 +20,10 @@ import {
   CardContent,
   CardMedia,
   Divider,
-  IconButton,
   MenuItem,
   Select,
   Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 
 const ProductDetails = () => {
   const { id } = useParams<string>();
@@ -60,52 +58,54 @@ const ProductDetails = () => {
 
   return (
     <MasterPage>
-      <h1>Product Details</h1>
-      <Card sx={{ maxWidth: 345 }} key={productDetails?.id}>
-        <CardMedia
-          component="img"
-          alt={productDetails?.title}
-          height="200"
-          image={productDetails?.category.image}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {productDetails?.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" m={2}>
-            {productDetails?.description}
-          </Typography>
-          <Divider />
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Box m={2}>
-              <Typography component="span">
-                SubTotal : {productDetails?.price}€
-              </Typography>
+      <Box sx={{ margin: "2%" }}>
+        <h1>Product Details</h1>
+        <Card sx={{ maxWidth: "50%", margin: "auto" }} key={productDetails?.id}>
+          <CardMedia
+            component="img"
+            alt={productDetails?.title}
+            height="20%"
+            image={productDetails?.category.image}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {productDetails?.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" m={2}>
+              {productDetails?.description}
+            </Typography>
+            <Divider />
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box m={2}>
+                <Typography component="span">
+                  SubTotal : {productDetails?.price}€
+                </Typography>
+              </Box>
             </Box>
-          </Box>
-        </CardContent>
-        <CardActions>
-          <Select
-            value={qty}
-            label="quantity"
-            onChange={(event) => qtyChangeHandler(event.target.value)}
-          >
-            {productQty.map((p) => (
-              <MenuItem key={p} value={p}>
-                {p}
-              </MenuItem>
-            ))}
-          </Select>
-          {productDetails && (
-            <Button
-              size="small"
-              onClick={() => addToCartHandler(productDetails, qty)}
+          </CardContent>
+          <CardActions>
+            <Select
+              value={qty}
+              label="quantity"
+              onChange={(event) => qtyChangeHandler(event.target.value)}
             >
-              Add to Cart
-            </Button>
-          )}
-        </CardActions>
-      </Card>
+              {productQty.map((p) => (
+                <MenuItem key={p} value={p}>
+                  {p}
+                </MenuItem>
+              ))}
+            </Select>
+            {productDetails && (
+              <Button
+                size="small"
+                onClick={() => addToCartHandler(productDetails, qty)}
+              >
+                Add to Cart
+              </Button>
+            )}
+          </CardActions>
+        </Card>
+      </Box>
     </MasterPage>
   );
 };

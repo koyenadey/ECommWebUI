@@ -13,6 +13,7 @@ describe("user reducer", () => {
     const userToBeUpdated = {
       name: "TestDev",
       email: "testDev1@mail.com",
+      role: "customer",
     };
 
     const expectedResult = {

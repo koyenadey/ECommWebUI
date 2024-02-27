@@ -44,3 +44,12 @@ export const mockCategories = [
     updatedAt: "2024-02-24T03:03:49.000Z",
   },
 ];
+
+export const footerData = [
+  { name: "Shipping", goTo: "aboutus", component: "shipping" },
+  { name: "Customer Care", goTo: "aboutus", component: "customercare" },
+  { name: "Returns Policy", goTo: "aboutus", component: "shipping" },
+  { name: "Store Policy", goTo: "", component: "" },
+  { name: "Payment Methods", goTo: "", component: "" },
+  { name: "About Us", goTo: "aboutus", component: "aboutus" },
+];

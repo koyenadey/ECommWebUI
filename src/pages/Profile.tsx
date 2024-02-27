@@ -4,9 +4,11 @@ import MasterPage from "../components/master-page/MasterPage";
 
 import ProfileEditForm from "../components/profile/ProfileEditForm";
 import ProfileDisplayForm from "../components/profile/ProfileDisplayForm";
+import useFetchToken from "../hook/useFetchUser";
 
 const Profile = () => {
   const [isEditable, setIsEditable] = useState<boolean>(false);
+  useFetchToken();
 
   const editProfileHandler = () => {
     setIsEditable((prev) => !prev);

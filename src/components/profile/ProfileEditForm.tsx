@@ -1,19 +1,29 @@
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 import { Box, FormControl, TextField, Typography } from "@mui/material";
 import { SaveButton } from "../../styles/styles";
+import { AppState, useAppDispatch } from "../../redux/store";
+import updateUser from "../../redux/thunks/updateUsers";
+import { USER_UPDATEURL } from "../../constants";
+import { UserType } from "../../misc/type";
 
 type UserEditForm = {
   name: string;
   email: string;
 };
 
-const initialValues: UserEditForm = {
-  name: "",
-  email: "",
-};
-
 const ProfileEditForm = ({ canEdit }: any) => {
+  const userData: UserType | undefined = useSelector(
+    (state: AppState) => state.userReducer.user
+  );
+
+  const initialValues: UserEditForm = {
+    name: userData?.name ?? "",
+    email: userData?.email ?? "",
+  };
+
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -21,9 +31,8 @@ const ProfileEditForm = ({ canEdit }: any) => {
   } = useForm<UserEditForm>({ defaultValues: initialValues });
 
   const submitHandler = (data: UserEditForm) => {
-    //dispatch
-    console.log(data);
     canEdit((prev: any) => !prev);
+    dispatch(updateUser({ baseUrl: USER_UPDATEURL, user: data }));
   };
 
   return (
@@ -34,6 +43,7 @@ const ProfileEditForm = ({ canEdit }: any) => {
         <FormControl fullWidth>
           <TextField
             {...register("name", {
+              required: "Name cannot be empty",
               minLength: {
                 value: 3,
                 message: "The minimum length should be 3",
@@ -52,6 +62,7 @@ const ProfileEditForm = ({ canEdit }: any) => {
         <FormControl fullWidth>
           <TextField
             {...register("email", {
+              required: "Email cannot be empty",
               pattern: {
                 value: /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
                 message: "Incorrect mail",
@@ -64,6 +75,7 @@ const ProfileEditForm = ({ canEdit }: any) => {
             {errors?.email?.message}
           </Typography>
         </FormControl>
+
         <SaveButton type="submit" value="Save" />
       </Box>
     </form>

@@ -98,8 +98,8 @@ const Login = () => {
               {...register("password", {
                 required: "Password cannot be empty",
                 minLength: {
-                  value: 6,
-                  message: "Password cannot be less than 6 charecters!",
+                  value: 5,
+                  message: "Password cannot be less than 5 charecters!",
                 },
               })}
               id="user-password"

@@ -4,11 +4,13 @@ import { ProductCart, UpdateProductCart } from "../../misc/type";
 type InitialState = {
   cart: ProductCart[];
   quantity: number;
+  subTotal: number;
 };
 
 const initialState: InitialState = {
   cart: [],
   quantity: 0,
+  subTotal: 0,
 };
 
 const cartSlice = createSlice({
@@ -26,9 +28,12 @@ const cartSlice = createSlice({
       state.quantity = state.cart.reduce((acc, curr) => {
         return acc + curr.quantity;
       }, 0);
+
+      state.subTotal = state.cart.reduce((acc, curr) => {
+        return acc + curr.quantity * curr.price;
+      }, 0);
     },
     updateCart: (state, action: PayloadAction<UpdateProductCart>) => {
-      //state.quantity += action.payload;
       const productToBeUpdated = state.cart.find(
         (product) => product.id === action.payload.productId
       );
@@ -40,6 +45,10 @@ const cartSlice = createSlice({
       state.quantity = state.cart.reduce((acc, curr) => {
         return acc + curr.quantity;
       }, 0);
+
+      state.subTotal = state.cart.reduce((acc, curr) => {
+        return acc + curr.quantity * curr.price;
+      }, 0);
     },
 
     removeFromCart: (state, action: PayloadAction<number>) => {
@@ -50,6 +59,10 @@ const cartSlice = createSlice({
 
       state.quantity = state.cart.reduce((acc, curr) => {
         return acc + curr.quantity;
+      }, 0);
+
+      state.subTotal = state.cart.reduce((acc, curr) => {
+        return acc + curr.quantity * curr.price;
       }, 0);
     },
   },

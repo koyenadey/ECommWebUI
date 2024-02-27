@@ -12,8 +12,11 @@ import { ProductItemIcon } from "../../styles/styles";
 import { Container } from "@mui/system";
 import { ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import useFetchUser from "../../hook/useFetchUser";
 
 const Products = () => {
+  useFetchUser();
+
   const [pageNo, setPageNo] = useState<number>(1);
 
   const navigate = useNavigate();
@@ -22,7 +25,9 @@ const Products = () => {
     (state: AppState) => state.productReducer.products
   );
 
-  //console.log(products);
+  const searchValue = useSelector(
+    (state: AppState) => state.productReducer.searchText
+  );
 
   const isLoading = useSelector(
     (state: AppState) => state.productReducer.isLoading
@@ -37,11 +42,20 @@ const Products = () => {
     setPageNo(value);
   };
 
-  const pageSize = Constants.PAGESIZE;
+  const pageSize: number = Constants.PAGESIZE;
   const offset = (pageNo - 1) * pageSize;
   const limit = pageNo * pageSize;
 
-  const paginatedData: ProductsList[] = products.slice(offset, limit);
+  const searchedData = products.filter((p) => {
+    return Object.values(p).some(
+      (value) =>
+        typeof value === "string" &&
+        value.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  });
+  const paginatedData: ProductsList[] = searchedData.slice(offset, limit);
+
+  const pageCount = Math.ceil(searchedData.length / pageSize);
 
   if (isLoading) return <div>Loading...</div>;
   else if (error) {
@@ -78,7 +92,7 @@ const Products = () => {
         </ImageList>
         <Paging
           pageNo={pageNo}
-          pageSize={pageSize}
+          pageCount={pageCount}
           onPageChange={pageChangeHandler}
         />
       </Container>

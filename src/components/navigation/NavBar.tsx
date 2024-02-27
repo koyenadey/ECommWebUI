@@ -14,6 +14,7 @@ import Logo from "../../images/M.png";
 import LoggedInUser from "../user/LoggedInUser";
 import { resetLogin } from "../../redux/slices/userSlice";
 import CategoriesMenu from "../menu/CategoriesMenu";
+import SearchBar from "../search/SearchBar";
 
 interface NavBarProps {
   isLoggedIn: boolean;
@@ -42,7 +43,12 @@ const NavigationBar = (props: NavBarProps) => {
 
   const showProfileHandler = (action: string) => {
     if (action === "Profile") navigate("/profile");
-    if (action === "DashBoard") navigate("/");
+    if (action === "About Us") navigate("/aboutus", { state: "aboutus" });
+    if (action === "Shipping & Returns")
+      navigate("/aboutus", { state: "shipping" });
+    if (action === "Customer Care")
+      navigate("/aboutus", { state: "customercare" });
+    if (action === "Dashboard") navigate("/dashboard");
     if (action === "LogOut") {
       localStorage.removeItem("refresh-token");
       dispatch(resetLogin());
@@ -53,8 +59,9 @@ const NavigationBar = (props: NavBarProps) => {
     setAnchorEl(null);
   };
 
-  const showCategoriesHandler = (index?: number) => {
-    if (index !== undefined) navigate(`/categories/${index + 1}/products`);
+  const showCategoriesHandler = (catName?: string, index?: number) => {
+    if (index !== undefined && catName !== undefined)
+      navigate(`/categories/${catName}/products?productId=${index + 1}`);
     setAnchorEll(null);
   };
 
@@ -67,7 +74,8 @@ const NavigationBar = (props: NavBarProps) => {
               Home
             </Avatar>
           </IconButton>
-          <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+            <SearchBar />
             <IconButton onClick={handleProfileClick}>
               {isLoggedIn ? (
                 <LoggedInUser />
@@ -75,7 +83,7 @@ const NavigationBar = (props: NavBarProps) => {
                 <PersonIcon sx={{ fontSize: 30 }} />
               )}
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => navigate("/checkout/cart")}>
               <Badge badgeContent={cartQty} color="success">
                 <ShoppingBagOutlinedIcon sx={{ fontSize: 30 }} />
               </Badge>
