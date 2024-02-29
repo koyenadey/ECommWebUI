@@ -57,6 +57,7 @@ const userSlice = createSlice({
           ...state,
           isLoading: false,
           users: action.payload,
+          error: "",
         };
       }
     );

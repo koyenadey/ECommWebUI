@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import PrivateRoute from "./components/private/PrivateRoute";
+import OrderPagePopUp from "./components/cart/OrderPagePopUp";
 
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
@@ -26,6 +27,7 @@ function App() {
           element={<PrivateRoute Component={Dashboard} />}
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/orderpopup" element={<OrderPagePopUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/products/all" element={<ProductsPage />} />

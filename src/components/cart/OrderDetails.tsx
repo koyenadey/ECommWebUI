@@ -13,15 +13,14 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 
 import { ProductCart } from "../../misc/type";
 import CartDialogue from "./CartDialogue";
 
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../redux/store";
-import { removeFromCart, updateCart } from "../../redux/slices/cartSlices";
+import { removeFromCart } from "../../redux/slices/cartSlices";
+import AddQuantity from "./AddQuantity";
 
 interface State extends SnackbarOrigin {
   open: boolean;
@@ -45,21 +44,6 @@ const OrderDetails = () => {
     (state: AppState) => state.cartReducer.cart
   );
 
-  const addItemHandler = (id: number, action: string) => {
-    const item = cartData.find((item) => item.id === id);
-    const qty = item?.quantity as number;
-    if (action === "increement") {
-      dispatch(updateCart({ productId: id, quantity: qty + 1 }));
-      setNotifyMessage(`${item?.title} Added Succesfully`);
-      setAddItemNotify({ ...addItemNotify, open: true });
-    }
-    if (action === "decreement") {
-      dispatch(updateCart({ productId: id, quantity: qty - 1 }));
-      setNotifyMessage(`${item?.title} removed from the cart`);
-      setAddItemNotify({ ...addItemNotify, open: true });
-    }
-  };
-
   const removeItemHandler = (itemId: number) => {
     setItemToDelete(itemId);
     setDialogueOpen(true);
@@ -78,7 +62,6 @@ const OrderDetails = () => {
     event: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    //event.preventDefault();
     if (reason === "clickaway" || reason === "escapeKeyDown") {
       return;
     }
@@ -136,23 +119,11 @@ const OrderDetails = () => {
                   </Typography>
                 </ListItemText>
                 <ListItemText>
-                  <Box
-                    sx={{
-                      minWidth: "80px",
-                      margin: "10%",
-                      border: "1px solid black",
-                      display: "flex",
-                      justifyContent: "space-evenly",
-                    }}
-                  >
-                    <RemoveIcon
-                      onClick={() => addItemHandler(item.id, "decreement")}
-                    />
-                    <Typography>{item.quantity}</Typography>
-                    <AddIcon
-                      onClick={() => addItemHandler(item.id, "increement")}
-                    />
-                  </Box>
+                  <AddQuantity
+                    item={item}
+                    onNotify={setNotifyMessage}
+                    onAddItemNotify={setAddItemNotify}
+                  />
                 </ListItemText>
                 <ListItemText>
                   <Typography

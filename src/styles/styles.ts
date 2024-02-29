@@ -6,15 +6,18 @@ import {
   Container,
   IconButton,
   ListItemText,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import { InputBase } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const StyledLink = styled(Link)({
   textDecoration: "none",
@@ -53,17 +56,21 @@ export const Heading = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const StyledFooter = styled(Box)({
+export const StyledFooter = styled(Box)(({ theme }) => ({
   backgroundColor: "#393b39",
   height: "50vh",
   width: "100%",
-});
 
+  [theme.breakpoints.down("sm")]: {},
+}));
 export const StyledInformation = styled(Box)(({ theme }) => ({
   width: "60%",
   display: "flex",
   margin: "auto",
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.between("xs", "sm")]: {
+    width: "60%",
+  },
+  [theme.breakpoints.between("xs", "sm")]: {
     width: "100%",
   },
 }));
@@ -75,23 +82,27 @@ export const StyledBtnFooter = styled(Button)(({ theme }) => ({
   fontFamily: "Roboto, sans-serif",
   textAlign: "center",
   fontSize: "16px",
-  [theme.breakpoints.down("sm")]: {
-    margin: "3rem 0rem",
+
+  [theme.breakpoints.between("xs", "sm")]: {
+    margin: "1rem 1rem",
     fontSize: "0.5rem",
+    minWidth: "0",
   },
-  [theme.breakpoints.up("sm")]: {
-    fontSize: "0.8rem",
-  },
-  [theme.breakpoints.down("md")]: {
-    width: "100%",
+
+  [theme.breakpoints.between("sm", "md")]: {
+    margin: "2rem 1rem",
     fontSize: "1rem",
-    margin: "3rem 0.5rem",
   },
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.between("md", "lg")]: {
+    width: "60%",
+    margin: "2rem 1rem",
+    fontSize: "1rem",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
     width: "60%",
     fontSize: "1rem",
   },
-}));
+})) as typeof Button;
 
 export const SaveButton = styled("input")({
   backgroundColor: "#393b39",
@@ -162,13 +173,14 @@ export const ProductItemIcon = styled(IconButton)({
   color: "rgba(255, 255, 255, 0.54)",
 });
 
-export const SubscribeBox = styled(Box)({
+export const SubscribeBox = styled(Box)(({ theme }) => ({
   margin: "auto",
   width: "70%",
   textAlign: "center",
-});
+  [theme.breakpoints.between("xs", "sm")]: {},
+}));
 
-export const SubscribeText = styled(TextField)({
+export const SubscribeText = styled(TextField)(({ theme }) => ({
   border: "1px solid white",
   color: "white",
   width: "30%",
@@ -177,9 +189,25 @@ export const SubscribeText = styled(TextField)({
     border: "2px solid white",
     color: "white",
   },
-});
+  [theme.breakpoints.between("xs", "sm")]: {
+    marginTop: "10%",
+    width: "50%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    marginTop: "10%",
+    width: "50%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    marginTop: "10%",
+    width: "50%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    marginTop: "10%",
+    width: "50%",
+  },
+})) as typeof TextField;
 
-export const SubscribeBtn = styled(Button)({
+export const SubscribeBtn = styled(Button)(({ theme }) => ({
   margin: "3% 2%",
   padding: "1%",
   backgroundColor: "white",
@@ -189,29 +217,104 @@ export const SubscribeBtn = styled(Button)({
     backgroundColor: "#393b39",
     color: "white",
   },
-});
+  [theme.breakpoints.between("xs", "sm")]: {
+    width: "50%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    marginTop: "12%",
+    width: "20%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    marginTop: "12%",
+    width: "20%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    marginTop: "12%",
+    width: "20%",
+  },
+})) as typeof Button;
 
-export const StyledFacebookIcon = styled(FacebookIcon)({
+export const StyledFacebookIcon = styled(FacebookIcon)(({ theme }) => ({
   color: "white",
   margin: "3% 2%",
-});
-export const StyledInstagramIcon = styled(InstagramIcon)({
+  [theme.breakpoints.between("xs", "sm")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.up("xl")]: {
+    margin: "10% 2%",
+  },
+}));
+
+export const StyledInstagramIcon = styled(InstagramIcon)(({ theme }) => ({
   color: "white",
   margin: "3% 2%",
-});
-export const StyledYoutubeIcon = styled(YouTubeIcon)({
+  [theme.breakpoints.between("xs", "sm")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.up("xl")]: {
+    margin: "10% 2%",
+  },
+}));
+
+export const StyledYoutubeIcon = styled(YouTubeIcon)(({ theme }) => ({
   color: "white",
   margin: "3% 2%",
-});
-export const StyledCopyrightIcon = styled(CopyrightIcon)({
+  [theme.breakpoints.between("xs", "sm")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    margin: "10% 2%",
+  },
+  [theme.breakpoints.up("xl")]: {
+    margin: "10% 2%",
+  },
+}));
+export const StyledCopyrightIcon = styled(CopyrightIcon)(({ theme }) => ({
   color: "white",
   fontSize: "90%",
   opacity: "40%",
-});
-export const StyledCopyrightText = styled("span")({
+}));
+
+export const StyledCopyrightText = styled("span")(({ theme }) => ({
   color: "white",
   opacity: "40%",
-});
+  [theme.breakpoints.between("xs", "sm")]: {
+    margin: "3% 2%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    margin: "5% 2%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    margin: "5  % 2%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    margin: "10% 2%",
+  },
+}));
 
 export const StyledInfoSections = styled(Typography)({
   padding: "5%",
@@ -222,3 +325,43 @@ export const StyledInfoSections = styled(Typography)({
 export const StyledListItem = styled(ListItemText)({
   textAlign: "center",
 });
+
+export const StyledSearchBar = styled(Paper)(({ theme }) => ({
+  textAlign: "center",
+  m: "auto",
+  [theme.breakpoints.between("xs", "sm")]: {
+    display: "flex",
+    width: "50%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    display: "flex",
+    width: "50%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    display: "flex",
+    width: "50%",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    width: "50%",
+  },
+})) as typeof Paper;
+
+export const StyledMagnifyingGlass = styled(IconButton)(({ theme }) => ({
+  [theme.breakpoints.between("xs", "sm")]: {
+    margin: "0",
+    padding: "0",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    margin: "0",
+    padding: "0",
+  },
+}));
+
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  [theme.breakpoints.between("xs", "sm")]: {
+    width: "90%",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    width: "90%",
+  },
+}));

@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import {
   List,
   ListItem,
@@ -10,9 +13,9 @@ import {
 import { EditButton } from "../../styles/styles";
 import LockIcon from "@mui/icons-material/Lock";
 import { AppState } from "../../redux/store";
-import { useSelector } from "react-redux";
 
 const OrderSummary = () => {
+  const navigate = useNavigate();
   const subTotal: number = useSelector(
     (state: AppState) => state.cartReducer.subTotal
   );
@@ -60,7 +63,11 @@ const OrderSummary = () => {
       </ListItem>
       <Divider />
       <ListItem>
-        <EditButton variant="contained" color="info">
+        <EditButton
+          variant="contained"
+          color="info"
+          onClick={() => navigate("/checkout/cart")}
+        >
           Checkout
         </EditButton>
       </ListItem>

@@ -35,6 +35,25 @@ export let mockProducts: ProductsList[] = [
   },
 ];
 
+export const mockUsers = [
+  {
+    id: 1,
+    email: "john@mail.com",
+    password: "changeme",
+    name: "Jhon",
+    role: "customer",
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg",
+  },
+  {
+    id: 2,
+    email: "maria@mail.com",
+    password: "12345",
+    name: "Maria",
+    role: "customer",
+    avatar: "https://i.imgur.com/DTfowdu.jpg",
+  },
+];
+
 export const mockCategories = [
   {
     id: 1,

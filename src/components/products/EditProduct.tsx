@@ -184,23 +184,6 @@ const EditProduct = () => {
             />
           </FormControl>
         </FormInput>
-        {/* <FormInput>
-          <Controller
-            name="images"
-            control={control}
-            defaultValue={productDetails?.images}
-            rules={{ required: "Category cannot be empty" }}
-            render={({ field }) => (
-              <TextField
-                fullWidth
-                {...field}
-                label="Images"
-                error={!!errors.images}
-                helperText={errors.images?.message}
-              />
-            )}
-          />
-        </FormInput> */}
         <SaveButton type="submit" value={buttonLabel} />
       </form>
     </Container>

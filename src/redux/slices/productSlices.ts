@@ -41,13 +41,13 @@ const productSlice = createSlice({
       };
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
-      if (action.payload instanceof Error) {
-        return {
-          ...state,
-          isLoading: false,
-          error: action.payload.message,
-        };
-      }
+      const payload = action.payload as Error;
+      const errorMessage = payload ? payload.message : "An error occurred";
+      return {
+        ...state,
+        isLoading: false,
+        error: errorMessage,
+      };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {

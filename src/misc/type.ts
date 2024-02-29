@@ -38,6 +38,8 @@ export type CreateProductType = {
   categoryId: number;
 };
 
+export type UpdateProductType = Omit<CreateProductType, "images">;
+
 export type ProductCart = {
   id: number;
   title: string;

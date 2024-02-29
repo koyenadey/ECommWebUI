@@ -1,11 +1,12 @@
 import { CATGET_URL, GETURL } from "../../constants";
 import { mockProducts } from "../../data/data";
-import { CreateProductType } from "../../misc/type";
+import { CreateProductType, Product, UpdateProductType } from "../../misc/type";
 import productReducer from "../../redux/slices/productSlices";
 import store from "../../redux/store";
 import createProducts from "../../redux/thunks/createProducts";
 import fetchAllCategories from "../../redux/thunks/fetchAllCategories";
 import fetchProducts from "../../redux/thunks/fetchProducts";
+import updateProduct from "../../redux/thunks/updateProduct";
 import { productServer } from "../shared/productServer";
 
 const initialState = {
@@ -41,10 +42,12 @@ describe("Product Reducer", () => {
     );
     expect(state).toEqual({
       products: Array.isArray(mockProducts) ? mockProducts : [],
+      categories: [],
       isLoading: false,
       productDetails: Array.isArray(mockProducts) ? undefined : mockProducts,
       productCount: mockProducts.length,
       error: "",
+      searchText: "",
     });
   });
 
@@ -55,25 +58,33 @@ describe("Product Reducer", () => {
     );
     expect(state).toEqual({
       products: [],
+      categories: [],
       isLoading: true,
       productDetails: undefined,
       productCount: 0,
       error: "",
+      searchText: "",
     });
   });
 
   test("should have a message in the error", () => {
-    const error = new Error("");
+    const error = new Error("An error occurred");
+
+    //const errorMessage = error ? error.message : "An error occurred";
+
     const state = productReducer(
       initialState,
       fetchProducts.rejected(error, "rejected", "")
     );
+
     expect(state).toEqual({
       products: [],
+      categories: [],
       isLoading: false,
       productDetails: undefined,
       productCount: 0,
       error: error.message,
+      searchText: "",
     });
   });
 
@@ -102,4 +113,38 @@ describe("Product Reducer", () => {
     await store.dispatch(createProducts(productObject));
     expect(store.getState().productReducer.products.length).toBe(2);
   });
+});
+
+test("should update a product", async () => {
+  const url = GETURL + "/1";
+  const product: CreateProductType = {
+    title: "Zara Blazer",
+    price: 100,
+    description: "A green zara blazer",
+    images: ["https://placeimg.com/640/480/any"],
+    categoryId: 1,
+  };
+  const productObject = { baseUrl: url, product };
+
+  const expectedResult = {
+    id: 1,
+    title: "Zara Blazer",
+    price: 100,
+    description: "A green zara blazer",
+    images: ["https://placeimg.com/640/480/any"],
+    creationAt: "",
+    updatedAt: "",
+    category: {
+      id: 1,
+      name: "Clothes",
+      image: "",
+      creationAt: "",
+      updatedAt: "",
+    },
+  };
+
+  await store.dispatch(updateProduct(productObject));
+  expect(store.getState().productReducer.productDetails?.title).toEqual(
+    expectedResult.title
+  );
 });

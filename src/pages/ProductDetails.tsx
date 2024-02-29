@@ -24,12 +24,15 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import OrderPagePopUp from "../components/cart/OrderPagePopUp";
 
 const ProductDetails = () => {
   const { id } = useParams<string>();
   const [qty, setQty] = useState<number>(1);
+  const [showOrderPopUp, setShowOrderPopUp] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
   const url = `${GETURL}/${id}`;
   const productQty: number[] = Utils.numbersArray(10);
 
@@ -53,13 +56,19 @@ const ProductDetails = () => {
     productToAdd.quantity = itemCount;
 
     dispatch(addToCart(productToAdd));
-    navigate("/checkout/cart");
+    setShowOrderPopUp(true);
   };
 
   return (
     <MasterPage>
-      <Box sx={{ margin: "2%" }}>
-        <h1>Product Details</h1>
+      <h1>Product Details</h1>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
         <Card sx={{ maxWidth: "50%", margin: "auto" }} key={productDetails?.id}>
           <CardMedia
             component="img"
@@ -98,13 +107,14 @@ const ProductDetails = () => {
             {productDetails && (
               <Button
                 size="small"
-                onClick={() => addToCartHandler(productDetails, qty)}
+                onClick={(event) => addToCartHandler(productDetails, qty)}
               >
                 Add to Cart
               </Button>
             )}
           </CardActions>
         </Card>
+        {showOrderPopUp && <OrderPagePopUp />}
       </Box>
     </MasterPage>
   );

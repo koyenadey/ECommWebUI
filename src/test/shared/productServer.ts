@@ -35,6 +35,30 @@ const handler = [
     };
     return HttpResponse.json(prodToReturn, { status: 201 });
   }),
+
+  http.put(
+    "https://api.escuelajs.co/api/v1/products/:id",
+    async ({ request }) => {
+      const pathSegments = new URL(request.url).pathname.split("/");
+      const productId = pathSegments[pathSegments.length - 1];
+      if (!productId) return new HttpResponse(null, { status: 404 });
+
+      const productToUpdate = mockProducts.find(
+        (product) => product.id === parseInt(productId)
+      );
+
+      const product = (await request.json()) as ProductsList;
+
+      if (!productToUpdate) return new HttpResponse(null, { status: 400 });
+
+      productToUpdate.title = product.title;
+      productToUpdate.price = product.price;
+      productToUpdate.description = product.description;
+      productToUpdate.category.id = product.category.id;
+
+      return HttpResponse.json(productToUpdate, { status: 204 });
+    }
+  ),
 ];
 
 export const productServer = setupServer(...handler);

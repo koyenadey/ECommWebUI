@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { IconButton, InputBase, Paper } from "@mui/material";
+import { IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
 import { addSearchText } from "../../redux/slices/productSlices";
 import { useDebouncedCallback } from "use-debounce";
+import { StyledMagnifyingGlass, StyledSearchBar } from "../../styles/styles";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -18,16 +19,16 @@ const SearchBar = () => {
   }, [dispatch, searchText, debounced]);
 
   return (
-    <Paper sx={{ textAlign: "center", m: "auto" }}>
-      <IconButton>
+    <StyledSearchBar>
+      <StyledMagnifyingGlass>
         <SearchIcon />
-      </IconButton>
+      </StyledMagnifyingGlass>
       <InputBase
         value={searchText}
         placeholder="search products"
         onChange={(event) => setSearchText(event.target.value)}
       />
-    </Paper>
+    </StyledSearchBar>
   );
 };
 
