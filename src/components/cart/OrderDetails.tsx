@@ -4,15 +4,11 @@ import {
   Alert,
   Box,
   Divider,
-  List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Snackbar,
   SnackbarOrigin,
-  Typography,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 
 import { ProductCart } from "../../misc/type";
 import CartDialogue from "./CartDialogue";
@@ -21,6 +17,15 @@ import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../redux/store";
 import { removeFromCart } from "../../redux/slices/cartSlices";
 import AddQuantity from "./AddQuantity";
+import {
+  StyledActionBtnsClose,
+  StyledCartHeader,
+  StyledListItemText,
+  StyledOrderDetList,
+  StyledPrdTitle,
+  StyledRemItemQty,
+  StyledTotItemPrice,
+} from "../../styles/styles";
 
 interface State extends SnackbarOrigin {
   open: boolean;
@@ -87,17 +92,9 @@ const OrderDetails = () => {
           {notifyMessage}
         </Alert>
       </Snackbar>
-      <List
-        sx={{
-          bgcolor: "background.paper",
-          width: "60%",
-          margin: "2%",
-        }}
-      >
+      <StyledOrderDetList>
         <ListItem>
-          <Typography variant="h5" sx={{ marginBottom: "1%" }}>
-            My Cart
-          </Typography>
+          <StyledCartHeader>My Cart</StyledCartHeader>
         </ListItem>
         <Divider />
         {cartData.map((item) => (
@@ -113,11 +110,9 @@ const OrderDetails = () => {
                   loading="lazy"
                 />
 
-                <ListItemText sx={{ maxWidth: "150px" }}>
-                  <Typography m={1} variant="body1">
-                    {item.title}
-                  </Typography>
-                </ListItemText>
+                <StyledListItemText>
+                  <StyledPrdTitle variant="body1">{item.title}</StyledPrdTitle>
+                </StyledListItemText>
                 <ListItemText>
                   <AddQuantity
                     item={item}
@@ -126,29 +121,19 @@ const OrderDetails = () => {
                   />
                 </ListItemText>
                 <ListItemText>
-                  <Typography
-                    sx={{ margin: "5%", textAlign: "center", minWidth: "80px" }}
-                    variant="subtitle1"
-                  >
+                  <StyledTotItemPrice variant="subtitle1">
                     {item.quantity * item.price}€
-                  </Typography>
+                  </StyledTotItemPrice>
                 </ListItemText>
-                <ListItemIcon
-                  sx={{
-                    minWidth: "50px",
-                    textAlign: "center",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => removeItemHandler(item.id)}
-                >
-                  <CloseIcon />
-                </ListItemIcon>
+                <StyledRemItemQty onClick={() => removeItemHandler(item.id)}>
+                  <StyledActionBtnsClose />
+                </StyledRemItemQty>
               </ListItem>
             )}
             <Divider />
           </Box>
         ))}
-      </List>
+      </StyledOrderDetList>
     </>
   );
 };

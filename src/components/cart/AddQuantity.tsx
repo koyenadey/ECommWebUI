@@ -1,11 +1,16 @@
-import { Box, IconButton, SnackbarOrigin, Typography } from "@mui/material";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
+import { SnackbarOrigin } from "@mui/material";
 
 import { useAppDispatch } from "../../redux/store";
 import { updateCart } from "../../redux/slices/cartSlices";
 
 import { ProductCart } from "../../misc/type";
+import {
+  StyledActionBtnsAdd,
+  StyledActionBtnsRemove,
+  StyledAddQty,
+  StyledQty,
+  StyledQtyVal,
+} from "../../styles/styles";
 
 interface State extends SnackbarOrigin {
   open: boolean;
@@ -35,23 +40,19 @@ const AddQuantity = ({ item, onNotify, onAddItemNotify }: AddQuantityType) => {
     }
   };
   return (
-    <Box
-      sx={{
-        minWidth: "80px",
-        margin: "10%",
-        border: "1px solid black",
-        display: "flex",
-        justifyContent: "space-evenly",
-      }}
-    >
-      <IconButton disabled={item.quantity === 0 ? true : false}>
-        <RemoveIcon onClick={() => addItemHandler(item.id, "decreement")} />
-      </IconButton>
-      <Typography p={1}>{item.quantity}</Typography>
-      <IconButton>
-        <AddIcon onClick={() => addItemHandler(item.id, "increement")} />
-      </IconButton>
-    </Box>
+    <StyledAddQty>
+      <StyledQty disabled={item.quantity === 0 ? true : false}>
+        <StyledActionBtnsRemove
+          onClick={() => addItemHandler(item.id, "decreement")}
+        />
+      </StyledQty>
+      <StyledQtyVal>{item.quantity}</StyledQtyVal>
+      <StyledQty>
+        <StyledActionBtnsAdd
+          onClick={() => addItemHandler(item.id, "increement")}
+        />
+      </StyledQty>
+    </StyledAddQty>
   );
 };
 

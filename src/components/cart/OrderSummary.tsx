@@ -5,13 +5,19 @@ import {
   List,
   ListItem,
   ListItemText,
-  Typography,
   Divider,
-  Link,
   ListItemIcon,
 } from "@mui/material";
-import { EditButton } from "../../styles/styles";
-import LockIcon from "@mui/icons-material/Lock";
+import {
+  EditButton,
+  StyledCartSumm,
+  StyledCartTot,
+  StyledCartTotVal,
+  StyledCheckOut,
+  StyledEstiDel,
+  StyledLock,
+  StyledSubTot,
+} from "../../styles/styles";
 import { AppState } from "../../redux/store";
 
 const OrderSummary = () => {
@@ -25,40 +31,31 @@ const OrderSummary = () => {
       sx={{
         width: "30%",
         bgcolor: "background.paper",
-        //border: "1px solid black",
         margin: "2%",
       }}
     >
       <ListItem>
         <ListItemText>
-          <Typography variant="h5">Order Summary</Typography>
+          <StyledCartSumm>Order Summary</StyledCartSumm>
         </ListItemText>
       </ListItem>
       <Divider />
       <ListItem>
         <ListItemText>
-          <Typography variant="subtitle1" m={2}>
-            Subtotal
-          </Typography>
-          <Link color="#383838" m={2}>
-            Estimate Delivery
-          </Link>
+          <StyledSubTot variant="subtitle1">Subtotal</StyledSubTot>
+          <StyledEstiDel>Estimate Delivery</StyledEstiDel>
         </ListItemText>
         <ListItemText>
-          <Typography variant="subtitle1">{subTotal}€</Typography>
+          <StyledSubTot variant="subtitle1">{subTotal}€</StyledSubTot>
         </ListItemText>
       </ListItem>
       <Divider />
       <ListItem>
         <ListItemText>
-          <Typography variant="h5" ml={2}>
-            Total
-          </Typography>
+          <StyledCartTot>Total</StyledCartTot>
         </ListItemText>
         <ListItemText>
-          <Typography variant="h6" ml={10}>
-            {subTotal}€
-          </Typography>
+          <StyledCartTotVal>{subTotal}€</StyledCartTotVal>
         </ListItemText>
       </ListItem>
       <Divider />
@@ -71,10 +68,10 @@ const OrderSummary = () => {
           Checkout
         </EditButton>
       </ListItem>
-      <ListItem sx={{ marginLeft: "10%" }}>
+      <ListItem>
         <ListItemIcon sx={{ cursor: "pointer" }}>
-          <LockIcon />
-          <Typography component="span">Secure Checkout</Typography>
+          <StyledLock />
+          <StyledCheckOut component="span">Secure Checkout</StyledCheckOut>
         </ListItemIcon>
       </ListItem>
     </List>

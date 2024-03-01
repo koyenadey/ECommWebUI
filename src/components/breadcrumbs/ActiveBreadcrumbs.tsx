@@ -1,6 +1,7 @@
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
+import { StyledBredCrumbs } from "../../styles/styles";
 
 const breadcrumbNameMap: { [key: string]: string } = {
   "/categories": "Products",
@@ -12,7 +13,7 @@ const ActiveBreadcrumbs = () => {
   const pathnames = path.slice(0, path.length - 1);
 
   return (
-    <Breadcrumbs aria-label="breadcrumb" sx={{ marginTop: "10%" }}>
+    <StyledBredCrumbs aria-label="breadcrumb">
       <RouterLink color="inherit" to="/">
         Home
       </RouterLink>
@@ -32,7 +33,7 @@ const ActiveBreadcrumbs = () => {
         );
       })}
       ;
-    </Breadcrumbs>
+    </StyledBredCrumbs>
   );
 };
 

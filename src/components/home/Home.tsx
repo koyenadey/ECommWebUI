@@ -19,7 +19,7 @@ const viewPortStyle = { height: "100vh" };
 const Home = () => {
   return (
     <Container>
-      <Parallax style={{ marginTop: "10%" }} strength={600} bgImage={image1}>
+      <Parallax style={{ marginTop: "5%" }} strength={600} bgImage={image1}>
         <Heading sx={viewPortStyle}>Moda Morph</Heading>
       </Parallax>
       <Box>

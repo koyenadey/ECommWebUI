@@ -14,17 +14,23 @@ import { GETURL } from "../constants";
 import * as Utils from "../utils/utils";
 import {
   Box,
-  Button,
-  Card,
   CardActions,
   CardContent,
   CardMedia,
   Divider,
   MenuItem,
-  Select,
-  Typography,
 } from "@mui/material";
 import OrderPagePopUp from "../components/cart/OrderPagePopUp";
+import {
+  StyledCartBtn,
+  StyledDetailsHeader,
+  StyledPrdDesc,
+  StyledPrdDetails,
+  StyledPrdHeader,
+  StyledPrice,
+  StyledQtyDdl,
+  StyledSubTotalPrice,
+} from "../styles/styles";
 
 const ProductDetails = () => {
   const { id } = useParams<string>();
@@ -47,7 +53,7 @@ const ProductDetails = () => {
     (state: AppState) => state.productReducer.productDetails
   );
 
-  const qtyChangeHandler = (value: string | number) => {
+  const qtyChangeHandler = (value: number) => {
     setQty(value as number);
   };
 
@@ -56,12 +62,13 @@ const ProductDetails = () => {
     productToAdd.quantity = itemCount;
 
     dispatch(addToCart(productToAdd));
-    setShowOrderPopUp(true);
+    navigate("/checkout/cart");
+    //setShowOrderPopUp(true);
   };
 
   return (
     <MasterPage>
-      <h1>Product Details</h1>
+      <StyledDetailsHeader variant="h1">Product Details</StyledDetailsHeader>
       <Box
         sx={{
           display: "flex",
@@ -69,7 +76,7 @@ const ProductDetails = () => {
           justifyContent: "space-between",
         }}
       >
-        <Card sx={{ maxWidth: "50%", margin: "auto" }} key={productDetails?.id}>
+        <StyledPrdDetails key={productDetails?.id}>
           <CardMedia
             component="img"
             alt={productDetails?.title}
@@ -77,43 +84,45 @@ const ProductDetails = () => {
             image={productDetails?.category.image}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <StyledPrdHeader gutterBottom variant="h5" component="div">
               {productDetails?.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" m={2}>
+            </StyledPrdHeader>
+            <StyledPrdDesc variant="body2" color="text.secondary" m={2}>
               {productDetails?.description}
-            </Typography>
+            </StyledPrdDesc>
             <Divider />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <StyledSubTotalPrice>
               <Box m={2}>
-                <Typography component="span">
+                <StyledPrice component="span">
                   SubTotal : {productDetails?.price}€
-                </Typography>
+                </StyledPrice>
               </Box>
-            </Box>
+            </StyledSubTotalPrice>
           </CardContent>
           <CardActions>
-            <Select
+            <StyledQtyDdl
               value={qty}
               label="quantity"
-              onChange={(event) => qtyChangeHandler(event.target.value)}
+              onChange={(event) =>
+                qtyChangeHandler(event.target.value as number)
+              }
             >
               {productQty.map((p) => (
                 <MenuItem key={p} value={p}>
                   {p}
                 </MenuItem>
               ))}
-            </Select>
+            </StyledQtyDdl>
             {productDetails && (
-              <Button
+              <StyledCartBtn
                 size="small"
                 onClick={(event) => addToCartHandler(productDetails, qty)}
               >
                 Add to Cart
-              </Button>
+              </StyledCartBtn>
             )}
           </CardActions>
-        </Card>
+        </StyledPrdDetails>
         {showOrderPopUp && <OrderPagePopUp />}
       </Box>
     </MasterPage>

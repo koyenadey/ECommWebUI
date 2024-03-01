@@ -1,7 +1,11 @@
 import { useEffect, useRef } from "react";
 
-import { Box, Container, Typography } from "@mui/material";
-import { StyledInfoSections } from "../styles/styles";
+import { Box, Container } from "@mui/material";
+import {
+  StyledAboutDesc,
+  StyledInfoSections,
+  StyledSectionBox,
+} from "../styles/styles";
 import MasterPage from "../components/master-page/MasterPage";
 import { useLocation } from "react-router-dom";
 import useFetchToken from "../hook/useFetchUser";
@@ -30,15 +34,9 @@ const AboutUs = () => {
   return (
     <MasterPage>
       <Container component="div" aria-label="Information-Section">
-        <Box
-          ref={shippingSection}
-          component="section"
-          style={{ height: "50vh" }}
-        >
-          <StyledInfoSections variant="h3">
-            Shipping & Returns
-          </StyledInfoSections>
-          <Typography component="article" m={2}>
+        <StyledSectionBox ref={shippingSection} component="section">
+          <StyledInfoSections>Shipping & Returns</StyledInfoSections>
+          <StyledAboutDesc component="article">
             I’m a shipping policy section. I’m a great place to update your
             customers about your shipping methods, packaging and costs. Use
             plain, straightforward language to build trust and make sure that
@@ -48,11 +46,11 @@ const AboutUs = () => {
             product. Having a straightforward refund or exchange policy is a
             great way to build trust and reassure your customers that they can
             buy with confidence.
-          </Typography>
-        </Box>
-        <Box ref={aboutSection} component="section" style={{ height: "50vh" }}>
+          </StyledAboutDesc>
+        </StyledSectionBox>
+        <StyledSectionBox ref={aboutSection} component="section">
           <StyledInfoSections variant="h3">About Us</StyledInfoSections>
-          <Typography component="article" m={2}>
+          <StyledAboutDesc component="article">
             Becoming no. 1 fashion destination is not an easy feat. Sincere
             efforts, digital enhancements and a team of dedicated personnel with
             an equally loyal customer base have made ModaMorph the online
@@ -64,15 +62,11 @@ const AboutUs = () => {
             ModaMorph sits on top of the online fashion game with an astounding
             social media following, a loyalty program dedicated to its
             customers, and tempting, hard-to-say-no-to deals.
-          </Typography>
-        </Box>
-        <Box
-          ref={custCareSection}
-          component="section"
-          style={{ height: "50vh" }}
-        >
+          </StyledAboutDesc>
+        </StyledSectionBox>
+        <StyledSectionBox ref={custCareSection} component="section">
           <StyledInfoSections variant="h3">Customer Care</StyledInfoSections>
-          <Typography component="article" m={2}>
+          <StyledAboutDesc component="article">
             I’m a customer care section. I’m a great place to write a long text
             about your company and your services, and, most importantly, how to
             contact your store with queries. Writing a detailed customer care
@@ -83,8 +77,8 @@ const AboutUs = () => {
             about your policy and make changes to the font. I’m a great place
             for you to tell a story and let your users know a little more about
             you.
-          </Typography>
-        </Box>
+          </StyledAboutDesc>
+        </StyledSectionBox>
       </Container>
     </MasterPage>
   );
