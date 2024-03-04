@@ -4,6 +4,7 @@ import fetchProducts from "../thunks/fetchProducts";
 import createProducts from "../thunks/createProducts";
 import fetchAllCategories from "../thunks/fetchAllCategories";
 import updateProduct from "../thunks/updateProduct";
+import deleteProduct from "../thunks/deleteProduct";
 
 type InitialState = {
   products: ProductsList[];
@@ -13,6 +14,8 @@ type InitialState = {
   error: string;
   productCount: number;
   searchText: string;
+  sortType: string;
+  isDeleted: boolean;
 };
 
 const initialState: InitialState = {
@@ -23,6 +26,8 @@ const initialState: InitialState = {
   error: "",
   productCount: 0,
   searchText: "",
+  sortType: "asc",
+  isDeleted: false,
 };
 
 const productSlice = createSlice({
@@ -31,6 +36,9 @@ const productSlice = createSlice({
   reducers: {
     addSearchText: (state, action: PayloadAction<string>) => {
       state.searchText = action.payload;
+    },
+    addSortType: (state, action: PayloadAction<string>) => {
+      state.sortType = action.payload;
     },
   },
   extraReducers(builder) {
@@ -59,6 +67,7 @@ const productSlice = createSlice({
             : action.payload,
           isLoading: false,
           productCount: action.payload.length ?? 0,
+          isDeleted: false,
         };
       }
     });
@@ -139,10 +148,38 @@ const productSlice = createSlice({
         error: payload.message,
       };
     });
+
+    builder.addCase(deleteProduct.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+        error: "",
+      };
+    });
+
+    builder.addCase(
+      deleteProduct.fulfilled,
+      (state, action: PayloadAction<boolean>) => {
+        return {
+          ...state,
+          isLoading: false,
+          isDeleted: action.payload,
+        };
+      }
+    );
+
+    builder.addCase(deleteProduct.rejected, (state, action) => {
+      const payload = action.payload as Error;
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
   },
 });
 
 const productReducer = productSlice.reducer;
-export const { addSearchText } = productSlice.actions;
+export const { addSearchText, addSortType } = productSlice.actions;
 
 export default productReducer;

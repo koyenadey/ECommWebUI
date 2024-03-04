@@ -17,6 +17,8 @@ const initialState = {
   error: "",
   productCount: 0,
   searchText: "",
+  sortType: "asc",
+  isDeleted: false,
 };
 
 beforeAll(() => {
@@ -48,6 +50,8 @@ describe("Product Reducer", () => {
       productCount: mockProducts.length,
       error: "",
       searchText: "",
+      sortType: "asc",
+      isDeleted: false,
     });
   });
 
@@ -64,13 +68,13 @@ describe("Product Reducer", () => {
       productCount: 0,
       error: "",
       searchText: "",
+      sortType: "asc",
+      isDeleted: false,
     });
   });
 
   test("should have a message in the error", () => {
     const error = new Error("An error occurred");
-
-    //const errorMessage = error ? error.message : "An error occurred";
 
     const state = productReducer(
       initialState,
@@ -85,6 +89,8 @@ describe("Product Reducer", () => {
       productCount: 0,
       error: error.message,
       searchText: "",
+      sortType: "asc",
+      isDeleted: false,
     });
   });
 

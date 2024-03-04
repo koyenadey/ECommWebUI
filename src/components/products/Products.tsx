@@ -13,6 +13,7 @@ import { Container } from "@mui/system";
 import { ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import useFetchUser from "../../hook/useFetchUser";
+import SortByPrice from "../filter/SortByPrice";
 
 const Products = () => {
   useFetchUser();
@@ -23,6 +24,10 @@ const Products = () => {
 
   const products = useSelector(
     (state: AppState) => state.productReducer.products
+  );
+
+  const sortTypeValue = useSelector(
+    (state: AppState) => state.productReducer.sortType
   );
 
   const searchValue = useSelector(
@@ -46,13 +51,25 @@ const Products = () => {
   const offset = (pageNo - 1) * pageSize;
   const limit = pageNo * pageSize;
 
-  const searchedData = products.filter((p) => {
+  const productsDataCopy: ProductsList[] = [...products];
+
+  const sortedData =
+    sortTypeValue === "asc"
+      ? productsDataCopy.sort(
+          (firstProd, secondProd) => firstProd.price - secondProd.price
+        )
+      : productsDataCopy.sort(
+          (firstProd, secondProd) => secondProd.price - firstProd.price
+        );
+
+  const searchedData = sortedData.filter((p) => {
     return Object.values(p).some(
       (value) =>
         typeof value === "string" &&
         value.toLowerCase().includes(searchValue.toLowerCase())
     );
   });
+
   const paginatedData: ProductsList[] = searchedData.slice(offset, limit);
 
   const pageCount = Math.ceil(searchedData.length / pageSize);
@@ -66,6 +83,7 @@ const Products = () => {
   return (
     <>
       <Container sx={{ marginTop: "10%" }}>
+        <SortByPrice />
         <ImageList sx={{}} cols={2} gap={70}>
           {paginatedData.map((item) => (
             <ImageListItem key={item.id}>
@@ -77,14 +95,16 @@ const Products = () => {
               />
               <ImageListItemBar
                 title={item?.title}
-                subtitle={item?.category?.name}
+                subtitle={`${item?.price} €`}
                 actionIcon={
-                  <ProductItemIcon
-                    aria-label={`show details ${item.title}`}
-                    onClick={() => productDetailsHandler(item?.id)}
-                  >
-                    <VisibilityIcon />
-                  </ProductItemIcon>
+                  <>
+                    <ProductItemIcon
+                      aria-label={`show details ${item.title}`}
+                      onClick={() => productDetailsHandler(item?.id)}
+                    >
+                      <VisibilityIcon />
+                    </ProductItemIcon>
+                  </>
                 }
               />
             </ImageListItem>
