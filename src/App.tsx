@@ -26,6 +26,10 @@ function App() {
           path="/dashboard"
           element={<PrivateRoute Component={Dashboard} />}
         />
+        <Route
+          path="/dashboard/:action/products/:id?"
+          element={<PrivateRoute Component={EditProduct} />}
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/orderpopup" element={<OrderPagePopUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -34,10 +38,6 @@ function App() {
         <Route
           path="/categories/:catName/products"
           element={<ProductsPage />}
-        />
-        <Route
-          path="/dashboard/:action/products/:id?"
-          element={<EditProduct />}
         />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/checkout/cart" element={<Cart />} />
