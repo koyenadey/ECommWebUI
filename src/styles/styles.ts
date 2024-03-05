@@ -36,9 +36,9 @@ export const StyledLink = styled(RLink)({
   fontFamily: "Roboto, sans-serif",
 });
 
-export const NavBar = styled(AppBar)({
+export const NavBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "#f2f2f2",
-});
+}));
 
 export const StyledMenuIcon = styled(MenuIcon)({
   color: "#030303",

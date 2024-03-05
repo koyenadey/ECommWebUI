@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { TextField, Typography } from "@mui/material";
@@ -7,9 +8,10 @@ import { FormInput, RegisterContainer, SaveButton } from "../../styles/styles";
 import { RegisterFormType, UserType } from "../../misc/type";
 import { AppState, useAppDispatch } from "../../redux/store";
 import fetchUsers from "../../redux/thunks/fetchUsers";
-import { USER_GETURL } from "../../constants";
+import { USER_GETURL, USER_LOGINURL } from "../../constants";
 import createUsers from "../../redux/thunks/createUsers";
 import { useSelector } from "react-redux";
+import createUserLogin from "../../redux/thunks/createUserLogin";
 
 const initialValues: RegisterFormType = {
   name: "",
@@ -19,11 +21,12 @@ const initialValues: RegisterFormType = {
 };
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState<string>("");
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<RegisterFormType>({ defaultValues: initialValues });
 
   const dispatch = useAppDispatch();
@@ -36,16 +39,21 @@ const RegisterForm = () => {
   );
 
   const registerUserHandler = (data: RegisterFormType) => {
-    if (isSubmitSuccessful) {
-      const userIfExist: UserType | undefined = allUsers.find(
-        (user) => user.email.toLowerCase() === data.email.toLowerCase()
+    const userIfExist: UserType | undefined = allUsers.find(
+      (user) => user.email.toLowerCase() === data.email.toLowerCase()
+    );
+    if (userIfExist)
+      setError("User already exists! Please try with another email...");
+    else {
+      dispatch(createUsers({ baseUrl: USER_GETURL, user: data }));
+      dispatch(
+        createUserLogin({
+          baseUrl: USER_LOGINURL,
+          userData: { email: data.email, password: data.password },
+        })
       );
-      if (userIfExist)
-        setError("User already exists! Please try with another email...");
-      else {
-        dispatch(createUsers({ baseUrl: USER_GETURL, user: data }));
-        setError("");
-      }
+      setError("");
+      navigate("/");
     }
   };
 

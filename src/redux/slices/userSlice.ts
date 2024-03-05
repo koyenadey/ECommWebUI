@@ -197,6 +197,7 @@ const userSlice = createSlice({
         isLoading: true,
       };
     });
+
     builder.addCase(
       createUsers.fulfilled,
       (state, action: PayloadAction<UserType>) => {

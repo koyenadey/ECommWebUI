@@ -67,7 +67,7 @@ const UserMenu = (props: UserMenuProps) => {
           Profile
         </MenuItem>
       )}
-      {isAdmin && (
+      {isAdmin && isLoggedIn && (
         <MenuItem onClick={() => handleClose("Dashboard")}>
           <ListItemIcon>
             <SupervisorAccountIcon fontSize="small" />

@@ -47,13 +47,11 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
   const submitHandler = (data: InitialValues) => {
-    if (isSubmitSuccessful) {
-      dispatch(createUserLogin({ baseUrl: USER_LOGINURL, userData: data }));
-    }
+    dispatch(createUserLogin({ baseUrl: USER_LOGINURL, userData: data }));
   };
 
   useEffect(() => {
