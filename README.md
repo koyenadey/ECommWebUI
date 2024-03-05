@@ -1,50 +1,104 @@
-# Frontend project
+# ModaMorph
 
-This repository for the Frontend project to build an e-commerce website.
+ModaMorph is a e-commerce application that enables people to shop a range of products from Clothes,Electronics,Furnitures,Shoes & Miscellenous categories
 
-## Requirements
+ModaMorph is built using **React** and [platzi fake store api](https://fakeapi.platzi.com/en/about/introduction/).
+This is a multi page application with all code written in **Typescript** and all styles in **MaterialUI**.
+ModaMorph is equipped with **accessibility** and **responsiveness** for Small screen upto 650px Medium Screen upt0 900px, Large screen upto 1024 and extra large 1200px and up.
 
-### Basic requirements
+## Module Structure
 
-The Front end project must use TypeScript and Redux toolkit.
+This project is structured into sub-directories under **src:** `components`,`constants`,`context`,`data`, `hook`, `images`, `misc`, `pages`,`redux`,`styles`,`test`,`utils`
 
-1. Use the API endpoint `https://fakeapi.platzi.com/`.
+### components
 
-2. Create at lease 4 pages (can be more if you want): Page for all products, product page, profile page (only available if user logins), and cart page (cart page could be a page or a modal)
+ModaMorph hosts all the visual components of the UI layer. The project utilizes `custom react hooks`, `react hook form`, `debounce` for efficiency, optimization and `react router dom` for routing. This project also utilizes the power of private routes which is essential for the privacy and security of the application. Private routes ensure that sensitive information and restricted content are accessible only to authorized users, enhancing the overall confidentiality and integrity of the application. Most of the major pages are wrapped by a `Master Page` component for enhanced layout.
 
-3. Create Redux store for following features:
+### pages
 
-   - product reducer: get all products, find a single products, filter products by categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp)
-   - user reducer: register and login
-   - cart reducer: add product to cart, remove products, update products's quantity in cart
+ModaMorph hosts all the pages of the application. Currently there are pages for `Home`, `DashBoard`,`Login`,`Register`,`ProductsPage`,`ProductDetails`,`Profile`,`Register`and `AboutUs`
 
-4. When adding routers to your application, set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
+### hook
 
-5. Styling: must have responsive
+ModaMorph hosts all the custom hooks used in the application. Currently there are hooks like `useFetchUsers`,`useFetchUser`,`useFetchProducts` to fetch the data accross the application.
 
-6. Implement unit testing for the reducers
+### utils
 
-7. **Deploy** the application and rewrite README file.
+ModaMorph hosts all the utility function used in the application.
 
-### Additional features:
+### misc
 
-- Use Context API to switch theme
-- Use pagination when fetching/displaying all the products
-- Implement performance optimization where applicable
+ModaMorph hosts all the types related to the application.
 
-## Grading (1-5)
+### Features
 
-1: Late submission or not complete basic requirements
+ModaMorph uses the following features -
 
-2: Basic requirement + Presentation
+- **Searching** : ModaMorph is enabled to search data accross the data set and is enabled with `Lazy Loading` and `debounce` features for performance optimisation.
 
-3: Folder structure + follow convention(naming convention ,loading, error) + some additional features
+- **Sorting** : ModaMorph is enabled to sort the data based on **brewery name** in both `ascending` and `descending order`. This feature also supports `Lazy Loading`
 
-4: All additional features + reusable logic + custom hook
+- **Pagination** : ModaMorph is enabled to **progressive pagination** based on search / sort functionalities accordingly.
 
-5: UI-UX (for example: send alert when user add same product) + styling (animation or transition, scroll to top) + advanced feature (google log in)
+- **ScrollToTop** : ModaMorph is enabled to **progressive traversal** based on the options selected accordingly. Selecting `AboutUs` traverses to the exact location of the paragraph where it is situated in the Page and not a generic location.
 
-## Deadline
+- **Filtering** : ModaMorph is enabled to **filter** products based on the categories selected. Selecting `Clothes` show the products pertaining to that category only.
 
-- Presentation: **7/3** and **8/3/ 2024**
-- Submitting Front-end project **10am 8/3/2024**
+- **LazyLoading** : ModaMorph is enabled to **lazy load** components based on the navigation. Only the Home component is loaded by default because it is the landing page. Rest of the components are loaded on demand. This increases the efficieny of the application.
+
+- **Redux** : The application's state is centrally managed by the Redux store, offering several advantages. By utilizing Redux, we mitigate prop drilling, ensuring a cleaner and more maintainable codebase. Additionally, it establishes a single source of truth for the application's data, enhancing predictability and simplifying state management across components. This approach streamlines development and fosters scalability, ultimately contributing to a more robust and efficient application architecture.
+
+## Usage Guidelines
+
+### Installations
+
+To run ModaMorph application, first installation of required dependencies are required.
+To install dependencies:
+
+- Run npm install / npm i
+
+## Run
+
+To run ModaMorph application, type `npm start`
+
+## Usage
+
+- Typing a product `name` in the search box fetches the result if found.
+
+- Data is by default sorted in `ascending order` but can also be sorted in `descending order` on `price` field. Sorting is on entire data set as of now because the `api` being used does not provides the information of metadata. This functionality will be replaced in the upcoming feature where a dedicated `api` with metadata features will be used.
+
+- Clicking on the logo navigates to the home page.
+
+- Clicking on the person icon on the navigation bar will show the option of logging in or to see details related to the application like `About Us`,`Shipping & Returns`,`Customer Care`, `Profile`, `Login`, `Dashboard`.
+
+- Profile is only available after you login.
+
+- Dashboard is available only for admin.
+
+- An admin can add product, modify it and delete the products.
+
+- Clicking on cart icon takes you to the cart page.
+
+- Clicking on menu icon shows all the categories of products and `All Products`. Clicking on categories takes you to the product page with all the products listed under the category selected.
+
+- Clicking eye button on the product navigates to the details page where all the details pertaining to the product could be found.
+
+- The product details has option to add the item to the cart and select the quantity.
+
+- Adding product automatically updates the quantity in the cart bag icon and takes you to the cart page.
+
+- The cart page has ability to update the quantity of the items and even delete the item from the cart.
+
+### Upcoming Features
+
+- The application has a checkout button, but it is not configured to take you to payments page. Payment integration will be done in upcoming feature.
+
+- Deleting user or Editing user details will be done in the upcoming features.
+
+- Switching to dark and light themes will also be there in the upcoming features.
+
+### Deployment
+
+You can find the live application in the link below:
+
+[ModaMorph](https://modamorph.netlify.app/)
