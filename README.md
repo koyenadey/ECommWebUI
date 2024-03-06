@@ -16,7 +16,35 @@ ModaMorph hosts all the visual components of the UI layer. The project utilizes 
 
 ### pages
 
-ModaMorph hosts all the pages of the application. Currently there are pages for `Home`, `DashBoard`,`Login`,`Register`,`ProductsPage`,`ProductDetails`,`Profile`,`Register`and `AboutUs`
+ModaMorph hosts all the pages of the application. Currently there are pages for `Home`, `DashBoard`,`Login`,`ProductsPage`,`ProductDetails`,`Profile`,`Register`and `AboutUs`
+
+## Home
+
+This is the landing page with navigation bar and footer. It also has menu and option to switch to dark mode.
+
+## DashBoard
+
+This page is available only for the admins. Once a user who is admin logs in can see the dasboard that has list of all users and products and can add, delete or update products.
+
+## Login
+
+This page is used for Login to the application using email & password and also has a option to register if new user.
+
+## Register
+
+This page is used to register a user in the application using email and a password. Currently google login is not available, but it will be available in the upcoming features.
+
+## ProductsPage
+
+This page is responsible for listing all the products pertaining top a category selected or All products if selected. Each product listed has an eye button that redirects to the details page where user can added the product to the cart.
+
+## Profile
+
+This page is only available if the user logs in and can be customer or admin. This page is available to both and they can update their name or email information is they want to.
+
+## AboutUs
+
+This page contains the history of the application and few FAQs like Shippinmg information and all.
 
 ### hook
 
@@ -47,6 +75,8 @@ ModaMorph uses the following features -
 - **LazyLoading** : ModaMorph is enabled to **lazy load** components based on the navigation. Only the Home component is loaded by default because it is the landing page. Rest of the components are loaded on demand. This increases the efficieny of the application.
 
 - **Redux** : The application's state is centrally managed by the Redux store, offering several advantages. By utilizing Redux, we mitigate prop drilling, ensuring a cleaner and more maintainable codebase. Additionally, it establishes a single source of truth for the application's data, enhancing predictability and simplifying state management across components. This approach streamlines development and fosters scalability, ultimately contributing to a more robust and efficient application architecture.
+
+- **DarkMode** : The application is having the feature to switch to dark and light modes in the navigation bar,menu & footer.
 
 ## Usage Guidelines
 
@@ -95,7 +125,9 @@ To run ModaMorph application, type `npm start`
 
 - Deleting user or Editing user details will be done in the upcoming features.
 
-- Switching to dark and light themes will also be there in the upcoming features.
+- Login using google will be available in the upcoming features.
+
+- Switching to dark and light themes for the application background for pages will also be there in the upcoming features.
 
 ### Deployment
 
