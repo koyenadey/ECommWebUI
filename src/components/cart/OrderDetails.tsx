@@ -20,6 +20,7 @@ import AddQuantity from "./AddQuantity";
 import {
   StyledActionBtnsClose,
   StyledCartHeader,
+  StyledDivider,
   StyledListItemText,
   StyledOrderDetList,
   StyledPrdTitle,
@@ -96,7 +97,7 @@ const OrderDetails = () => {
         <ListItem>
           <StyledCartHeader>My Cart</StyledCartHeader>
         </ListItem>
-        <Divider />
+        <StyledDivider />
         {cartData.map((item) => (
           <Box key={item.id}>
             {item.quantity > 0 && (
@@ -130,7 +131,7 @@ const OrderDetails = () => {
                 </StyledRemItemQty>
               </ListItem>
             )}
-            <Divider />
+            <StyledDivider />
           </Box>
         ))}
       </StyledOrderDetList>

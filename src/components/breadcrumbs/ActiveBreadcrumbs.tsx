@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
-import { StyledBredCrumbs } from "../../styles/styles";
+import { StyledBredCrumbs, StyledProfileHeader } from "../../styles/styles";
 
 const breadcrumbNameMap: { [key: string]: string } = {
   "/categories": "Products",
@@ -9,7 +9,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
 
 const ActiveBreadcrumbs = () => {
   const location = useLocation();
-  const path = location.pathname.split("/").filter((x) => x);
+  const path: string[] = location.pathname.split("/").filter((x) => x);
   const pathnames = path.slice(0, path.length - 1);
 
   return (
@@ -24,9 +24,9 @@ const ActiveBreadcrumbs = () => {
           const toNew = to === `/categories` ? `/products/all` : to;
 
           return last ? (
-            <Typography color="textPrimary" key={to}>
+            <StyledProfileHeader color="textPrimary" key={to}>
               {value}
-            </Typography>
+            </StyledProfileHeader>
           ) : (
             <RouterLink color="textPrimary" to={toNew} key={to}>
               {breadcrumbNameMap[to]}

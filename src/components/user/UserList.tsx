@@ -7,14 +7,16 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemIcon,
-  Divider,
 } from "@mui/material";
 
 import { UserType } from "../../misc/type";
 import { AppState } from "../../redux/store";
 
-import { StyledListItem } from "../../styles/styles";
-import EditIcon from "@mui/icons-material/Edit";
+import {
+  StyledDivider,
+  StyledEditIcon,
+  StyledListItem,
+} from "../../styles/styles";
 
 const UserList = () => {
   const editRoleHandler = (id: number) => {
@@ -37,10 +39,10 @@ const UserList = () => {
             <StyledListItem>{user.email}</StyledListItem>
             <StyledListItem>{user.role}</StyledListItem>
             <ListItemIcon onClick={() => editRoleHandler(user.id)}>
-              <EditIcon />
+              <StyledEditIcon />
             </ListItemIcon>
           </ListItem>
-          <Divider />
+          <StyledDivider />
         </Box>
       ))}
     </List>

@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { ProductsList } from "../../misc/type";
+import { AppState, useAppDispatch } from "../../redux/store";
+import fetchProducts from "../../redux/thunks/fetchProducts";
+import Paging from "../pagination/Paging";
+import { GETURL, PAGESIZE } from "../../constants";
+import CartDialogue from "../cart/CartDialogue";
+import deleteProduct from "../../redux/thunks/deleteProduct";
+
 import {
   List,
   ListItem,
@@ -13,17 +21,12 @@ import {
   Box,
 } from "@mui/material";
 
-import { ProductsList } from "../../misc/type";
-import { AppState, useAppDispatch } from "../../redux/store";
-import fetchProducts from "../../redux/thunks/fetchProducts";
-import Paging from "../pagination/Paging";
-import { GETURL, PAGESIZE } from "../../constants";
-
-import { StyledListItem } from "../../styles/styles";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CartDialogue from "../cart/CartDialogue";
-import deleteProduct from "../../redux/thunks/deleteProduct";
+import {
+  StyledDeleteIcon,
+  StyledDivider,
+  StyledEditIcon,
+  StyledListItem,
+} from "../../styles/styles";
 
 const ProductsListForEdit = () => {
   const navigate = useNavigate();
@@ -100,13 +103,13 @@ const ProductsListForEdit = () => {
               <StyledListItem>{product.category.name}</StyledListItem>
               <StyledListItem>{product.price}€</StyledListItem>
               <ListItemIcon onClick={() => editProductHandler(product.id)}>
-                <EditIcon />
+                <StyledEditIcon />
               </ListItemIcon>
               <ListItemIcon onClick={() => deleteProductHandler(product.id)}>
-                <DeleteIcon />
+                <StyledDeleteIcon />
               </ListItemIcon>
             </ListItem>
-            <Divider />
+            <StyledDivider />
           </Box>
         ))}
       </List>

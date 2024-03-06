@@ -8,6 +8,7 @@ import {
   Card,
   Container,
   IconButton,
+  InputLabel,
   ListItemText,
   Paper,
   Link,
@@ -17,10 +18,12 @@ import {
   ListItemIcon,
   ListItem,
   TableCell,
+  Divider,
+  Select,
+  Pagination,
 } from "@mui/material";
 import { InputBase } from "@mui/material";
 
-import Select from "@mui/material/Select";
 import MenuIcon from "@mui/icons-material/Menu";
 import LockIcon from "@mui/icons-material/Lock";
 import CloseIcon from "@mui/icons-material/Close";
@@ -32,6 +35,8 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const StyledLink = styled(RLink)(({ theme }) => ({
   fontFamily: "Roboto, sans-serif",
@@ -429,6 +434,8 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const StyledBredCrumbs = styled(Breadcrumbs)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#393b39" : "#393b39",
+
   [theme.breakpoints.between("xs", "sm")]: {
     marginTop: "20%",
   },
@@ -559,8 +566,10 @@ export const StyledPrice = styled(Typography)(({ theme }) => ({
 })) as typeof Typography;
 
 export const StyledCartBtn = styled(Button)(({ theme }) => ({
-  color: "#030303",
   fontSize: "1.1rem",
+  backgroundColor: theme.palette.mode === "dark" ? "#f2f2f2" : "#d9d9d9",
+  color: theme.palette.mode === "dark" ? "#666666" : "black",
+
   [theme.breakpoints.between("xs", "sm")]: {
     color: "#030303",
     fontSize: "0.7rem",
@@ -619,6 +628,7 @@ export const StyledCartHeader = styled(Typography)(({ theme }) => ({
 export const StyledCartSumm = styled(Typography)(({ theme }) => ({
   marginBottom: "1%",
   fontSize: "1.7rem",
+
   [theme.breakpoints.between("xs", "sm")]: {
     fontSize: "1rem",
   },
@@ -702,6 +712,7 @@ export const StyledCartTotVal = styled(Typography)(({ theme }) => ({
 export const StyledCheckOut = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",
   marginLeft: "0.4rem",
+  color: theme.palette.mode === "dark" ? "#393b39" : "#393b39",
   [theme.breakpoints.between("xs", "sm")]: {
     fontSize: "0.5rem",
   },
@@ -721,6 +732,7 @@ export const StyledCheckOut = styled(Typography)(({ theme }) => ({
 
 export const StyledLock = styled(LockIcon)(({ theme }) => ({
   fontSize: "large",
+  color: theme.palette.mode === "dark" ? "#393b39" : "#393b39",
   [theme.breakpoints.between("xs", "sm")]: {
     fontSize: "small",
   },
@@ -873,7 +885,7 @@ export const StyledTotItemPrice = styled(Typography)(({ theme }) => ({
 export const StyledRemItemQty = styled(ListItemIcon)(({ theme }) => ({
   minWidth: "50px",
   textAlign: "center",
-  cursor: "pointer",
+
   [theme.breakpoints.between("xs", "sm")]: {
     padding: 0,
     minWidth: "30px",
@@ -894,6 +906,8 @@ export const StyledRemItemQty = styled(ListItemIcon)(({ theme }) => ({
 export const StyledActionBtnsClose = styled(CloseIcon)(({ theme }) => ({
   height: "1.2em",
   width: "1.2em",
+  cursor: "pointer",
+  color: theme.palette.mode === "dark" ? "#999999" : "#999999",
   [theme.breakpoints.between("xs", "sm")]: {
     height: "0.8em",
     width: "0.8em",
@@ -914,6 +928,8 @@ export const StyledActionBtnsClose = styled(CloseIcon)(({ theme }) => ({
 export const StyledActionBtnsAdd = styled(AddIcon)(({ theme }) => ({
   height: "1.2em",
   width: "1.2em",
+  cursor: "pointer",
+  color: theme.palette.mode === "dark" ? "#999999" : "#999999",
   [theme.breakpoints.between("xs", "sm")]: {
     height: "0.8em",
     width: "0.8em",
@@ -934,6 +950,8 @@ export const StyledActionBtnsAdd = styled(AddIcon)(({ theme }) => ({
 export const StyledActionBtnsRemove = styled(RemoveIcon)(({ theme }) => ({
   height: "1.3em",
   width: "1.3em",
+  cursor: "pointer",
+  color: theme.palette.mode === "dark" ? "#999999" : "#999999",
   [theme.breakpoints.between("xs", "sm")]: {
     height: "0.8em",
     width: "0.8rem",
@@ -979,3 +997,27 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export const StyledProfileDetails = styled(TextField)(({ theme }) => ({
   width: "100%",
 })) as typeof TextField;
+
+export const StyledDivider = styled(Divider)(({ theme }) => ({
+  background: theme.palette.mode === "dark" ? "#bfbfbf" : "#bfbfbf",
+})) as typeof Divider;
+
+export const StyledSelect = styled(Select)(({ theme }) => ({
+  background: theme.palette.background.paper,
+}));
+
+export const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#4e4e4e" : "#4e4e4e",
+})) as typeof InputLabel;
+
+export const StyledEditIcon = styled(EditIcon)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#4e4e4e" : "#4e4e4e",
+}));
+export const StyledDeleteIcon = styled(DeleteIcon)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#4e4e4e" : "#4e4e4e",
+}));
+
+export const StyledPagination = styled(Pagination)(({ theme }) => ({
+  borderRadius: "4px",
+  background: theme.palette.background.paper,
+})) as typeof Pagination;

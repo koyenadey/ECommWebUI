@@ -14,6 +14,7 @@ import {
   StyledCartTot,
   StyledCartTotVal,
   StyledCheckOut,
+  StyledDivider,
   StyledEstiDel,
   StyledLock,
   StyledSubTot,
@@ -30,7 +31,6 @@ const OrderSummary = () => {
     <List
       sx={{
         width: "30%",
-        bgcolor: "background.paper",
         margin: "2%",
       }}
     >
@@ -39,7 +39,7 @@ const OrderSummary = () => {
           <StyledCartSumm>Order Summary</StyledCartSumm>
         </ListItemText>
       </ListItem>
-      <Divider />
+      <StyledDivider />
       <ListItem>
         <ListItemText>
           <StyledSubTot variant="subtitle1">Subtotal</StyledSubTot>
@@ -49,7 +49,7 @@ const OrderSummary = () => {
           <StyledSubTot variant="subtitle1">{subTotal}€</StyledSubTot>
         </ListItemText>
       </ListItem>
-      <Divider />
+      <StyledDivider />
       <ListItem>
         <ListItemText>
           <StyledCartTot>Total</StyledCartTot>
@@ -58,7 +58,7 @@ const OrderSummary = () => {
           <StyledCartTotVal>{subTotal}€</StyledCartTotVal>
         </ListItemText>
       </ListItem>
-      <Divider />
+      <StyledDivider />
       <ListItem>
         <EditButton
           variant="contained"

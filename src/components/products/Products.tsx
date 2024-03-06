@@ -84,7 +84,7 @@ const Products = () => {
     <>
       <Container sx={{ marginTop: "10%" }}>
         <SortByPrice />
-        <ImageList sx={{}} cols={2} gap={70}>
+        <ImageList cols={2} gap={70}>
           {paginatedData.map((item) => (
             <ImageListItem key={item.id}>
               <img

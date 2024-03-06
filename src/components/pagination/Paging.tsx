@@ -1,4 +1,4 @@
-import { Pagination } from "@mui/material";
+import { StyledPagination } from "../../styles/styles";
 
 interface PagingProps {
   pageCount: number;
@@ -10,7 +10,7 @@ const Paging = (props: PagingProps) => {
   const { pageCount, pageNo, onPageChange } = props;
 
   return (
-    <Pagination
+    <StyledPagination
       sx={{ margin: "5% 25%" }}
       page={pageNo}
       count={pageCount}

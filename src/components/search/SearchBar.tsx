@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../redux/store";
 
 import { IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useDispatch } from "react-redux";
 import { addSearchText } from "../../redux/slices/productSlices";
-import { useDebouncedCallback } from "use-debounce";
 import { StyledMagnifyingGlass, StyledSearchBar } from "../../styles/styles";
 
 const SearchBar = () => {
-  const [searchText, setSearchText] = useState<string>("");
+  const searchTextVal = useSelector(
+    (state: AppState) => state.productReducer.searchText
+  );
+  const [searchText, setSearchText] = useState<string>(searchTextVal);
+
   const debounced = useDebouncedCallback((value) => {
     dispatch(addSearchText(value));
   }, 2000);

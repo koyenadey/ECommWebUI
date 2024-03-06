@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-import { Container, MenuItem, Select } from "@mui/material";
+import { Container, MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addSortType } from "../../redux/slices/productSlices";
+import { StyledSelect, StyledInputLabel } from "../../styles/styles";
 
 const SortByPrice = () => {
   const dispatch = useDispatch();
@@ -15,16 +16,17 @@ const SortByPrice = () => {
 
   return (
     <Container sx={{ marginTop: "10%" }}>
-      <Select
+      <StyledInputLabel id="sortByPrice">Sort by Price</StyledInputLabel>
+      <StyledSelect
         labelId="sortByPrice"
         label="Sort by Price"
         value={sortType}
-        onChange={(event) => sortProductHandler(event.target.value)}
+        onChange={(event) => sortProductHandler(event.target.value as string)}
         color="secondary"
       >
         <MenuItem value="asc">Ascending</MenuItem>
         <MenuItem value="desc">Descending</MenuItem>
-      </Select>
+      </StyledSelect>
     </Container>
   );
 };
