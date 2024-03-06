@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import fetchProducts from "../redux/thunks/fetchProducts";
 import MasterPage from "../components/master-page/MasterPage";
-import { addToCart } from "../redux/slices/cartSlices";
+import { addToCart } from "../redux/slices/cartSlice";
 import { AppState, useAppDispatch } from "../redux/store";
 
 import { Product } from "../misc/type";

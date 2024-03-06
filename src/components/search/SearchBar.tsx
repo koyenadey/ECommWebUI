@@ -5,7 +5,7 @@ import { AppState } from "../../redux/store";
 
 import { IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { addSearchText } from "../../redux/slices/productSlices";
+import { addSearchText } from "../../redux/slices/productSlice";
 import { StyledMagnifyingGlass, StyledSearchBar } from "../../styles/styles";
 
 const SearchBar = () => {

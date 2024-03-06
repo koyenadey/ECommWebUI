@@ -15,7 +15,7 @@ import CartDialogue from "./CartDialogue";
 
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../redux/store";
-import { removeFromCart } from "../../redux/slices/cartSlices";
+import { removeFromCart } from "../../redux/slices/cartSlice";
 import AddQuantity from "./AddQuantity";
 import {
   StyledActionBtnsClose,

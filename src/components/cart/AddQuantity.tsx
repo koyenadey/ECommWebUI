@@ -1,7 +1,7 @@
 import { SnackbarOrigin } from "@mui/material";
 
 import { useAppDispatch } from "../../redux/store";
-import { updateCart } from "../../redux/slices/cartSlices";
+import { updateCart } from "../../redux/slices/cartSlice";
 
 import { ProductCart } from "../../misc/type";
 import {

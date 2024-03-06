@@ -1,7 +1,7 @@
 import { CATGET_URL, GETURL } from "../../constants";
 import { mockProducts } from "../../data/data";
 import { CreateProductType, Product, UpdateProductType } from "../../misc/type";
-import productReducer from "../../redux/slices/productSlices";
+import productReducer from "../../redux/slices/productSlice";
 import store from "../../redux/store";
 import createProducts from "../../redux/thunks/createProducts";
 import fetchAllCategories from "../../redux/thunks/fetchAllCategories";

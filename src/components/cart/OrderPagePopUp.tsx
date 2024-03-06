@@ -20,7 +20,7 @@ import { AppState, useAppDispatch } from "../../redux/store";
 import { ProductCart } from "../../misc/type";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
-import { removeFromCart } from "../../redux/slices/cartSlices";
+import { removeFromCart } from "../../redux/slices/cartSlice";
 import { EditButton } from "../../styles/styles";
 
 interface State extends SnackbarOrigin {

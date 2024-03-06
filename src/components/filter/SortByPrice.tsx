@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Container, MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { addSortType } from "../../redux/slices/productSlices";
+import { addSortType } from "../../redux/slices/productSlice";
 import { StyledSelect, StyledInputLabel } from "../../styles/styles";
 
 const SortByPrice = () => {
