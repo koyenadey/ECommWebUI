@@ -4,7 +4,7 @@ import userReducer from "../../redux/slices/userSlice";
 import store from "../../redux/store";
 import createUsers from "../../redux/thunks/createUsers";
 import fetchUsers from "../../redux/thunks/fetchUsers";
-import updateUser from "../../redux/thunks/updateUsers";
+import updateUser from "../../redux/thunks/updateUser";
 import { userServer } from "../shared/userServer";
 
 beforeAll(() => userServer.listen());

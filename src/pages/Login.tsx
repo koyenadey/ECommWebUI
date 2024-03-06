@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <Container>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <IconButton>
+        <IconButton onClick={() => navigate("/")}>
           <Avatar
             sx={{ width: 56, height: 56, margin: "15% 45%", cursor: "default" }}
             variant="square"

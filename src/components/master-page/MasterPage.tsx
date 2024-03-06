@@ -1,4 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect } from "react";
+import { ThemeProvider } from "@emotion/react";
+import getTheme from "../../styles/customTheme";
 
 import { useSelector } from "react-redux";
 
@@ -10,19 +12,14 @@ import { useNavigate } from "react-router-dom";
 import fetchAcessToken from "../../redux/thunks/fetchAccessToken";
 import { ATOKEN_URL } from "../../constants";
 import ActiveBreadcrumbs from "../breadcrumbs/ActiveBreadcrumbs";
-import ThemeContext, { ThemeContextType } from "../../context/ThemeContext";
+import { ThemeContext } from "../../App";
 
 interface MasterPageProps {
   children: ReactNode;
 }
 
 const MasterPage = ({ children }: MasterPageProps) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-  const themeContextVal: ThemeContextType = {
-    isDarkMode,
-    setIsDarkMode,
-  };
+  const themeContext = useContext(ThemeContext);
 
   const isLoggedIn = useSelector(
     (state: AppState) => state.userReducer.isLoggedIn
@@ -45,12 +42,16 @@ const MasterPage = ({ children }: MasterPageProps) => {
   }, [dispatch, localRToken, isLoggedIn, navigate]);
 
   return (
-    <ThemeContext.Provider value={themeContextVal}>
-      <NavigationBar isLoggedIn={isLoggedIn} />
+    <ThemeProvider theme={getTheme(themeContext.mode)}>
+      <NavigationBar
+        isLoggedIn={isLoggedIn}
+        mode={themeContext.mode}
+        toggleColorMode={themeContext.toggleMode}
+      />
       <ActiveBreadcrumbs />
       {children}
       <Footer />
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 };
 

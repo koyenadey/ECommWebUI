@@ -8,6 +8,7 @@ import useFetchToken from "../hook/useFetchUser";
 
 const Profile = () => {
   const [isEditable, setIsEditable] = useState<boolean>(false);
+
   useFetchToken();
 
   const editProfileHandler = () => {

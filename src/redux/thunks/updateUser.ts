@@ -20,7 +20,12 @@ const updateUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      if (!response.ok) throw new Error("Failed to fetch the data");
+
+      if (!response.ok) {
+        if (response.status === 401)
+          throw new Error("This user cannot be edited");
+        else throw new Error("This user cannot be edited");
+      }
 
       const data: UserType = await response.json();
       return data;

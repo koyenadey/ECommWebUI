@@ -5,7 +5,7 @@ import { Token } from "../../misc/type";
 
 import fetchUser from "../thunks/fetchUser";
 import createUserLogin from "../thunks/createUserLogin";
-import updateUser from "../thunks/updateUsers";
+import updateUser from "../thunks/updateUser";
 import fetchAcessToken from "../thunks/fetchAccessToken";
 import fetchUsers from "../thunks/fetchUsers";
 import createUsers from "../thunks/createUsers";
@@ -154,11 +154,12 @@ const userSlice = createSlice({
       }
     );
     builder.addCase(updateUser.rejected, (state, action) => {
-      const payload = action.payload as { message: string };
+      const payload = action.payload as string;
       return {
         ...state,
+        error: payload,
         isLoading: false,
-        error: payload.message,
+        isLoggedIn: true,
       };
     });
 

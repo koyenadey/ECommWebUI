@@ -16,7 +16,6 @@ import {
 } from "../../styles/styles";
 
 import { Box } from "@mui/system";
-import { Button } from "@mui/material";
 import { footerData } from "../../data/data";
 
 const Footer = () => {

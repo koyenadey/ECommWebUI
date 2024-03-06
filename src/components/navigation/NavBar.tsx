@@ -5,9 +5,15 @@ import UserMenu from "../menu/UserMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
 
-import { NavBar, StyledMenuIcon } from "../../styles/styles";
+import {
+  NavBar,
+  StyledDarkMode,
+  StyledLightMode,
+  StyledMenuIcon,
+} from "../../styles/styles";
 import { Box, Toolbar, IconButton, Avatar, Badge } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import Logo from "../../images/M.png";
@@ -18,10 +24,12 @@ import SearchBar from "../search/SearchBar";
 
 interface NavBarProps {
   isLoggedIn: boolean;
+  mode: "dark" | "light";
+  toggleColorMode: () => void;
 }
 
 const NavigationBar = (props: NavBarProps) => {
-  const { isLoggedIn } = props;
+  const { isLoggedIn, mode, toggleColorMode } = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorEll, setAnchorEll] = useState<null | HTMLElement>(null);
@@ -75,6 +83,13 @@ const NavigationBar = (props: NavBarProps) => {
             </Avatar>
           </IconButton>
           <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={toggleColorMode}
+              color="inherit"
+            >
+              {mode === "dark" ? <StyledDarkMode /> : <StyledLightMode />}
+            </IconButton>
             <SearchBar />
             <IconButton onClick={handleProfileClick}>
               {isLoggedIn ? (

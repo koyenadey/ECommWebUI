@@ -1,11 +1,14 @@
-import { TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { TableCell, TableHead, TableRow } from "@mui/material";
+import { StyledProfileHeader } from "../../styles/styles";
 
 const ProfileHeader = () => {
   return (
     <TableHead>
       <TableRow>
         <TableCell align="center" colSpan={2}>
-          <Typography variant="h6">Profile Details</Typography>
+          <StyledProfileHeader variant="h6">
+            Profile Details
+          </StyledProfileHeader>
         </TableCell>
       </TableRow>
     </TableHead>

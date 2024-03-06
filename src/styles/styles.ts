@@ -16,13 +16,16 @@ import {
   List,
   ListItemIcon,
   ListItem,
+  TableCell,
 } from "@mui/material";
 import { InputBase } from "@mui/material";
+
 import Select from "@mui/material/Select";
 import MenuIcon from "@mui/icons-material/Menu";
 import LockIcon from "@mui/icons-material/Lock";
 import CloseIcon from "@mui/icons-material/Close";
-import { useMediaQuery } from "@mui/material";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Brightness5Icon from "@mui/icons-material/Brightness5";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -30,23 +33,26 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 
-export const StyledLink = styled(RLink)({
-  textDecoration: "none",
-  color: "#030303",
+export const StyledLink = styled(RLink)(({ theme }) => ({
   fontFamily: "Roboto, sans-serif",
-});
-
-export const NavBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: "#f2f2f2",
+  textDecoration: "none",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
 }));
 
-export const StyledMenuIcon = styled(MenuIcon)({
-  color: "#030303",
-});
+export const NavBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#393b39" : "#f2f2f2",
+})) as typeof AppBar;
 
-export const useHeadingSpace = () => {
-  return useMediaQuery("(min-width:600px)");
-};
+export const StyledDarkMode = styled(DarkModeIcon)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+}));
+export const StyledLightMode = styled(Brightness5Icon)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+}));
+
+export const StyledMenuIcon = styled(MenuIcon)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+}));
 
 export const Heading = styled(Typography)(({ theme }) => ({
   color: "white",
@@ -65,15 +71,16 @@ export const Heading = styled(Typography)(({ theme }) => ({
     fontSize: "100px",
     fontWeight: "600",
   },
-}));
+})) as typeof Typography;
 
 export const StyledFooter = styled(Box)(({ theme }) => ({
-  backgroundColor: "#393b39",
+  backgroundColor: theme.palette.mode === "dark" ? "#393b39" : "#d9d9d9",
   height: "50vh",
   width: "100%",
 
   [theme.breakpoints.down("sm")]: {},
-}));
+})) as typeof Box;
+
 export const StyledInformation = styled(Box)(({ theme }) => ({
   width: "60%",
   display: "flex",
@@ -84,11 +91,11 @@ export const StyledInformation = styled(Box)(({ theme }) => ({
   [theme.breakpoints.between("xs", "sm")]: {
     width: "100%",
   },
-}));
+})) as typeof Box;
 
 export const StyledBtnFooter = styled(Button)(({ theme }) => ({
   margin: "3rem 1rem",
-  color: "white",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
   opacity: "60%",
   fontFamily: "Roboto, sans-serif",
   textAlign: "center",
@@ -224,12 +231,13 @@ export const SubscribeText = styled(TextField)(({ theme }) => ({
 export const SubscribeBtn = styled(Button)(({ theme }) => ({
   margin: "3% 2%",
   padding: "1%",
-  backgroundColor: "white",
-  color: "#393b39",
+  backgroundColor: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
+  color: theme.palette.mode === "dark" ? "#393b39" : "#f2f2f2",
   width: "20%",
+
   "&:hover": {
-    backgroundColor: "#393b39",
-    color: "white",
+    backgroundColor: theme.palette.mode === "dark" ? "#666666" : "#f2f2f2",
+    color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
   },
   [theme.breakpoints.between("xs", "sm")]: {
     width: "50%",
@@ -250,7 +258,7 @@ export const SubscribeBtn = styled(Button)(({ theme }) => ({
 })) as typeof Button;
 
 export const StyledFacebookIcon = styled(FacebookIcon)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
   margin: "3% 2%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "5% 2%",
@@ -270,7 +278,7 @@ export const StyledFacebookIcon = styled(FacebookIcon)(({ theme }) => ({
 }));
 
 export const StyledInstagramIcon = styled(InstagramIcon)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
   margin: "3% 2%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "5% 2%",
@@ -290,7 +298,7 @@ export const StyledInstagramIcon = styled(InstagramIcon)(({ theme }) => ({
 }));
 
 export const StyledYoutubeIcon = styled(YouTubeIcon)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
   margin: "3% 2%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "5% 2%",
@@ -309,13 +317,13 @@ export const StyledYoutubeIcon = styled(YouTubeIcon)(({ theme }) => ({
   },
 }));
 export const StyledCopyrightIcon = styled(CopyrightIcon)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
   fontSize: "90%",
   opacity: "40%",
 }));
 
 export const StyledCopyrightText = styled("span")(({ theme }) => ({
-  color: "white",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
   opacity: "40%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "3% 2%",
@@ -959,3 +967,15 @@ export const StyledSectionBox = styled(Box)(({ theme }) => ({
     height: "70vh",
   },
 })) as typeof Box;
+
+export const StyledProfileHeader = styled(Typography)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "black" : "black",
+})) as typeof Typography;
+
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "black" : "black",
+})) as typeof TableCell;
+
+export const StyledProfileDetails = styled(TextField)(({ theme }) => ({
+  width: "100%",
+})) as typeof TextField;
