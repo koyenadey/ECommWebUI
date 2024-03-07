@@ -30,7 +30,7 @@ const EditProduct = () => {
   const buttonLabel: string = action === "edit" ? "Update" : "Create";
 
   const submitHandler = async (data: CreateProductType) => {
-    if (isSubmitSuccessful && action === "edit") {
+    if (action === "edit") {
       dispatch(updateProduct({ baseUrl: `${GETURL}/${id}`, product: data }));
       setSubmitSuccesful(true);
       setTimeout(() => {
