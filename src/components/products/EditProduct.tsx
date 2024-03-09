@@ -37,7 +37,6 @@ const EditProduct = () => {
         navigate("/dashboard");
       }, 2000);
     } else {
-      console.log("In else...");
       dispatch(createProducts({ baseUrl: `${GETURL}`, product: data }));
       setSubmitSuccesful(true);
       setTimeout(() => {
@@ -174,7 +173,6 @@ const EditProduct = () => {
                       fullWidth
                       placeholder="Add image URL"
                       onChange={(e) => {
-                        // Append the new image URL to the array when the user inputs a value
                         field.onChange([e.target.value]);
                       }}
                     />

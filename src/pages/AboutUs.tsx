@@ -13,7 +13,7 @@ import useFetchToken from "../hook/useFetchUser";
 const AboutUs = () => {
   useFetchToken();
   const location = useLocation();
-  const data = location.state; //should contain the name of the ref.
+  const data = location.state;
 
   const aboutSection = useRef<HTMLDivElement>(null);
   const shippingSection = useRef<HTMLDivElement>(null);

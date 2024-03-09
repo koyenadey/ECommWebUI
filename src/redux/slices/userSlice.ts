@@ -42,7 +42,6 @@ const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    //Fetch all users
     builder.addCase(fetchUsers.pending, (state) => {
       return {
         ...state,
@@ -70,8 +69,6 @@ const userSlice = createSlice({
         error: payload.message,
       };
     });
-
-    //Fetch User Pending
 
     builder.addCase(fetchUser.pending, (state, action) => {
       return {
@@ -102,7 +99,6 @@ const userSlice = createSlice({
       }
     });
 
-    //Create User Login
     builder.addCase(createUserLogin.pending, (state, action) => {
       return {
         ...state,
@@ -134,8 +130,6 @@ const userSlice = createSlice({
       };
     });
 
-    //Update user pending
-
     builder.addCase(updateUser.pending, (state, action) => {
       return {
         ...state,
@@ -162,8 +156,6 @@ const userSlice = createSlice({
         isLoggedIn: true,
       };
     });
-
-    //Fetch User Access Token
 
     builder.addCase(fetchAcessToken.pending, (state, action) => {
       return {

@@ -76,7 +76,6 @@ const Products = () => {
 
   if (isLoading) return <div>Loading...</div>;
   else if (error) {
-    console.log(error);
     return <>{error}</>;
   }
 

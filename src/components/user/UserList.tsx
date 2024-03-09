@@ -19,9 +19,7 @@ import {
 } from "../../styles/styles";
 
 const UserList = () => {
-  const editRoleHandler = (id: number) => {
-    console.log(id);
-  };
+  const editRoleHandler = (id: number) => {};
 
   const users: UserType[] = useSelector(
     (state: AppState) => state.userReducer.users

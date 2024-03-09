@@ -63,7 +63,6 @@ const ProductDetails = () => {
 
     dispatch(addToCart(productToAdd));
     navigate("/checkout/cart");
-    //setShowOrderPopUp(true);
   };
 
   return (

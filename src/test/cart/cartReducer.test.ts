@@ -4,7 +4,6 @@ import cartReducer, {
   removeFromCart,
   updateCart,
 } from "../../redux/slices/cartSlice";
-//import store from "../../redux/store";
 
 const initialState = {
   cart: [],

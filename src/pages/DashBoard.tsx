@@ -30,7 +30,6 @@ const Dashboard = () => {
       dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: accessToken }));
     } else {
       if (refreshToken) {
-        console.log(refreshToken);
         dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
       }
     }

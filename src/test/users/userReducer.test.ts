@@ -24,13 +24,11 @@ const initialState = {
 };
 
 describe("user reducer", () => {
-  //To test initial state
   test("should return initial state", () => {
     const state = userReducer(undefined, { type: "" });
     expect(state).toEqual(initialState);
   });
 
-  //To test the fulfilled state of async thunk
   test("should return a list of users", () => {
     const state = userReducer(
       initialState,
@@ -73,7 +71,6 @@ describe("user reducer", () => {
     expect(store.getState().userReducer.user).toEqual(expectedResult);
   });
 
-  //test async thunk
   test("should update the user from api", async () => {
     const userToBeUpdated = {
       name: "TestDev",

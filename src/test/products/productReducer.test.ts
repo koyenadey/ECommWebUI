@@ -30,13 +30,11 @@ afterAll(() => {
 });
 
 describe("Product Reducer", () => {
-  //To test the initial state
   test("should return initial state", () => {
     const state = productReducer(undefined, { type: "" });
     expect(state).toEqual(initialState);
   });
 
-  //testing the fulfilled state of async thunk
   test("should return a list of products", () => {
     const state = productReducer(
       initialState,
@@ -94,19 +92,16 @@ describe("Product Reducer", () => {
     });
   });
 
-  //test asyncthunk --- products
   test("should fetch all the products from api", async () => {
     await store.dispatch(fetchProducts(GETURL));
     expect(store.getState().productReducer.products.length).toBe(2);
   });
 
-  //testasyncthunk --- categories
   test("should fetch all the categories from api", async () => {
     await store.dispatch(fetchAllCategories(CATGET_URL));
     expect(store.getState().productReducer.categories.length).toBe(1);
   });
 
-  //should create product in the server
   test("should create new product", async () => {
     const product: CreateProductType = {
       title: "Zara Blazer",
