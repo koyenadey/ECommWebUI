@@ -6,7 +6,7 @@ import { ProductsList } from "../../misc/type";
 import { AppState, useAppDispatch } from "../../redux/store";
 import fetchProducts from "../../redux/thunks/fetchProducts";
 import Paging from "../pagination/Paging";
-import { GETURL, PAGESIZE } from "../../constants";
+import { GETURL, GET_COUNTURL, PAGESIZE } from "../../constants";
 import CartDialogue from "../cart/CartDialogue";
 import deleteProduct from "../../redux/thunks/deleteProduct";
 
@@ -27,6 +27,7 @@ import {
   StyledEditIcon,
   StyledListItem,
 } from "../../styles/styles";
+import fetchProductCount from "../../redux/thunks/fetchProductCount";
 
 const ProductsListForEdit = () => {
   const navigate = useNavigate();
@@ -42,7 +43,9 @@ const ProductsListForEdit = () => {
   const isDeleted = useSelector(
     (state: AppState) => state.productReducer.isDeleted
   );
+
   useEffect(() => {
+    dispatch(fetchProductCount(GET_COUNTURL));
     dispatch(fetchProducts(GETURL));
   }, [isDeleted, dispatch]);
 

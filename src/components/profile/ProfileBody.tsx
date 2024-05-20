@@ -7,7 +7,7 @@ import { StyledTableCell } from "../../styles/styles";
 const ProfileBody = () => {
   const userData = useSelector((state: AppState) => state.userReducer.user);
 
-  const dataInputName = <Typography>{userData?.name}</Typography>;
+  const dataInputName = <Typography>{userData?.userName}</Typography>;
 
   const dataInputMail = <Typography>{userData?.email}</Typography>;
 

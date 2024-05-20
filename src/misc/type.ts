@@ -8,12 +8,20 @@ export type Category = {
 
 export type CreateCategory = Omit<Category, "id">;
 
+type ProductImage = {
+  productId: string;
+  imageUrl: string;
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type ProductsList = {
   id: number;
   title: string;
   price: number;
   description: string;
-  images: string[];
+  images: ProductImage[];
   creationAt: string;
   updatedAt: string;
   category: Category;
@@ -24,7 +32,7 @@ export type Product = {
   title: string;
   price: number;
   description: string;
-  images: string[];
+  images: ProductImage[];
   creationAt: string;
   updatedAt: string;
   category: Category;
@@ -58,10 +66,10 @@ export type UpdateProductCart = {
 };
 
 export type UserType = {
-  id: number;
+  id: string;
   email: string;
   password: string;
-  name: string;
+  userName: string;
   role: string;
   avatar: string;
 };
@@ -74,8 +82,7 @@ export type CreateUserType = {
 };
 
 export type Token = {
-  access_token: string;
-  refresh_token: string;
+  refreshToken: string;
 };
 
 export type RegisterFormType = {

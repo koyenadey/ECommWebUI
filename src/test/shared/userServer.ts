@@ -27,12 +27,12 @@ const handler = [
   http.post("https://api.escuelajs.co/api/v1/users", async ({ request }) => {
     const user = (await request.json()) as RegisterFormType;
     const userToReturn: UserType = {
-      id: 3,
+      id: "3",
       email: user.email,
       password: user.password,
       role: "customer",
       avatar: user.avatar,
-      name: user.name,
+      userName: user.name,
     };
     return HttpResponse.json(userToReturn, { status: 204 });
   }),

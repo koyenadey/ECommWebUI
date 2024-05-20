@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   List,
@@ -19,7 +20,12 @@ import {
 } from "../../styles/styles";
 
 const UserList = () => {
-  const editRoleHandler = (id: number) => {};
+  const navigate = useNavigate();
+
+  const editRoleHandler = (id: string) => {
+    console.log(id);
+    navigate(`/dashboard/${"edit"}/users/${id}`);
+  };
 
   const users: UserType[] = useSelector(
     (state: AppState) => state.userReducer.users
@@ -31,9 +37,9 @@ const UserList = () => {
         <Box component="article" key={user.id} alignContent="center">
           <ListItem>
             <ListItemAvatar>
-              <Avatar alt={user.name} src={user.avatar} />
+              <Avatar alt={user.userName} src={user.avatar} />
             </ListItemAvatar>
-            <StyledListItem>{user.name}</StyledListItem>
+            <StyledListItem>{user.userName}</StyledListItem>
             <StyledListItem>{user.email}</StyledListItem>
             <StyledListItem>{user.role}</StyledListItem>
             <ListItemIcon onClick={() => editRoleHandler(user.id)}>

@@ -34,8 +34,8 @@ const MasterPage = ({ children }: MasterPageProps) => {
   };
 
   useEffect(() => {
-    if (!isLoggedIn && localRToken) {
-      dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
+    if (!isLoggedIn && !localRToken) {
+      //dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
     }
   }, [dispatch, localRToken, isLoggedIn, navigate]);
 

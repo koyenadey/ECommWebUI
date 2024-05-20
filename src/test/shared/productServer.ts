@@ -21,7 +21,15 @@ const handler = [
       title: product.title,
       price: product.price,
       description: product.description,
-      images: product.images,
+      images: [
+        {
+          productId: "1",
+          imageUrl: "example1.jpg",
+          id: "1",
+          createdAt: "",
+          updatedAt: "",
+        },
+      ],
       category: {
         id: product.categoryId,
         name: "",

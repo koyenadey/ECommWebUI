@@ -59,7 +59,7 @@ const Login = () => {
   }, [isLoggedIn, navigate, error]);
 
   return (
-    <Container>
+    <Container style={{ width: "50%", textAlign: "center", marginTop: "18%" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <IconButton onClick={() => navigate("/")}>
           <Avatar

@@ -3,21 +3,23 @@ import { UserType } from "../../misc/type";
 
 export interface UpdateUser {
   baseUrl: string;
-  user: {
-    name: string;
-    email: string;
-  };
+  user: FormData;
+  token: string;
 }
 
 const updateUser = createAsyncThunk(
   "users/updateUser",
-  async ({ baseUrl, user }: UpdateUser, { rejectWithValue }) => {
+  async ({ baseUrl, user, token }: UpdateUser, { rejectWithValue }) => {
     try {
+      // const formData = new FormData();
+      // formData.append("UserName", user.name);
+      // if (user.avatar) formData.append("Avatar", user.avatar);
+
       const response: Response = await fetch(baseUrl, {
-        method: "PUT",
-        body: JSON.stringify(user),
+        method: "PATCH",
+        body: user,
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
 

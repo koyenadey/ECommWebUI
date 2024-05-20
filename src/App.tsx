@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PrivateRoute from "./components/private/PrivateRoute";
 import OrderPagePopUp from "./components/cart/OrderPagePopUp";
+import EditUser from "./components/user/EditUser";
 
 export interface ThemeContextType {
   mode: "light" | "dark";
@@ -51,6 +52,10 @@ function App() {
           <Route
             path="/dashboard/:action/products/:id?"
             element={<PrivateRoute Component={EditProduct} />}
+          />
+          <Route
+            path="/dashboard/:action/users/:id?"
+            element={<PrivateRoute Component={EditUser} />}
           />
           <Route path="/register" element={<Register />} />
           <Route path="/orderpopup" element={<OrderPagePopUp />} />

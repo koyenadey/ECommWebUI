@@ -148,7 +148,11 @@ const EditProduct = () => {
             <Controller
               name="images"
               control={control}
-              defaultValue={action === "edit" ? productDetails?.images : []}
+              defaultValue={
+                action === "edit"
+                  ? productDetails?.images.map((im) => im.imageUrl)
+                  : []
+              }
               rules={{ required: "Images cannot be empty" }}
               render={({ field }) => (
                 <>

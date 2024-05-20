@@ -42,7 +42,9 @@ const UserMenu = (props: UserMenuProps) => {
   const { anchorEl, open, handleClose, isLoggedIn } = props;
   const LogOutIn = isLoggedIn ? "LogOut" : "LogIn";
   const isAdmin =
-    useSelector((state: AppState) => state.userReducer.user?.role) === "admin"
+    useSelector(
+      (state: AppState) => state.userReducer.user?.role
+    )?.toUpperCase() === "ADMIN"
       ? true
       : false;
   return (

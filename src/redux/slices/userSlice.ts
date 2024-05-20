@@ -23,8 +23,7 @@ const initialState: InitialState = {
   user: undefined,
   users: [],
   tokens: {
-    access_token: "",
-    refresh_token: "",
+    refreshToken: "",
   },
   isLoading: true,
   error: "",
@@ -37,8 +36,7 @@ const userSlice = createSlice({
   reducers: {
     resetLogin: (state) => {
       state.isLoggedIn = false;
-      state.tokens.access_token = "";
-      state.tokens.refresh_token = "";
+      state.tokens.refreshToken = "";
     },
   },
   extraReducers(builder) {
@@ -109,7 +107,7 @@ const userSlice = createSlice({
     builder.addCase(
       createUserLogin.fulfilled,
       (state, action: PayloadAction<Token>) => {
-        localStorage.setItem("refresh-token", action.payload.refresh_token);
+        localStorage.setItem("refresh-token", action.payload.refreshToken);
         return {
           ...state,
           isLoading: false,
@@ -140,11 +138,13 @@ const userSlice = createSlice({
     builder.addCase(
       updateUser.fulfilled,
       (state, action: PayloadAction<UserType>) => {
-        return {
-          ...state,
-          isLoading: false,
-          user: action.payload,
-        };
+        if (state?.user?.role == "Customer") {
+          return {
+            ...state,
+            isLoading: false,
+            user: action.payload,
+          };
+        } else return state;
       }
     );
     builder.addCase(updateUser.rejected, (state, action) => {

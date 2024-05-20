@@ -29,9 +29,11 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<RegisterFormType>({ defaultValues: initialValues });
 
+  const token = localStorage.getItem("refresh_token") ?? "";
+
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchUsers(USER_GETURL));
+    dispatch(fetchUsers({ baseUrl: USER_GETURL, token }));
   }, [dispatch]);
 
   const allUsers: UserType[] = useSelector(

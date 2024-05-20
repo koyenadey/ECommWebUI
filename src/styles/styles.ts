@@ -131,8 +131,8 @@ export const SaveButton = styled("input")({
   backgroundColor: "#393b39",
   color: "white",
   marginTop: "1%",
-  width: "100%",
-  padding: "2%",
+  width: "40%",
+  padding: "1%",
   textAlign: "center",
   borderRadius: "6px",
   transition: "background-color 0.3s ease",
@@ -996,6 +996,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export const StyledProfileDetails = styled(TextField)(({ theme }) => ({
   width: "100%",
+  variants: "outlined",
 })) as typeof TextField;
 
 export const StyledDivider = styled(Divider)(({ theme }) => ({
@@ -1021,3 +1022,10 @@ export const StyledPagination = styled(Pagination)(({ theme }) => ({
   borderRadius: "4px",
   background: theme.palette.background.paper,
 })) as typeof Pagination;
+
+export const StyledContainer = styled(Container)(({ theme }) => ({
+  border: "1px solid black",
+  marginBottom: "2%",
+  marginTop: "2%",
+  marginX: "auto",
+})) as typeof Container;

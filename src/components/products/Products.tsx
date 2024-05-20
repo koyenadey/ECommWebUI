@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { AppState } from "../../redux/store";
+import { AppState, useAppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 
 import Paging from "../pagination/Paging";
@@ -14,16 +14,27 @@ import { ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import useFetchUser from "../../hook/useFetchUser";
 import SortByPrice from "../filter/SortByPrice";
+import fetchProducts from "../../redux/thunks/fetchProducts";
+import { GETURL, PAGESIZE } from "../../constants/index";
 
 const Products = () => {
   useFetchUser();
-
+  const dispatch = useAppDispatch();
   const [pageNo, setPageNo] = useState<number>(1);
+
+  useEffect(() => {
+    console.log("In Use Effect" + pageNo);
+    dispatch(fetchProducts(`${GETURL}?PageNo=${pageNo}&PageSize=${PAGESIZE}`));
+  }, [pageNo]);
 
   const navigate = useNavigate();
 
   const products = useSelector(
     (state: AppState) => state.productReducer.products
+  );
+
+  const totalProducts = useSelector(
+    (state: AppState) => state.productReducer.productCount
   );
 
   const sortTypeValue = useSelector(
@@ -47,7 +58,7 @@ const Products = () => {
     setPageNo(value);
   };
 
-  const pageSize: number = Constants.PAGESIZE;
+  const pageSize: number = PAGESIZE;
   const offset = (pageNo - 1) * pageSize;
   const limit = pageNo * pageSize;
 
@@ -70,9 +81,9 @@ const Products = () => {
     );
   });
 
-  const paginatedData: ProductsList[] = searchedData.slice(offset, limit);
+  const paginatedData: ProductsList[] = searchedData; //.slice(offset, limit);
 
-  const pageCount = Math.ceil(searchedData.length / pageSize);
+  const pageCount = Math.ceil(totalProducts / pageSize);
 
   if (isLoading) return <div>Loading...</div>;
   else if (error) {
@@ -87,7 +98,7 @@ const Products = () => {
           {paginatedData.map((item) => (
             <ImageListItem key={item.id}>
               <img
-                srcSet={`${item.category.image}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
+                srcSet={`${item.images[0].imageUrl}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
                 src={`${item.category.image}?w=80&h=80&fit=crop&auto=format`}
                 alt={item.title}
                 loading="lazy"

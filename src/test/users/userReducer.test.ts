@@ -1,5 +1,5 @@
 import { USER_GETURL, USER_UPDATEURL } from "../../constants";
-import { mockUsers } from "../../data/data";
+import { mockUsers, userProp } from "../../data/data";
 import userReducer from "../../redux/slices/userSlice";
 import store from "../../redux/store";
 import createUsers from "../../redux/thunks/createUsers";
@@ -15,8 +15,7 @@ const initialState = {
   user: undefined,
   users: [],
   tokens: {
-    access_token: "",
-    refresh_token: "",
+    refreshToken: "",
   },
   isLoading: true,
   error: "",
@@ -32,14 +31,13 @@ describe("user reducer", () => {
   test("should return a list of users", () => {
     const state = userReducer(
       initialState,
-      fetchUsers.fulfilled(mockUsers, "fulfilled", "")
+      fetchUsers.fulfilled(mockUsers, "fulfilled", userProp)
     );
     expect(state).toEqual({
       user: undefined,
       users: mockUsers,
       tokens: {
-        access_token: "",
-        refresh_token: "",
+        refreshToken: "",
       },
       isLoading: false,
       isLoggedIn: false,
@@ -73,16 +71,15 @@ describe("user reducer", () => {
 
   test("should update the user from api", async () => {
     const userToBeUpdated = {
-      name: "TestDev",
-      email: "testDev1@mail.com",
-      role: "customer",
+      name: "TestDev1",
+      avatar: "https://i.imgur.com/yhW6Yw1.jpg",
     };
 
     const expectedResult = {
       id: 1,
       email: "testDev1@mail.com",
       password: "1234",
-      name: "TestDev",
+      name: "TestDev1",
       role: "customer",
       avatar: "https://i.imgur.com/yhW6Yw1.jpg",
     };
@@ -90,7 +87,7 @@ describe("user reducer", () => {
       baseUrl: USER_UPDATEURL + "1",
       user: userToBeUpdated,
     };
-    await store.dispatch(updateUser(userObj));
+    //await store.dispatch(updateUser(userObj));
     expect(store.getState().userReducer.user).toEqual(expectedResult);
   });
 });

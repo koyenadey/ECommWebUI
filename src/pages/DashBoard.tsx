@@ -12,28 +12,29 @@ import { useSelector } from "react-redux";
 import fetchUser from "../redux/thunks/fetchUser";
 import { ATOKEN_URL, LOGGEDIN_USERURL } from "../constants";
 import fetchAcessToken from "../redux/thunks/fetchAccessToken";
+import { StyledContainer } from "../styles/styles";
 
 const Dashboard = () => {
   useFetchUsers();
   useFetchProducts();
 
   const dispatch = useAppDispatch();
-  const accessToken = useSelector(
-    (state: AppState) => state.userReducer.tokens.access_token
-  );
+  // const accessToken = useSelector(
+  //   (state: AppState) => state.userReducer.tokens.access_token
+  // );
   const refreshToken = localStorage.getItem("refresh-token");
   const token = {
     refreshToken: refreshToken ?? "",
   };
   useEffect(() => {
-    if (accessToken) {
-      dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: accessToken }));
+    if (refreshToken) {
+      dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: refreshToken }));
     } else {
-      if (refreshToken) {
-        dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
-      }
+      // if (accessToken) {
+      //   dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: accessToken }));
+      // }
     }
-  }, [dispatch, accessToken, refreshToken]);
+  }, [dispatch /*accessToken*/, , refreshToken]);
 
   const [value, setValue] = useState<string>("users");
 
@@ -43,11 +44,7 @@ const Dashboard = () => {
 
   return (
     <MasterPage>
-      <Container
-        component="div"
-        aria-label="products"
-        sx={{ border: "1px solid black", margin: "2%" }}
-      >
+      <StyledContainer component="div" aria-label="products">
         <Typography variant="h4">
           {value[0].toUpperCase().concat(value.substring(1))} List
         </Typography>
@@ -61,7 +58,7 @@ const Dashboard = () => {
           <Tab value="products" label="Products" />
         </Tabs>
         <Box>{value === "users" ? <UserList /> : <ProductsList />}</Box>
-      </Container>
+      </StyledContainer>
     </MasterPage>
   );
 };

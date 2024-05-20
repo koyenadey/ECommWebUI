@@ -5,6 +5,7 @@ import createProducts from "../thunks/createProducts";
 import fetchAllCategories from "../thunks/fetchAllCategories";
 import updateProduct from "../thunks/updateProduct";
 import deleteProduct from "../thunks/deleteProduct";
+import fetchProductCount from "../thunks/fetchProductCount";
 
 type InitialState = {
   products: ProductsList[];
@@ -41,6 +42,7 @@ const productSlice = createSlice({
       state.sortType = action.payload;
     },
   },
+
   extraReducers(builder) {
     builder.addCase(fetchProducts.pending, (state, action) => {
       return {
@@ -48,6 +50,7 @@ const productSlice = createSlice({
         isLoading: true,
       };
     });
+
     builder.addCase(fetchProducts.rejected, (state, action) => {
       const payload = action.payload as Error;
       const errorMessage = payload ? payload.message : "An error occurred";
@@ -57,20 +60,45 @@ const productSlice = createSlice({
         error: errorMessage,
       };
     });
+
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      if (!(action.payload instanceof Error)) {
-        return {
-          ...state,
-          products: Array.isArray(action.payload) ? action.payload : [],
-          productDetails: Array.isArray(action.payload)
-            ? undefined
-            : action.payload,
-          isLoading: false,
-          productCount: action.payload.length ?? 0,
-          isDeleted: false,
-        };
-      }
+      return {
+        ...state,
+        products: Array.isArray(action.payload) ? action.payload : [],
+        productDetails: Array.isArray(action.payload)
+          ? undefined
+          : action.payload,
+        isLoading: false,
+        isDeleted: false,
+      };
     });
+
+    builder.addCase(fetchProductCount.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(fetchProductCount.fulfilled, (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        productCount: action.payload,
+        isDeleted: false,
+      };
+    });
+
+    builder.addCase(fetchProductCount.rejected, (state, action) => {
+      const payload = action.payload as Error;
+      const errorMessage = payload ? payload.message : "An error occurred";
+      return {
+        ...state,
+        isLoading: false,
+        error: errorMessage,
+      };
+    });
+
     builder.addCase(createProducts.pending, (state, action) => {
       return {
         ...state,

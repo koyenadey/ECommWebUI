@@ -1,4 +1,4 @@
-import { ProductsList } from "../misc/type";
+import { ProductsList, UserType } from "../misc/type";
 
 export let mockProducts: ProductsList[] = [
   {
@@ -6,7 +6,15 @@ export let mockProducts: ProductsList[] = [
     title: "product1",
     price: 1,
     description: "product1",
-    images: ["img1", "img2"],
+    images: [
+      {
+        productId: "1",
+        imageUrl: "example1.jpg",
+        id: "1",
+        createdAt: "",
+        updatedAt: "",
+      },
+    ],
     creationAt: "",
     updatedAt: "",
     category: {
@@ -22,7 +30,15 @@ export let mockProducts: ProductsList[] = [
     title: "product2",
     price: 2,
     description: "product2",
-    images: ["img1", "img2"],
+    images: [
+      {
+        productId: "1",
+        imageUrl: "example1.jpg",
+        id: "1",
+        createdAt: "",
+        updatedAt: "",
+      },
+    ],
     creationAt: "",
     updatedAt: "",
     category: {
@@ -37,22 +53,27 @@ export let mockProducts: ProductsList[] = [
 
 export const mockUsers = [
   {
-    id: 1,
+    id: "1",
     email: "john@mail.com",
     password: "changeme",
-    name: "Jhon",
+    userName: "Jhon",
     role: "customer",
     avatar: "https://i.imgur.com/LDOO4Qs.jpg",
   },
   {
-    id: 2,
+    id: "2",
     email: "maria@mail.com",
     password: "12345",
-    name: "Maria",
+    userName: "Maria",
     role: "customer",
     avatar: "https://i.imgur.com/DTfowdu.jpg",
   },
 ];
+
+export const userProp = {
+  baseUrl: "http://localhost:5240/api/v1",
+  token: "mockToken",
+};
 
 export const mockCategories = [
   {

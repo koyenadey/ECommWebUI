@@ -6,8 +6,10 @@ import { USER_GETURL } from "../constants";
 const useFetchUsers = () => {
   const dispatch = useAppDispatch();
 
+  const token = localStorage.getItem("refresh-token") ?? "";
+
   useEffect(() => {
-    dispatch(fetchUsers(USER_GETURL));
+    dispatch(fetchUsers({ baseUrl: USER_GETURL, token }));
   }, [dispatch]);
 };
 
