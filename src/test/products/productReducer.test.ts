@@ -18,7 +18,7 @@ const initialState = {
   productCount: 0,
   searchText: "",
   sortType: "asc",
-  isDeleted: false,
+  deletedId: "",
 };
 
 beforeAll(() => {
@@ -103,14 +103,15 @@ describe("Product Reducer", () => {
   });
 
   test("should create new product", async () => {
-    const product: CreateProductType = {
+    const product: any = {
       name: "Zara Blazer",
       price: 30,
       description: "Green zara blazer",
       images: ["https://placeimg.com/640/480/any"],
-      categoryId: 1,
+      categoryId: "1",
     };
-    const productObject = { baseUrl: GETURL, product: product };
+    const token = localStorage.getItem("refresh-token") ?? "";
+    const productObject = { baseUrl: GETURL, product: product, token };
     await store.dispatch(createProducts(productObject));
     expect(store.getState().productReducer.products.length).toBe(2);
   });
@@ -118,14 +119,15 @@ describe("Product Reducer", () => {
 
 test("should update a product", async () => {
   const url = GETURL + "/1";
-  const product: CreateProductType = {
+  const product: any = {
     name: "Zara Blazer",
     price: 100,
     description: "A green zara blazer",
     images: ["https://placeimg.com/640/480/any"],
-    categoryId: 1,
+    categoryId: "1",
   };
-  const productObject = { baseUrl: url, product };
+  const token = localStorage.getItem("refresh-token") ?? "";
+  const productObject = { baseUrl: url, product, token };
 
   const expectedResult = {
     id: 1,

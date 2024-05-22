@@ -4,17 +4,19 @@ import { CreateProductType, Product } from "../../misc/type";
 interface UpdateProduct {
   baseUrl: string;
   product: CreateProductType;
+  token: string;
 }
 
 const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  async ({ baseUrl, product }: UpdateProduct, { rejectWithValue }) => {
+  async ({ baseUrl, product, token }: UpdateProduct, { rejectWithValue }) => {
     try {
       const result = await fetch(baseUrl, {
-        method: "PUT",
+        method: "PATCH",
         body: JSON.stringify(product),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!result.ok) throw new Error(result.statusText);

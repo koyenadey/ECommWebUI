@@ -1,20 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { CreateProductType, Product, ProductsList } from "../../misc/type";
+import { Product } from "../../misc/type";
 interface CreateProduct {
   baseUrl: string;
-  product: CreateProductType;
+  product: FormData;
+  token: string;
 }
 
 const createProducts = createAsyncThunk(
   "products/createProducts",
-  async ({ baseUrl, product }: CreateProduct, { rejectWithValue }) => {
+  async ({ baseUrl, product, token }: CreateProduct, { rejectWithValue }) => {
     try {
       const response: Response = await fetch(baseUrl, {
         method: "POST",
-        body: JSON.stringify(product),
+        body: product,
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
 

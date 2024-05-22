@@ -1,23 +1,28 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import { useAppDispatch } from "../redux/store";
-import { GETCATPROD, GETURL, GET_COUNTURL } from "../constants";
+import {
+  GETCATPRD_COUNTURL,
+  GETCATPROD,
+  GETURL,
+  GET_COUNTURL,
+} from "../constants";
 import fetchProducts from "../redux/thunks/fetchProducts";
 import fetchProductCount from "../redux/thunks/fetchProductCount";
 
 const useFetchProducts = () => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const [searchParams] = useSearchParams();
-  const productId = searchParams.get("productId");
-
-  const url = productId ? `${GETCATPROD}/${productId}/products` : GETURL;
+  const url = id ? `${GETURL}/category/${id}` : GETURL;
+  const prodCountUrl = id ? `${GETCATPRD_COUNTURL}/${id}/meta` : GET_COUNTURL;
 
   useEffect(() => {
-    dispatch(fetchProductCount(GET_COUNTURL));
+    console.log("coming here : " + url + " and " + prodCountUrl);
+    dispatch(fetchProductCount(prodCountUrl));
     dispatch(fetchProducts(url));
-  }, [dispatch, url]);
+  }, [dispatch, url, prodCountUrl]);
 };
 
 export default useFetchProducts;

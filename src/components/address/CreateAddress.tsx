@@ -9,66 +9,89 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppState, useAppDispatch } from "../../redux/store";
-import { AddressType } from "../../misc/type";
+import { AddressType, UserType } from "../../misc/type";
 import { useForm } from "react-hook-form";
 import { SaveButton } from "../../styles/styles";
 import updateAddress from "../../redux/thunks/updateAddress";
 import { USER_ADDRESSURL } from "../../constants";
+import createAddress from "../../redux/thunks/createAddress";
 
-export type AddressEditFormInput = {
+export type AddressCreateFormInput = {
+  userId: string;
   addressLine: string;
   street: string;
   city: string;
+  country: string;
   postcode: string;
   landmark: string;
   phoneNumber: string;
 };
 
-const EditAddress = () => {
+const CreateAddress = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const token = localStorage.getItem("refresh-token") ?? "";
+  const token = localStorage.getItem("refresh-token");
 
-  const address: AddressType | undefined = useSelector(
-    (state: AppState) => state.userReducer.addresses
-  ).find((a: AddressType) => a.id === id);
+  const userId: string | undefined = useSelector(
+    (state: AppState) => state.userReducer.user
+  )?.id;
 
   const initialValues = {
-    addressLine: address?.addressLine ?? "",
-    street: address?.street,
-    city: address?.city,
-    postcode: address?.postcode,
-    landmark: address?.landmark,
-    phoneNumber: address?.phoneNumber,
+    userId: userId,
+    addressLine: "",
+    street: "",
+    city: "",
+    country: "",
+    postcode: "",
+    landmark: "",
+    phoneNumber: "",
   };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddressEditFormInput>({ defaultValues: initialValues });
+  } = useForm<AddressCreateFormInput>({ defaultValues: initialValues });
 
-  const submitHandler = (data: AddressEditFormInput) => {
-    dispatch(
-      updateAddress({
-        baseUrl: `${USER_ADDRESSURL}/${id}`,
-        address: data,
-        token,
-      })
-    );
-    navigate("/dashboard");
+  const submitHandler = async (data: AddressCreateFormInput) => {
+    //console.log(data);
+    if (token) {
+      var result = await dispatch(
+        createAddress({
+          baseUrl: `${USER_ADDRESSURL}`,
+          address: data,
+          token,
+        })
+      );
+      if (result) navigate("/profile");
+    }
   };
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
       <Paper elevation={3} sx={{ p: 3, maxWidth: 400, width: "100%" }}>
         <Typography variant="h6" gutterBottom>
-          Edit address
+          Create address
         </Typography>
         <form onSubmit={handleSubmit(submitHandler)}>
           <Box component="div">
+            <FormControl fullWidth margin="normal">
+              <TextField
+                {...register("userId")}
+                id="userid"
+                label="User Id"
+                variant="outlined"
+                fullWidth
+                disabled
+                InputLabelProps={{
+                  shrink: !!userId, // Shrink label if value is present
+                }}
+                error={!!errors?.userId}
+                helperText={errors?.userId?.message}
+              />
+            </FormControl>
             <FormControl fullWidth margin="normal">
               <TextField
                 {...register("addressLine", {
@@ -79,9 +102,6 @@ const EditAddress = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputLabelProps={{
-                  shrink: !!address?.addressLine, // Shrink label if value is present
-                }}
                 error={!!errors?.addressLine}
                 helperText={errors?.addressLine?.message}
               />
@@ -97,9 +117,6 @@ const EditAddress = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputLabelProps={{
-                  shrink: !!address?.street, // Shrink label if value is present
-                }}
                 error={!!errors?.street}
                 helperText={errors?.street?.message}
               />
@@ -115,11 +132,23 @@ const EditAddress = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputLabelProps={{
-                  shrink: !!address?.city, // Shrink label if value is present
-                }}
                 error={!!errors?.city}
                 helperText={errors?.city?.message}
+              />
+            </FormControl>
+
+            <FormControl fullWidth margin="normal">
+              <TextField
+                {...register("country", {
+                  required: "This field is required",
+                })}
+                id="country"
+                label="Country"
+                variant="outlined"
+                required
+                fullWidth
+                error={!!errors?.country}
+                helperText={errors?.country?.message}
               />
             </FormControl>
 
@@ -139,9 +168,6 @@ const EditAddress = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputLabelProps={{
-                  shrink: !!address?.postcode, // Shrink label if value is present
-                }}
                 error={!!errors?.postcode}
                 helperText={errors?.postcode?.message}
               />
@@ -157,9 +183,6 @@ const EditAddress = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputLabelProps={{
-                  shrink: !!address?.landmark, // Shrink label if value is present
-                }}
                 error={!!errors?.landmark}
                 helperText={errors?.landmark?.message}
               />
@@ -175,9 +198,6 @@ const EditAddress = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputLabelProps={{
-                  shrink: !!address?.phoneNumber, // Shrink label if value is present
-                }}
                 error={!!errors?.phoneNumber}
                 helperText={errors?.phoneNumber?.message}
               />
@@ -200,4 +220,4 @@ const EditAddress = () => {
   );
 };
 
-export default EditAddress;
+export default CreateAddress;

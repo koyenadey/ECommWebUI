@@ -13,6 +13,7 @@ import fetchUserAddress from "../thunks/fetchUserAddress";
 import updateAddress from "../thunks/updateAddress";
 import fetchDefaultAddress from "../thunks/fetchDefaultAddress";
 import deleteUserAddress from "../thunks/deleteUserAddress";
+import checkEmailExists from "../thunks/checkEmailExists";
 
 type InitialState = {
   user: UserType | undefined;
@@ -23,6 +24,7 @@ type InitialState = {
   isLoading: boolean;
   isLoggedIn: boolean;
   error: string;
+  emailExist: boolean;
 };
 
 const initialState: InitialState = {
@@ -36,6 +38,7 @@ const initialState: InitialState = {
   isLoading: true,
   error: "",
   isLoggedIn: false,
+  emailExist: false,
 };
 
 const userSlice = createSlice({
@@ -74,6 +77,34 @@ const userSlice = createSlice({
     );
 
     builder.addCase(fetchUsers.rejected, (state, action) => {
+      const payload = action.payload as { message: string };
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
+
+    builder.addCase(checkEmailExists.pending, (state) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(
+      checkEmailExists.fulfilled,
+      (state, action: PayloadAction<boolean>) => {
+        return {
+          ...state,
+          isLoading: false,
+          emailExist: action.payload,
+          error: "",
+        };
+      }
+    );
+
+    builder.addCase(checkEmailExists.rejected, (state, action) => {
       const payload = action.payload as { message: string };
       return {
         ...state,

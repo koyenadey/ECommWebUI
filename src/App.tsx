@@ -24,8 +24,10 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Register = lazy(() => import("./pages/Register"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const Dashboard = lazy(() => import("./pages/DashBoard"));
-const EditProduct = lazy(() => import("./components/products/EditProduct"));
+const EditAProduct = lazy(() => import("./components/products/EditAProduct"));
 const EditAddress = lazy(() => import("./components/address/EditAddress"));
+const CreateProduct = lazy(() => import("./components/products/CreateProduct"));
+const CreateAddress = lazy(() => import("./components/address/CreateAddress"));
 
 function App() {
   const [mode, setMode] = useState<"light" | "dark">("light");
@@ -51,16 +53,24 @@ function App() {
             element={<PrivateRoute Component={Dashboard} />}
           />
           <Route
-            path="/dashboard/:action/products/:id?"
-            element={<PrivateRoute Component={EditProduct} />}
+            path="/dashboard/edit/products/:id"
+            element={<PrivateRoute Component={EditAProduct} />}
           />
           <Route
-            path="/dashboard/:action/users/:id?"
+            path="/dashboard/create/product"
+            element={<PrivateRoute Component={CreateProduct} />}
+          />
+          <Route
+            path="/dashboard/:action/users/:id"
             element={<PrivateRoute Component={EditUser} />}
           />
           <Route
-            path="/address/edit/:id?"
+            path="/address/edit/:id"
             element={<PrivateRoute Component={EditAddress} />}
+          />
+          <Route
+            path="/address/create"
+            element={<PrivateRoute Component={CreateAddress} />}
           />
           <Route path="/register" element={<Register />} />
           <Route path="/orderpopup" element={<OrderPagePopUp />} />
@@ -68,7 +78,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/products/all" element={<ProductsPage />} />
           <Route
-            path="/categories/:catName/products"
+            path="/products/category/:catName/:id"
             element={<ProductsPage />}
           />
           <Route path="/products/:id" element={<ProductDetails />} />

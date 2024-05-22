@@ -182,7 +182,8 @@ export const RegisterButton = styled(Button)({
 });
 
 export const RegisterContainer = styled(Container)({
-  marginTop: "13%",
+  marginTop: "5%",
+  marginBottom: "5%",
   width: "50%",
   border: "1px solid black",
   textAlign: "center",

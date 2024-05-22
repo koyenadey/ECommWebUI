@@ -12,8 +12,11 @@ import AddressCard from "./AddressCard";
 import { AddressType } from "../../misc/type";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 const AddressList = () => {
+  const navigate = useNavigate();
+
   const addresses: AddressType[] = useSelector(
     (state: AppState) => state.userReducer.addresses
   );
@@ -53,6 +56,7 @@ const AddressList = () => {
                 startIcon={<AddIcon />}
                 aria-label="Add new address"
                 sx={{ height: "100%", width: "100%", textTransform: "none" }}
+                onClick={() => navigate("/address/create")}
               >
                 Add address
               </Button>

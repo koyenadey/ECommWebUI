@@ -24,18 +24,18 @@ const mockUsers = [
 ];
 
 const handler = [
-  http.post("https://api.escuelajs.co/api/v1/users", async ({ request }) => {
-    const user = (await request.json()) as RegisterFormType;
-    const userToReturn: UserType = {
-      id: "3",
-      email: user.email,
-      password: user.password,
-      role: "customer",
-      avatar: user.avatar,
-      userName: user.name,
-    };
-    return HttpResponse.json(userToReturn, { status: 204 });
-  }),
+  // http.post("https://api.escuelajs.co/api/v1/users", async ({ request }) => {
+  //   const user = (await request.json()) as RegisterFormType;
+  //   const userToReturn: UserType = {
+  //     id: "3",
+  //     email: user.email,
+  //     password: user.password,
+  //     role: "customer",
+  //     avatar: undefined,
+  //     userName: user.userName,
+  //   };
+  //   return HttpResponse.json(userToReturn, { status: 204 });
+  // }),
 
   http.put("https://api.escuelajs.co/api/v1/users/:userId", ({ request }) => {
     const pathSegments = new URL(request.url).pathname.split("/");

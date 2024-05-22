@@ -11,10 +11,6 @@ const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ baseUrl, user, token }: UpdateUser, { rejectWithValue }) => {
     try {
-      // const formData = new FormData();
-      // formData.append("UserName", user.name);
-      // if (user.avatar) formData.append("Avatar", user.avatar);
-
       const response: Response = await fetch(baseUrl, {
         method: "PATCH",
         body: user,

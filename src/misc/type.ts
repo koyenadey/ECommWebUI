@@ -1,7 +1,7 @@
 import { Inventory } from "@mui/icons-material";
 
 export type Category = {
-  id: number;
+  id: string;
   name: string;
   image: string;
   creationAt: string;
@@ -46,11 +46,28 @@ export type CreateProductType = {
   name: string;
   price: number;
   description: string;
-  images: string[];
-  categoryId: number;
+  images: FileList;
+  inventory: number;
+  weight: number;
+  categoryId: string;
 };
 
-export type UpdateProductType = Omit<CreateProductType, "images">;
+export type CreateProductType1 = {
+  pname: string;
+  price: number;
+  description: string;
+  images: FileList;
+  inventory: number;
+  weight: number;
+  categoryId: string;
+};
+
+export type UpdateProductType = {
+  price: number;
+  inventory: number;
+};
+
+//export type UpdateProductType = Omit<CreateProductType, "images">;
 
 export type ProductCart = {
   id: number;
@@ -108,8 +125,15 @@ export type Token = {
 };
 
 export type RegisterFormType = {
-  name: string;
-  email: string;
-  password: string;
-  avatar: string;
+  UserName: string;
+  Email: string;
+  Password: string;
+  Avatar?: FileList;
+  AddresLine1: string;
+  Street: string;
+  City: string;
+  Postcode: string;
+  Country: string;
+  PhoneNumber: string;
+  Landmark: string;
 };

@@ -6,9 +6,10 @@ import fetchAllCategories from "../thunks/fetchAllCategories";
 import updateProduct from "../thunks/updateProduct";
 import deleteProduct from "../thunks/deleteProduct";
 import fetchProductCount from "../thunks/fetchProductCount";
+import fetchProduct from "../thunks/fetchProduct";
 
 type InitialState = {
-  products: ProductsList[];
+  products: Product[];
   categories: Category[];
   productDetails: Product | undefined;
   isLoading: boolean;
@@ -16,7 +17,7 @@ type InitialState = {
   productCount: number;
   searchText: string;
   sortType: string;
-  isDeleted: boolean;
+  deletedId: string;
 };
 
 const initialState: InitialState = {
@@ -28,7 +29,7 @@ const initialState: InitialState = {
   productCount: 0,
   searchText: "",
   sortType: "asc",
-  isDeleted: false,
+  deletedId: "",
 };
 
 const productSlice = createSlice({
@@ -44,6 +45,32 @@ const productSlice = createSlice({
   },
 
   extraReducers(builder) {
+    builder.addCase(fetchProduct.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(fetchProduct.fulfilled, (state, action) => {
+      return {
+        ...state,
+        productDetails: action.payload,
+        isLoading: false,
+        isDeleted: false,
+      };
+    });
+
+    builder.addCase(fetchProduct.rejected, (state, action) => {
+      const payload = action.payload as Error;
+      const errorMessage = payload ? payload.message : "An error occurred";
+      return {
+        ...state,
+        isLoading: false,
+        error: errorMessage,
+      };
+    });
+
     builder.addCase(fetchProducts.pending, (state, action) => {
       return {
         ...state,
@@ -65,9 +92,7 @@ const productSlice = createSlice({
       return {
         ...state,
         products: Array.isArray(action.payload) ? action.payload : [],
-        productDetails: Array.isArray(action.payload)
-          ? undefined
-          : action.payload,
+        productDetails: undefined,
         isLoading: false,
         isDeleted: false,
       };
@@ -160,9 +185,14 @@ const productSlice = createSlice({
     builder.addCase(
       updateProduct.fulfilled,
       (state, action: PayloadAction<Product>) => {
+        const products = state.products.filter(
+          (p) => p.id !== action.payload.id
+        );
+        products.push(action.payload);
         return {
           ...state,
           isLoading: false,
+          products: products,
           productDetails: action.payload,
         };
       }
@@ -187,11 +217,15 @@ const productSlice = createSlice({
 
     builder.addCase(
       deleteProduct.fulfilled,
-      (state, action: PayloadAction<boolean>) => {
+      (state, action: PayloadAction<Product>) => {
+        const products = state.products.filter(
+          (p) => p.id !== action.payload.id
+        );
         return {
           ...state,
           isLoading: false,
-          isDeleted: action.payload,
+          products: products,
+          deletedId: action.payload.id,
         };
       }
     );

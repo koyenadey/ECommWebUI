@@ -12,7 +12,7 @@ import { StyledLink } from "../../styles/styles";
 interface CategoriesMenuProps {
   anchorEl: null | HTMLElement;
   open: boolean;
-  handleClose: (catName?: string, index?: number) => void;
+  handleClose: (catName?: string, catId?: string) => void;
 }
 
 const CategoriesMenu = (props: CategoriesMenuProps) => {
@@ -40,8 +40,8 @@ const CategoriesMenu = (props: CategoriesMenuProps) => {
         <StyledLink to="/products/all">All Products</StyledLink>
       </MenuItem>
       <Divider />
-      {categories.map((category, index) => [
-        <MenuItem onClick={() => handleClose(category.name, index)}>
+      {categories.map((category) => [
+        <MenuItem onClick={() => handleClose(category?.name, category?.id)}>
           <ListItemText>{category.name}</ListItemText>
         </MenuItem>,
         <Divider />,

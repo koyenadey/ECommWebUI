@@ -1,8 +1,8 @@
-import { ProductsList, UserType } from "../misc/type";
+import { Product, UserType } from "../misc/type";
 
-export let mockProducts: ProductsList[] = [
+export let mockProducts: Product[] = [
   {
-    id: 1,
+    id: "P1",
     name: "product1",
     price: 1,
     description: "product1",
@@ -15,10 +15,12 @@ export let mockProducts: ProductsList[] = [
         updatedAt: "",
       },
     ],
+    inventory: 10,
+    weight: 0.2,
     creationAt: "",
     updatedAt: "",
     category: {
-      id: 1,
+      id: "1",
       name: "Clothes",
       image: "",
       creationAt: "",
@@ -26,7 +28,7 @@ export let mockProducts: ProductsList[] = [
     },
   },
   {
-    id: 2,
+    id: "2",
     name: "product2",
     price: 2,
     description: "product2",
@@ -39,10 +41,12 @@ export let mockProducts: ProductsList[] = [
         updatedAt: "",
       },
     ],
+    inventory: 50,
+    weight: 0.2,
     creationAt: "",
     updatedAt: "",
     category: {
-      id: 2,
+      id: "2",
       name: "Electronics",
       image: "",
       creationAt: "",
@@ -58,7 +62,7 @@ export const mockUsers = [
     password: "changeme",
     userName: "Jhon",
     role: "customer",
-    avatar: "https://i.imgur.com/LDOO4Qs.jpg",
+    avatar: undefined,
   },
   {
     id: "2",
@@ -66,7 +70,7 @@ export const mockUsers = [
     password: "12345",
     userName: "Maria",
     role: "customer",
-    avatar: "https://i.imgur.com/DTfowdu.jpg",
+    avatar: undefined,
   },
 ];
 

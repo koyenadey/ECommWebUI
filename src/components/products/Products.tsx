@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../redux/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Paging from "../pagination/Paging";
 import * as Constants from "../../constants/index";
-import { ProductsList } from "../../misc/type";
+import { Product, ProductsList } from "../../misc/type";
 import { ProductItemIcon } from "../../styles/styles";
 
 import { Container } from "@mui/system";
@@ -18,11 +18,14 @@ import fetchProducts from "../../redux/thunks/fetchProducts";
 import { GETURL, PAGESIZE } from "../../constants/index";
 
 const Products = () => {
+  //const { id } = useParams();
   useFetchUser();
   const dispatch = useAppDispatch();
   const [pageNo, setPageNo] = useState<number>(1);
 
   useEffect(() => {
+    // if (id) dispatch(fetchProducts(`${GETURL}/category/${id}`));
+    // else
     dispatch(fetchProducts(`${GETURL}?PageNo=${pageNo}&PageSize=${PAGESIZE}`));
   }, [pageNo]);
 
@@ -49,7 +52,7 @@ const Products = () => {
   );
   const error = useSelector((state: AppState) => state.productReducer.error);
 
-  const productDetailsHandler = (productId: number) => {
+  const productDetailsHandler = (productId: string) => {
     navigate(`/products/${productId}`);
   };
 
@@ -61,7 +64,7 @@ const Products = () => {
   const offset = (pageNo - 1) * pageSize;
   const limit = pageNo * pageSize;
 
-  const productsDataCopy: ProductsList[] = [...products];
+  const productsDataCopy: Product[] = [...products];
 
   const sortedData =
     sortTypeValue === "asc"
@@ -80,7 +83,7 @@ const Products = () => {
     );
   });
 
-  const paginatedData: ProductsList[] = searchedData; //.slice(offset, limit);
+  const paginatedData: Product[] = searchedData; //.slice(offset, limit);
 
   const pageCount = Math.ceil(totalProducts / pageSize);
 

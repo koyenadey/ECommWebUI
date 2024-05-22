@@ -25,7 +25,7 @@ const CartDialogue = (props: CartDialogueProps) => {
         <DialogTitle id="alert-dialog-title">{"Remove Item"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to remove this item from cart?
+            Do you want to remove this item?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

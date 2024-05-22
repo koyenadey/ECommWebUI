@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Product } from "../../misc/type";
 
-const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
+const fetchProduct = createAsyncThunk(
+  "products/fetchProduct",
   async (baseUrl: string, { rejectWithValue }) => {
     try {
       const response: Response = await fetch(baseUrl);
@@ -11,8 +11,7 @@ const fetchProducts = createAsyncThunk(
         throw new Error("Failed to fetch data");
       }
 
-      const result: Product[] = await response.json();
-      //console.log(result);
+      const result: Product = await response.json();
       return result;
     } catch (e) {
       const error = e as Error;
@@ -21,4 +20,4 @@ const fetchProducts = createAsyncThunk(
   }
 );
 
-export default fetchProducts;
+export default fetchProduct;

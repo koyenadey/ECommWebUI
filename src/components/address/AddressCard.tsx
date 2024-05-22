@@ -39,20 +39,20 @@ const AddressCard = (props: AddressCardProps) => {
 
   const handleOpen = () => setOpen(true);
 
-  const handleClose = (action: string, id: string) => {
+  const handleClose = async (action: string, id: string) => {
     if (action === "No") setOpen(false);
     else {
-      dispatch(
-        deleteUserAddress({ baseUrl: `${USER_ADDRESSURL}/${id}`, token })
-      )
-        .then((response) => {
-          console.log(`User address ${response} deleted successfully`);
-          navigate("/dashboard");
-        })
-        .catch((error) => {
-          console.error("Error deleting user address:", error.message);
-        });
-      setOpen(false);
+      try {
+        var result = await dispatch(
+          deleteUserAddress({ baseUrl: `${USER_ADDRESSURL}/${id}`, token })
+        );
+        setOpen(false);
+        if (result) {
+          navigate("/profile");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   const editAddressHandler = () => {

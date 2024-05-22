@@ -4,12 +4,11 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import fetchProducts from "../redux/thunks/fetchProducts";
 import MasterPage from "../components/master-page/MasterPage";
 import { addToCart } from "../redux/slices/cartSlice";
 import { AppState, useAppDispatch } from "../redux/store";
 
-import { CreateProductType, Product, ProductCart } from "../misc/type";
+import { Product } from "../misc/type";
 import { GETProdURL } from "../constants";
 import * as Utils from "../utils/utils";
 import {
@@ -31,27 +30,33 @@ import {
   StyledQtyDdl,
   StyledSubTotalPrice,
 } from "../styles/styles";
+import fetchProduct from "../redux/thunks/fetchProduct";
 
 const ProductDetails = () => {
   const { id } = useParams<string>();
   const [qty, setQty] = useState<number>(1);
-  const [showOrderPopUp, setShowOrderPopUp] = useState<boolean>(false);
+  //const [showOrderPopUp, setShowOrderPopUp] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const url = `${GETProdURL}/${id}`;
-  const productQty: number[] = Utils.numbersArray(10);
 
   const storeDispatch = useAppDispatch();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    storeDispatch(fetchProducts(url));
+    storeDispatch(fetchProduct(url));
   }, [storeDispatch, url]);
 
   const productDetails = useSelector(
     (state: AppState) => state.productReducer.productDetails
   );
+
+  const productInventory = productDetails?.inventory;
+
+  let productQty: number[] = [];
+  if (productInventory && productInventory > 10)
+    productQty = Utils.numbersArray(10);
 
   const qtyChangeHandler = (value: number) => {
     setQty(value as number);
@@ -99,19 +104,21 @@ const ProductDetails = () => {
             </StyledSubTotalPrice>
           </CardContent>
           <CardActions>
-            <StyledQtyDdl
-              value={qty}
-              label="quantity"
-              onChange={(event) =>
-                qtyChangeHandler(event.target.value as number)
-              }
-            >
-              {productQty.map((p) => (
-                <MenuItem key={p} value={p}>
-                  {p}
-                </MenuItem>
-              ))}
-            </StyledQtyDdl>
+            {productQty.length > 0 && (
+              <StyledQtyDdl
+                value={qty}
+                label="quantity"
+                onChange={(event) =>
+                  qtyChangeHandler(event.target.value as number)
+                }
+              >
+                {productQty.map((p) => (
+                  <MenuItem key={p} value={p}>
+                    {p}
+                  </MenuItem>
+                ))}
+              </StyledQtyDdl>
+            )}
             {productDetails && (
               <StyledCartBtn
                 size="small"
@@ -122,7 +129,7 @@ const ProductDetails = () => {
             )}
           </CardActions>
         </StyledPrdDetails>
-        {showOrderPopUp && <OrderPagePopUp />}
+        {/* {showOrderPopUp && <OrderPagePopUp />} */}
       </Box>
     </MasterPage>
   );

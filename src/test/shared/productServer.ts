@@ -52,7 +52,7 @@ const handler = [
       if (!productId) return new HttpResponse(null, { status: 404 });
 
       const productToUpdate = mockProducts.find(
-        (product) => product.id === parseInt(productId)
+        (product) => product.id === productId
       );
 
       const product = (await request.json()) as ProductsList;

@@ -31,7 +31,7 @@ const mockCart: Product[] = [
     creationAt: "",
     updatedAt: "",
     category: {
-      id: 1,
+      id: "1",
       name: "Clothes",
       image: "",
       creationAt: "",
@@ -66,7 +66,7 @@ describe("Cart Reducer", () => {
       creationAt: "",
       updatedAt: "",
       category: {
-        id: 1,
+        id: "1",
         name: "Clothes",
         image: "",
         creationAt: "",

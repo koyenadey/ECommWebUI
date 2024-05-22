@@ -67,9 +67,8 @@ const NavigationBar = (props: NavBarProps) => {
     setAnchorEl(null);
   };
 
-  const showCategoriesHandler = (catName?: string, index?: number) => {
-    if (index !== undefined && catName !== undefined)
-      navigate(`/categories/${catName}/products?productId=${index + 1}`);
+  const showCategoriesHandler = (catName?: string, catId?: string) => {
+    if (catId && catName) navigate(`/products/category/${catName}/${catId}`);
     setAnchorEll(null);
   };
 
