@@ -1,3 +1,5 @@
+import { Inventory } from "@mui/icons-material";
+
 export type Category = {
   id: number;
   name: string;
@@ -18,7 +20,7 @@ type ProductImage = {
 
 export type ProductsList = {
   id: number;
-  title: string;
+  name: string;
   price: number;
   description: string;
   images: ProductImage[];
@@ -28,18 +30,20 @@ export type ProductsList = {
 };
 
 export type Product = {
-  id: number;
-  title: string;
+  id: string;
+  name: string;
   price: number;
   description: string;
+  category: Category;
   images: ProductImage[];
   creationAt: string;
+  inventory: number;
+  weight: number;
   updatedAt: string;
-  category: Category;
 };
 
 export type CreateProductType = {
-  title: string;
+  name: string;
   price: number;
   description: string;
   images: string[];
@@ -61,7 +65,7 @@ export type ProductCart = {
 };
 
 export type UpdateProductCart = {
-  productId: number;
+  productId: string;
   quantity: number;
 };
 
@@ -79,6 +83,24 @@ export type CreateUserType = {
   email: string;
   role: string;
   avatar: string;
+};
+
+export type AddressUserType = {
+  id: string;
+  userName: string;
+  email: string;
+};
+
+export type AddressType = {
+  id: string;
+  user: AddressUserType;
+  addressLine: string;
+  street: string;
+  city: string;
+  country: string;
+  postcode: string;
+  phoneNumber: string;
+  landmark: string;
 };
 
 export type Token = {

@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductCart, UpdateProductCart } from "../../misc/type";
+import { Product, ProductCart, UpdateProductCart } from "../../misc/type";
 
 type InitialState = {
-  cart: ProductCart[];
+  cart: Product[];
   quantity: number;
   subTotal: number;
 };
@@ -17,20 +17,20 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<ProductCart>) => {
-      const product: ProductCart | undefined = state.cart.find(
+    addToCart: (state, action: PayloadAction<Product>) => {
+      const product: Product | undefined = state.cart.find(
         (item) => item.id === action.payload.id
       );
       if (!product) {
         state.cart.push(action.payload);
-      } else product.quantity += action.payload.quantity;
+      } else product.inventory += action.payload.inventory;
 
       state.quantity = state.cart.reduce((acc, curr) => {
-        return acc + curr.quantity;
+        return acc + curr.inventory;
       }, 0);
 
       state.subTotal = state.cart.reduce((acc, curr) => {
-        return acc + curr.quantity * curr.price;
+        return acc + curr.inventory * curr.price;
       }, 0);
     },
     updateCart: (state, action: PayloadAction<UpdateProductCart>) => {
@@ -39,30 +39,30 @@ const cartSlice = createSlice({
       );
 
       if (productToBeUpdated) {
-        productToBeUpdated.quantity = action.payload.quantity;
+        productToBeUpdated.inventory = action.payload.quantity;
       }
 
       state.quantity = state.cart.reduce((acc, curr) => {
-        return acc + curr.quantity;
+        return acc + curr.inventory;
       }, 0);
 
       state.subTotal = state.cart.reduce((acc, curr) => {
-        return acc + curr.quantity * curr.price;
+        return acc + curr.inventory * curr.price;
       }, 0);
     },
 
-    removeFromCart: (state, action: PayloadAction<number>) => {
+    removeFromCart: (state, action: PayloadAction<string>) => {
       const productExists = state.cart.find((p) => p.id === action.payload);
       if (productExists) {
-        state.cart = state.cart.filter((c) => c.id !== action.payload);
+        state.cart = state.cart.filter((pc) => pc.id !== action.payload);
       }
 
       state.quantity = state.cart.reduce((acc, curr) => {
-        return acc + curr.quantity;
+        return acc + curr.inventory;
       }, 0);
 
       state.subTotal = state.cart.reduce((acc, curr) => {
-        return acc + curr.quantity * curr.price;
+        return acc + curr.inventory * curr.price;
       }, 0);
     },
   },

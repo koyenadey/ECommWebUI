@@ -6,7 +6,8 @@ import { AppState, useAppDispatch } from "../redux/store";
 
 import Home from "../components/home/Home";
 import MasterPage from "../components/master-page/MasterPage";
-import { LOGGEDIN_USERURL } from "../constants";
+import { LOGGEDIN_USERURL, USER_ADDRESSURL } from "../constants";
+import fetchUserAddress from "../redux/thunks/fetchUserAddress";
 //import fetchAcessToken from "../redux/thunks/fetchAccessToken";
 
 const HomePage = () => {
@@ -22,6 +23,9 @@ const HomePage = () => {
   useEffect(() => {
     if (refreshToken) {
       dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: refreshToken }));
+      dispatch(
+        fetchUserAddress({ baseUrl: USER_ADDRESSURL, token: refreshToken })
+      );
       //dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
     }
     //  else {

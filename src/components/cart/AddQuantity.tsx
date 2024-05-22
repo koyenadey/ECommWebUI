@@ -3,7 +3,7 @@ import { SnackbarOrigin } from "@mui/material";
 import { useAppDispatch } from "../../redux/store";
 import { updateCart } from "../../redux/slices/cartSlice";
 
-import { ProductCart } from "../../misc/type";
+import { Product, ProductCart } from "../../misc/type";
 import {
   StyledActionBtnsAdd,
   StyledActionBtnsRemove,
@@ -17,7 +17,7 @@ interface State extends SnackbarOrigin {
 }
 
 interface AddQuantityType {
-  item: ProductCart;
+  item: Product;
   onNotify: (message: string) => void;
   onAddItemNotify: (obj: State) => void;
 }
@@ -25,28 +25,28 @@ interface AddQuantityType {
 const AddQuantity = ({ item, onNotify, onAddItemNotify }: AddQuantityType) => {
   const dispatch = useAppDispatch();
 
-  const addItemHandler = (id: number, action: string) => {
-    const qty = item.quantity;
+  const addItemHandler = (id: string, action: string) => {
+    const qty = item.inventory;
 
     if (action === "increement") {
       dispatch(updateCart({ productId: id, quantity: qty + 1 }));
-      onNotify(`${item?.title} Added Succesfully`);
+      onNotify(`${item?.name} Added Succesfully`);
       onAddItemNotify({ open: true, vertical: "top", horizontal: "right" });
     }
     if (action === "decreement") {
       dispatch(updateCart({ productId: id, quantity: qty - 1 }));
-      onNotify(`${item?.title} removed from the cart`);
+      onNotify(`${item?.name} removed from the cart`);
       onAddItemNotify({ open: true, vertical: "top", horizontal: "right" });
     }
   };
   return (
     <StyledAddQty>
-      <StyledQty disabled={item.quantity === 0 ? true : false}>
+      <StyledQty disabled={item.inventory === 0 ? true : false}>
         <StyledActionBtnsRemove
           onClick={() => addItemHandler(item.id, "decreement")}
         />
       </StyledQty>
-      <StyledQtyVal>{item.quantity}</StyledQtyVal>
+      <StyledQtyVal>{item.inventory}</StyledQtyVal>
       <StyledQty>
         <StyledActionBtnsAdd
           onClick={() => addItemHandler(item.id, "increement")}

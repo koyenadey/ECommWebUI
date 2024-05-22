@@ -3,7 +3,7 @@ import { ProductsList, UserType } from "../misc/type";
 export let mockProducts: ProductsList[] = [
   {
     id: 1,
-    title: "product1",
+    name: "product1",
     price: 1,
     description: "product1",
     images: [
@@ -27,7 +27,7 @@ export let mockProducts: ProductsList[] = [
   },
   {
     id: 2,
-    title: "product2",
+    name: "product2",
     price: 2,
     description: "product2",
     images: [
@@ -93,3 +93,10 @@ export const footerData = [
   { name: "Payment Methods", goTo: "", component: "" },
   { name: "About Us", goTo: "aboutus", component: "aboutus" },
 ];
+
+export const modalHeaderWarning = "Delete Address";
+export const modalHeaderFailed = "Removal failed";
+export const modalMessageWarning =
+  "Are you sure you want to delete this address? Once deleted the address could not be recovered!";
+export const modalMessageFailed =
+  "This address is used as your residential address for digital purchases. To delete this address, first set a different residential address for your digital purchases.";

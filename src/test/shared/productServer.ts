@@ -18,7 +18,7 @@ const handler = [
     const product = (await request.json()) as CreateProductType;
 
     const prodToReturn: ProductsList = {
-      title: product.title,
+      name: product.name,
       price: product.price,
       description: product.description,
       images: [
@@ -59,7 +59,7 @@ const handler = [
 
       if (!productToUpdate) return new HttpResponse(null, { status: 400 });
 
-      productToUpdate.title = product.title;
+      productToUpdate.name = product.name;
       productToUpdate.price = product.price;
       productToUpdate.description = product.description;
       productToUpdate.category.id = product.category.id;

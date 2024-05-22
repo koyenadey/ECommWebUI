@@ -68,16 +68,16 @@ const EditProduct = () => {
         <FormInput>
           <FormControl fullWidth>
             <Controller
-              name="title"
+              name="name"
               control={control}
-              defaultValue={action === "edit" ? productDetails?.title : ""}
+              defaultValue={action === "edit" ? productDetails?.name : ""}
               rules={{ required: "Title cannot be empty" }}
               render={({ field }) => (
                 <TextField
                   {...field}
                   label="Title"
-                  error={!!errors.title}
-                  helperText={errors.title?.message}
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
                 />
               )}
             />

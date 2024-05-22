@@ -104,7 +104,7 @@ describe("Product Reducer", () => {
 
   test("should create new product", async () => {
     const product: CreateProductType = {
-      title: "Zara Blazer",
+      name: "Zara Blazer",
       price: 30,
       description: "Green zara blazer",
       images: ["https://placeimg.com/640/480/any"],
@@ -119,7 +119,7 @@ describe("Product Reducer", () => {
 test("should update a product", async () => {
   const url = GETURL + "/1";
   const product: CreateProductType = {
-    title: "Zara Blazer",
+    name: "Zara Blazer",
     price: 100,
     description: "A green zara blazer",
     images: ["https://placeimg.com/640/480/any"],
@@ -129,7 +129,7 @@ test("should update a product", async () => {
 
   const expectedResult = {
     id: 1,
-    title: "Zara Blazer",
+    name: "Zara Blazer",
     price: 100,
     description: "A green zara blazer",
     images: ["https://placeimg.com/640/480/any"],
@@ -145,7 +145,7 @@ test("should update a product", async () => {
   };
 
   await store.dispatch(updateProduct(productObject));
-  expect(store.getState().productReducer.productDetails?.title).toEqual(
-    expectedResult.title
+  expect(store.getState().productReducer.productDetails?.name).toEqual(
+    expectedResult.name
   );
 });

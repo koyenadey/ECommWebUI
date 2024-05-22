@@ -13,6 +13,8 @@ afterAll(() => userServer.close());
 
 const initialState = {
   user: undefined,
+  addresses: [],
+  defaultAddId: "",
   users: [],
   tokens: {
     refreshToken: "",

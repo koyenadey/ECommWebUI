@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { CreateProductType, ProductsList } from "../../misc/type";
+import { CreateProductType, Product, ProductsList } from "../../misc/type";
 interface CreateProduct {
   baseUrl: string;
   product: CreateProductType;
@@ -21,7 +21,7 @@ const createProducts = createAsyncThunk(
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
-      const result: ProductsList = await response.json();
+      const result: Product = await response.json();
       return result;
     } catch (e) {
       const error = e as Error;

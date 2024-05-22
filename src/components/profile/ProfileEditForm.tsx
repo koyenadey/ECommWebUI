@@ -18,9 +18,11 @@ type UserEditFormInput = {
 const ProfileEditForm = ({ canEdit }: any) => {
   const { id } = useParams();
   const token = localStorage.getItem("refresh-token");
+
   const userData: UserType | undefined = useSelector(
     (state: AppState) => state.userReducer.user
   );
+
   const selectedUserData: UserType | undefined = useSelector(
     (state: AppState) => state.userReducer.users.find((u) => u.id === id)
   );

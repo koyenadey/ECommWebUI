@@ -25,6 +25,7 @@ const Register = lazy(() => import("./pages/Register"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const Dashboard = lazy(() => import("./pages/DashBoard"));
 const EditProduct = lazy(() => import("./components/products/EditProduct"));
+const EditAddress = lazy(() => import("./components/address/EditAddress"));
 
 function App() {
   const [mode, setMode] = useState<"light" | "dark">("light");
@@ -56,6 +57,10 @@ function App() {
           <Route
             path="/dashboard/:action/users/:id?"
             element={<PrivateRoute Component={EditUser} />}
+          />
+          <Route
+            path="/address/edit/:id?"
+            element={<PrivateRoute Component={EditAddress} />}
           />
           <Route path="/register" element={<Register />} />
           <Route path="/orderpopup" element={<OrderPagePopUp />} />

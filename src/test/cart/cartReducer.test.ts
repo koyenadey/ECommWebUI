@@ -1,4 +1,4 @@
-import { ProductCart, UpdateProductCart } from "../../misc/type";
+import { Product, ProductCart, UpdateProductCart } from "../../misc/type";
 import cartReducer, {
   addToCart,
   removeFromCart,
@@ -11,14 +11,23 @@ const initialState = {
   subTotal: 0,
 };
 
-const mockCart: ProductCart[] = [
+const mockCart: Product[] = [
   {
-    id: 1,
-    title: "Product1",
+    id: "1",
+    name: "Product1",
     price: 10,
     description: "A description",
-    quantity: 1,
-    images: ["img1"],
+    inventory: 1,
+    weight: 0.2,
+    images: [
+      {
+        productId: "1",
+        imageUrl: "example1.jpg",
+        id: "1",
+        createdAt: "",
+        updatedAt: "",
+      },
+    ],
     creationAt: "",
     updatedAt: "",
     category: {
@@ -38,13 +47,22 @@ describe("Cart Reducer", () => {
   });
 
   test("The cart should add item", () => {
-    const mockItemToBeAdded: ProductCart = {
-      id: 1,
-      title: "Product1",
+    const mockItemToBeAdded: Product = {
+      id: "1",
+      name: "Product1",
       price: 10,
       description: "A description",
-      quantity: 1,
-      images: ["img1"],
+      inventory: 1,
+      weight: 0.2,
+      images: [
+        {
+          productId: "1",
+          imageUrl: "example1.jpg",
+          id: "1",
+          createdAt: "",
+          updatedAt: "",
+        },
+      ],
       creationAt: "",
       updatedAt: "",
       category: {
@@ -74,7 +92,7 @@ describe("Cart Reducer", () => {
     };
 
     const mockItemToBeUpdated: UpdateProductCart = {
-      productId: 1,
+      productId: "1",
       quantity: 2,
     };
 
@@ -89,7 +107,7 @@ describe("Cart Reducer", () => {
       subTotal: 20,
     };
 
-    const state = cartReducer(currentState, removeFromCart(1));
+    const state = cartReducer(currentState, removeFromCart("1"));
     expect(state.cart.length).toBe(0);
   });
 });

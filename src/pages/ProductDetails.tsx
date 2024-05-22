@@ -9,8 +9,8 @@ import MasterPage from "../components/master-page/MasterPage";
 import { addToCart } from "../redux/slices/cartSlice";
 import { AppState, useAppDispatch } from "../redux/store";
 
-import { Product } from "../misc/type";
-import { GETURL } from "../constants";
+import { CreateProductType, Product, ProductCart } from "../misc/type";
+import { GETProdURL } from "../constants";
 import * as Utils from "../utils/utils";
 import {
   Box,
@@ -39,7 +39,7 @@ const ProductDetails = () => {
 
   const navigate = useNavigate();
 
-  const url = `${GETURL}/${id}`;
+  const url = `${GETProdURL}/${id}`;
   const productQty: number[] = Utils.numbersArray(10);
 
   const storeDispatch = useAppDispatch();
@@ -58,8 +58,8 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = (item: Product, itemCount: number) => {
-    const productToAdd = JSON.parse(JSON.stringify(item));
-    productToAdd.quantity = itemCount;
+    const productToAdd: Product = JSON.parse(JSON.stringify(item));
+    productToAdd.inventory = itemCount;
 
     dispatch(addToCart(productToAdd));
     navigate("/checkout/cart");
@@ -78,13 +78,13 @@ const ProductDetails = () => {
         <StyledPrdDetails key={productDetails?.id}>
           <CardMedia
             component="img"
-            alt={productDetails?.title}
+            alt={productDetails?.name}
             height="20%"
-            image={productDetails?.category.image}
+            image={productDetails?.images[0].imageUrl}
           />
           <CardContent>
             <StyledPrdHeader gutterBottom variant="h5" component="div">
-              {productDetails?.title}
+              {productDetails?.name}
             </StyledPrdHeader>
             <StyledPrdDesc variant="body2" color="text.secondary" m={2}>
               {productDetails?.description}

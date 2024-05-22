@@ -23,7 +23,6 @@ const UserList = () => {
   const navigate = useNavigate();
 
   const editRoleHandler = (id: string) => {
-    console.log(id);
     navigate(`/dashboard/${"edit"}/users/${id}`);
   };
 

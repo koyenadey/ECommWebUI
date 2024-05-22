@@ -98,11 +98,11 @@ const ProductsListForEdit = () => {
               <ListItemAvatar>
                 <Avatar
                   variant="square"
-                  alt={product.title}
+                  alt={product.name}
                   src={product.category.image}
                 />
               </ListItemAvatar>
-              <StyledListItem>{product.title}</StyledListItem>
+              <StyledListItem>{product.name}</StyledListItem>
               <StyledListItem>{product.category.name}</StyledListItem>
               <StyledListItem>{product.price}€</StyledListItem>
               <ListItemIcon onClick={() => editProductHandler(product.id)}>

@@ -29,12 +29,8 @@ const Dashboard = () => {
   useEffect(() => {
     if (refreshToken) {
       dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: refreshToken }));
-    } else {
-      // if (accessToken) {
-      //   dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: accessToken }));
-      // }
     }
-  }, [dispatch /*accessToken*/, , refreshToken]);
+  }, [dispatch, , refreshToken]);
 
   const [value, setValue] = useState<string>("users");
 

@@ -17,7 +17,7 @@ import {
 
 import AddQuantity from "./AddQuantity";
 import { AppState, useAppDispatch } from "../../redux/store";
-import { ProductCart } from "../../misc/type";
+import { Product, ProductCart } from "../../misc/type";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
 import { removeFromCart } from "../../redux/slices/cartSlice";
@@ -40,7 +40,7 @@ const OrderPagePopUp = () => {
 
   const [open, setOpen] = useState(true);
 
-  const cartItems: ProductCart[] = useSelector(
+  const cartItems: Product[] = useSelector(
     (state: AppState) => state.cartReducer.cart
   );
 
@@ -48,7 +48,7 @@ const OrderPagePopUp = () => {
     (state: AppState) => state.cartReducer.subTotal
   );
 
-  const removeItemHandler = (itemId: number) => {
+  const removeItemHandler = (itemId: string) => {
     dispatch(removeFromCart(itemId));
   };
 
@@ -92,13 +92,13 @@ const OrderPagePopUp = () => {
                     height="auto"
                     srcSet={`${item.category.image}?w=50&h=50&fit=crop&auto=format&dpr=2 2x`}
                     src={`${item.category.image}?w=50&h=50&fit=crop&auto=format`}
-                    alt={item.title}
+                    alt={item.name}
                     loading="lazy"
                   />
                 </Box>
                 <Box>
                   <Typography ml={2} mt={1} variant="body1">
-                    {item.title}
+                    {item.name}
                   </Typography>
                   <Typography ml={2} mt={1} variant="subtitle1">
                     {item.price}

@@ -23,7 +23,6 @@ const Products = () => {
   const [pageNo, setPageNo] = useState<number>(1);
 
   useEffect(() => {
-    console.log("In Use Effect" + pageNo);
     dispatch(fetchProducts(`${GETURL}?PageNo=${pageNo}&PageSize=${PAGESIZE}`));
   }, [pageNo]);
 
@@ -99,17 +98,17 @@ const Products = () => {
             <ImageListItem key={item.id}>
               <img
                 srcSet={`${item.images[0].imageUrl}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
-                src={`${item.category.image}?w=80&h=80&fit=crop&auto=format`}
-                alt={item.title}
+                src={`${item.images[0].imageUrl}?w=80&h=80&fit=crop&auto=format`}
+                alt={item.name}
                 loading="lazy"
               />
               <ImageListItemBar
-                title={item?.title}
+                title={item?.name}
                 subtitle={`${item?.price} €`}
                 actionIcon={
                   <>
                     <ProductItemIcon
-                      aria-label={`show details ${item.title}`}
+                      aria-label={`show details ${item.name}`}
                       onClick={() => productDetailsHandler(item?.id)}
                     >
                       <VisibilityIcon />

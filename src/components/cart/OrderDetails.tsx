@@ -10,7 +10,7 @@ import {
   SnackbarOrigin,
 } from "@mui/material";
 
-import { ProductCart } from "../../misc/type";
+import { Product, ProductCart } from "../../misc/type";
 import CartDialogue from "./CartDialogue";
 
 import { useSelector } from "react-redux";
@@ -34,7 +34,7 @@ interface State extends SnackbarOrigin {
 
 const OrderDetails = () => {
   const [dialogueIsOpen, setDialogueOpen] = useState<boolean>(false);
-  const [itemToDeleteId, setItemToDelete] = useState<number | null>(null);
+  const [itemToDeleteId, setItemToDelete] = useState<string | null>(null);
   const [addItemNotify, setAddItemNotify] = useState<State>({
     open: false,
     vertical: "top",
@@ -46,18 +46,18 @@ const OrderDetails = () => {
 
   const dispatch = useAppDispatch();
 
-  const cartData: ProductCart[] = useSelector(
+  const cartData: Product[] = useSelector(
     (state: AppState) => state.cartReducer.cart
   );
 
-  const removeItemHandler = (itemId: number) => {
+  const removeItemHandler = (itemId: string) => {
     setItemToDelete(itemId);
     setDialogueOpen(true);
   };
 
   const confirmDeleteHandler = (confirm: boolean) => {
     if (confirm) {
-      dispatch(removeFromCart(itemToDeleteId as number));
+      dispatch(removeFromCart(itemToDeleteId as string));
     } else {
       setItemToDelete(null);
     }
@@ -100,19 +100,19 @@ const OrderDetails = () => {
         <StyledDivider />
         {cartData.map((item) => (
           <Box key={item.id}>
-            {item.quantity > 0 && (
+            {item.inventory > 0 && (
               <ListItem>
                 <img
                   height="10%"
                   width="20%"
-                  srcSet={`${item.category.image}?w=50&h=50&fit=crop&auto=format&dpr=5 20x`}
-                  src={`${item.category.image}?w=50&h=50&fit=crop&auto=format`}
-                  alt={item.title}
+                  srcSet={`${item.images[0].imageUrl}?w=50&h=50&fit=crop&auto=format&dpr=5 20x`}
+                  src={`${item.images[0].imageUrl}?w=50&h=50&fit=crop&auto=format`}
+                  alt={item.name}
                   loading="lazy"
                 />
 
                 <StyledListItemText>
-                  <StyledPrdTitle variant="body1">{item.title}</StyledPrdTitle>
+                  <StyledPrdTitle variant="body1">{item.name}</StyledPrdTitle>
                 </StyledListItemText>
                 <ListItemText>
                   <AddQuantity
@@ -123,7 +123,7 @@ const OrderDetails = () => {
                 </ListItemText>
                 <ListItemText>
                   <StyledTotItemPrice variant="subtitle1">
-                    {item.quantity * item.price}€
+                    {item.inventory * item.price}€
                   </StyledTotItemPrice>
                 </ListItemText>
                 <StyledRemItemQty onClick={() => removeItemHandler(item.id)}>
