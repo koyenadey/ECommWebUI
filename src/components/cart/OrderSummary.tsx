@@ -19,13 +19,66 @@ import {
   StyledLock,
   StyledSubTot,
 } from "../../styles/styles";
-import { AppState } from "../../redux/store";
+import { AppState, useAppDispatch } from "../../redux/store";
+import { ReactEventHandler } from "react";
+import {
+  CreateOrdersType,
+  OrderedProductsType,
+  Product,
+} from "../../misc/type";
+import createOrder from "../../redux/thunks/createOrder";
+import { ORDER_GETURL } from "../../constants";
+import { removeFromCart, resetCart } from "../../redux/slices/cartSlice";
 
 const OrderSummary = () => {
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
   const subTotal: number = useSelector(
     (state: AppState) => state.cartReducer.subTotal
   );
+
+  const token: string = useSelector(
+    (state: AppState) => state.userReducer.tokens.refreshToken
+  );
+
+  const userId: string =
+    useSelector((state: AppState) => state.userReducer.user?.id) ?? "";
+  const addressId: string = useSelector(
+    (state: AppState) => state.orderReducer.orderAddresId
+  );
+  const cartItems: Product[] = useSelector(
+    (state: AppState) => state.cartReducer.cart
+  );
+  const addressSelected = useSelector(
+    (state: AppState) => state.orderReducer.orderAddresId
+  );
+  const isDisabled = addressSelected ? false : true;
+
+  const orderedProducts: OrderedProductsType[] = cartItems.map((product) => ({
+    productId: product?.id,
+    quantity: product?.inventory,
+    priceAtPurchase: product?.price,
+  }));
+
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const order: CreateOrdersType = {
+      userId,
+      addressId,
+      orderedProducts,
+    };
+
+    var result = await dispatch(
+      createOrder({ baseUrl: `${ORDER_GETURL}`, order, token })
+    );
+    if (result) {
+      navigate("/");
+      dispatch(resetCart());
+    }
+  };
 
   return (
     <List
@@ -61,9 +114,10 @@ const OrderSummary = () => {
       <StyledDivider />
       <ListItem>
         <EditButton
+          disabled={isDisabled}
           variant="contained"
           color="info"
-          onClick={() => navigate("/checkout/cart")}
+          onClick={handleSubmit}
         >
           Checkout
         </EditButton>

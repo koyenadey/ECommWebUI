@@ -52,7 +52,6 @@ const RegisterForm = () => {
 
   const registerUserHandler = async (data: RegisterFormType) => {
     const formData = transformToFormDataUser(data);
-    //console.log("Registration data: " + formData);
 
     try {
       const userIfExist: boolean = await dispatch(
@@ -77,9 +76,7 @@ const RegisterForm = () => {
           }
         }
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return (

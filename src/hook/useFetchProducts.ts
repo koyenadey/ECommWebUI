@@ -19,7 +19,6 @@ const useFetchProducts = () => {
   const prodCountUrl = id ? `${GETCATPRD_COUNTURL}/${id}/meta` : GET_COUNTURL;
 
   useEffect(() => {
-    console.log("coming here : " + url + " and " + prodCountUrl);
     dispatch(fetchProductCount(prodCountUrl));
     dispatch(fetchProducts(url));
   }, [dispatch, url, prodCountUrl]);

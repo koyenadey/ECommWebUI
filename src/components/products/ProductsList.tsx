@@ -80,7 +80,7 @@ const ProductsListForEdit = () => {
 
   const confirmDeleteHandler = (confirm: boolean) => {
     const url = `${GETProdURL}/${itemToDeleteId}`;
-    //console.log(url);
+
     if (confirm) {
       if (token) dispatch(deleteProduct({ baseUrl: url, token }));
     } else {
@@ -90,7 +90,6 @@ const ProductsListForEdit = () => {
   };
 
   const pageChangeHandler = (value: number) => {
-    console.log(value);
     setPageNo(value);
   };
 

@@ -23,10 +23,18 @@ const Products = () => {
   const dispatch = useAppDispatch();
   const [pageNo, setPageNo] = useState<number>(1);
 
+  const searchTextVal = useSelector(
+    (state: AppState) => state.productReducer.searchText
+  );
+
   useEffect(() => {
-    // if (id) dispatch(fetchProducts(`${GETURL}/category/${id}`));
-    // else
-    dispatch(fetchProducts(`${GETURL}?PageNo=${pageNo}&PageSize=${PAGESIZE}`));
+    dispatch(
+      fetchProducts(
+        `${GETURL}?PageNo=${pageNo}&PageSize=${PAGESIZE}${
+          searchTextVal.length > 0 ? "&SearchKey=" + searchTextVal : ""
+        }`
+      )
+    );
   }, [pageNo]);
 
   const navigate = useNavigate();

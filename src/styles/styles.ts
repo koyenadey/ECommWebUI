@@ -408,6 +408,8 @@ export const StyledSearchBar = styled(Paper)(({ theme }) => ({
     display: "flex",
     width: "50%",
   },
+  marginTop: "4%",
+  height: "30%",
 })) as typeof Paper;
 
 export const StyledMagnifyingGlass = styled(IconButton)(({ theme }) => ({

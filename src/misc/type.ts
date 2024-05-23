@@ -1,4 +1,5 @@
 import { Inventory } from "@mui/icons-material";
+import { StringLiteral } from "typescript";
 
 export type Category = {
   id: string;
@@ -136,4 +137,67 @@ export type RegisterFormType = {
   Country: string;
   PhoneNumber: string;
   Landmark: string;
+};
+
+export type OrderUserType = {
+  userId: string;
+  userName: string;
+  email: string;
+};
+
+export type OrderAddressType = {
+  id: string;
+  user: OrderUserType;
+  addressLine: string;
+  street: string;
+  city: string;
+  country: string;
+  postcode: string;
+  phoneNumber: string;
+  landmark: string;
+};
+
+export type OrderProductType = {
+  productId: string;
+  productName: string;
+  quantity: number;
+  priceAtPurchase: number;
+};
+
+export type Order = {
+  orderId: string;
+  orderDate: Date;
+  status: string;
+  userName: string;
+  dateOfDelivery: Date;
+  address: OrderAddressType;
+  orderedProducts: OrderProductType[];
+};
+
+export type ReadOrder = {
+  orderId: string;
+  orderDate: Date;
+  totalPrice: number;
+  status: string;
+  userName: string;
+  dateOfDelivery: Date;
+  address: OrderAddressType;
+  orderedProducts: OrderProductType[];
+};
+
+export type OrderedProductsType = {
+  productId: string;
+  quantity: number;
+  priceAtPurchase: number;
+};
+
+export type CreateOrdersType = {
+  userId: string;
+  addressId: string;
+  orderedProducts: OrderedProductsType[];
+};
+
+export type UpdateOrderType = {
+  status: string;
+  dateOfDelivery: Date;
 };

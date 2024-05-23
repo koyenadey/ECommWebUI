@@ -12,7 +12,6 @@ const fetchProducts = createAsyncThunk(
       }
 
       const result: Product[] = await response.json();
-      //console.log(result);
       return result;
     } catch (e) {
       const error = e as Error;

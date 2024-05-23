@@ -18,6 +18,8 @@ type UserEditFormInput = {
 const ProfileEditForm = ({ canEdit }: any) => {
   const { id } = useParams();
   const token = localStorage.getItem("refresh-token");
+  const userId = useSelector((state: AppState) => state.userReducer.user?.id);
+  const ID = id ?? userId;
 
   const userData: UserType | undefined = useSelector(
     (state: AppState) => state.userReducer.user
@@ -51,11 +53,11 @@ const ProfileEditForm = ({ canEdit }: any) => {
     if (data.avatar && data.avatar.length > 0) {
       const avatarFile = data.avatar[0];
       formData.append("avatar", avatarFile);
-    } else formData.append("avatar", "");
+    }
 
     dispatch(
       updateUser({
-        baseUrl: `${USER_UPDATEURL}/${id}`,
+        baseUrl: `${USER_UPDATEURL}/${ID}`,
         user: formData,
         token: token ?? "",
       })

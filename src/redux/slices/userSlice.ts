@@ -55,6 +55,9 @@ const userSlice = createSlice({
       );
       state.addresses = updatedAddress;
     },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.tokens.refreshToken = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchUsers.pending, (state) => {
@@ -128,6 +131,7 @@ const userSlice = createSlice({
           user: action.payload,
           isLoading: false,
           isLoggedIn: true,
+          error: "",
         };
       }
     );
@@ -157,6 +161,7 @@ const userSlice = createSlice({
           defaultAddId: action.payload,
           isLoading: false,
           isLoggedIn: true,
+          error: "",
         };
       }
     );
@@ -186,6 +191,7 @@ const userSlice = createSlice({
           addresses: action.payload,
           isLoading: false,
           isLoggedIn: true,
+          error: "",
         };
       }
     );
@@ -246,6 +252,7 @@ const userSlice = createSlice({
             ...state,
             isLoading: false,
             user: action.payload,
+            error: "",
           };
         } else return state;
       }
@@ -361,6 +368,7 @@ const userSlice = createSlice({
           ...state,
           isLoading: true,
           tokens: action.payload,
+          error: "",
         };
       }
     );
@@ -388,6 +396,7 @@ const userSlice = createSlice({
           ...state,
           isLoading: false,
           user: action.payload,
+          error: "",
         };
       }
     );
@@ -404,5 +413,5 @@ const userSlice = createSlice({
 });
 
 const userReducer = userSlice.reducer;
-export const { resetLogin } = userSlice.actions;
+export const { resetLogin, setToken } = userSlice.actions;
 export default userReducer;

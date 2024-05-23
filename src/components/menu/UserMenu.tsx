@@ -3,6 +3,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import InfoIcon from "@mui/icons-material/Info";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import { useSelector } from "react-redux";
@@ -78,6 +79,14 @@ const UserMenu = (props: UserMenuProps) => {
         </MenuItem>
       )}
       <Divider />
+      {isLoggedIn && (
+        <MenuItem onClick={() => handleClose("OrderHistory")}>
+          <ListItemIcon>
+            <ShoppingBagIcon fontSize="small" />
+          </ListItemIcon>
+          Order History
+        </MenuItem>
+      )}
       <MenuItem onClick={() => handleClose("About Us")}>
         <ListItemIcon>
           <InfoIcon fontSize="small" />

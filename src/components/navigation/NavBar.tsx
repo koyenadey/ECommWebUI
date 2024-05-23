@@ -21,6 +21,8 @@ import LoggedInUser from "../user/LoggedInUser";
 import { resetLogin } from "../../redux/slices/userSlice";
 import CategoriesMenu from "../menu/CategoriesMenu";
 import SearchBar from "../search/SearchBar";
+import { resetCart } from "../../redux/slices/cartSlice";
+import { resetOrder } from "../../redux/slices/orderSlice";
 
 interface NavBarProps {
   isLoggedIn: boolean;
@@ -50,6 +52,7 @@ const NavigationBar = (props: NavBarProps) => {
   const cartQty = useSelector((state: AppState) => state.cartReducer.quantity);
 
   const showProfileHandler = (action: string) => {
+    if (action === "OrderHistory") navigate("/order-history");
     if (action === "Profile") navigate("/profile");
     if (action === "About Us") navigate("/aboutus", { state: "aboutus" });
     if (action === "Shipping & Returns")
@@ -60,6 +63,8 @@ const NavigationBar = (props: NavBarProps) => {
     if (action === "LogOut") {
       localStorage.removeItem("refresh-token");
       dispatch(resetLogin());
+      dispatch(resetCart());
+      dispatch(resetOrder());
       navigate("/");
     }
     if (action === "LogIn") navigate("/login");

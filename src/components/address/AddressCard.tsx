@@ -50,9 +50,7 @@ const AddressCard = (props: AddressCardProps) => {
         if (result) {
           navigate("/profile");
         }
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }
   };
   const editAddressHandler = () => {

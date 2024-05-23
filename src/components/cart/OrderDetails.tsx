@@ -8,6 +8,7 @@ import {
   ListItemText,
   Snackbar,
   SnackbarOrigin,
+  Typography,
 } from "@mui/material";
 
 import { Product, ProductCart } from "../../misc/type";
@@ -27,12 +28,14 @@ import {
   StyledRemItemQty,
   StyledTotItemPrice,
 } from "../../styles/styles";
+import AddressModal from "../address/AddressModal";
 
 interface State extends SnackbarOrigin {
   open: boolean;
 }
 
 const OrderDetails = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const [dialogueIsOpen, setDialogueOpen] = useState<boolean>(false);
   const [itemToDeleteId, setItemToDelete] = useState<string | null>(null);
   const [addItemNotify, setAddItemNotify] = useState<State>({
@@ -75,6 +78,14 @@ const OrderDetails = () => {
     setAddItemNotify({ ...addItemNotify, open: false });
   };
 
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <CartDialogue isOpen={dialogueIsOpen} onClose={confirmDeleteHandler} />
@@ -94,9 +105,16 @@ const OrderDetails = () => {
         </Alert>
       </Snackbar>
       <StyledOrderDetList>
-        <ListItem>
-          <StyledCartHeader>My Cart</StyledCartHeader>
-        </ListItem>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <ListItem>
+            <StyledCartHeader>My Cart</StyledCartHeader>
+          </ListItem>
+          <ListItem sx={{ mx: "2%" }}>
+            <Typography sx={{ color: "blue" }} onClick={handleOpenModal}>
+              Select Address
+            </Typography>
+          </ListItem>
+        </Box>
         <StyledDivider />
         {cartData.map((item) => (
           <Box key={item.id}>
@@ -135,6 +153,7 @@ const OrderDetails = () => {
           </Box>
         ))}
       </StyledOrderDetList>
+      <AddressModal open={isModalOpen} handleClose={handleCloseModal} />
     </>
   );
 };

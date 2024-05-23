@@ -65,11 +65,18 @@ const cartSlice = createSlice({
         return acc + curr.inventory * curr.price;
       }, 0);
     },
+
+    resetCart: (state) => {
+      state.cart = [];
+      state.quantity = 0;
+      state.subTotal = 0;
+    },
   },
 });
 
 const cartReducer = cartSlice.reducer;
 
-export const { removeFromCart, addToCart, updateCart } = cartSlice.actions;
+export const { removeFromCart, addToCart, updateCart, resetCart } =
+  cartSlice.actions;
 
 export default cartReducer;

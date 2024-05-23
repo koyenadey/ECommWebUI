@@ -56,7 +56,6 @@ const CreateAddress = () => {
   } = useForm<AddressCreateFormInput>({ defaultValues: initialValues });
 
   const submitHandler = async (data: AddressCreateFormInput) => {
-    //console.log(data);
     if (token) {
       var result = await dispatch(
         createAddress({

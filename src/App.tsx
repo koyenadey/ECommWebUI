@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import PrivateRoute from "./components/private/PrivateRoute";
 import OrderPagePopUp from "./components/cart/OrderPagePopUp";
 import EditUser from "./components/user/EditUser";
+import OrderHistory from "./pages/OrderHistory";
 
 export interface ThemeContextType {
   mode: "light" | "dark";
@@ -28,6 +29,7 @@ const EditAProduct = lazy(() => import("./components/products/EditAProduct"));
 const EditAddress = lazy(() => import("./components/address/EditAddress"));
 const CreateProduct = lazy(() => import("./components/products/CreateProduct"));
 const CreateAddress = lazy(() => import("./components/address/CreateAddress"));
+const EditOrder = lazy(() => import("./components/cart/EditOrder"));
 
 function App() {
   const [mode, setMode] = useState<"light" | "dark">("light");
@@ -72,6 +74,10 @@ function App() {
             path="/address/create"
             element={<PrivateRoute Component={CreateAddress} />}
           />
+          <Route
+            path="/orders/edit/:id"
+            element={<PrivateRoute Component={EditOrder} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/orderpopup" element={<OrderPagePopUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -82,6 +88,7 @@ function App() {
             element={<ProductsPage />}
           />
           <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/checkout/cart" element={<Cart />} />
         </Routes>
       </Suspense>

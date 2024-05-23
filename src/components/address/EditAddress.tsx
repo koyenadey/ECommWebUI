@@ -58,7 +58,7 @@ const EditAddress = () => {
         token,
       })
     );
-    navigate("/dashboard");
+    navigate("/profile");
   };
 
   return (

@@ -55,7 +55,6 @@ const CreateProduct = () => {
     const formData = transformToFormData(data);
     if (token) {
       try {
-        console.log(data);
         const result = await dispatch(
           createProducts({
             baseUrl: `${GETProdURL}`,
@@ -64,9 +63,7 @@ const CreateProduct = () => {
           })
         ).unwrap();
         if (result.id) navigate("/dashboard");
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }
   };
 

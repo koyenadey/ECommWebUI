@@ -29,3 +29,6 @@ export const PAGESIZE = 10;
 //Categories
 export const CATGET_URL = "http://localhost:5240/api/v1/categories";
 //"https://api.escuelajs.co/api/v1/categories";
+
+//Orders
+export const ORDER_GETURL = "http://localhost:5240/api/v1/orders";

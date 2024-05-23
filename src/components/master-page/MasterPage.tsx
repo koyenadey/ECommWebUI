@@ -13,6 +13,7 @@ import fetchAcessToken from "../../redux/thunks/fetchAccessToken";
 import { ATOKEN_URL } from "../../constants";
 import ActiveBreadcrumbs from "../breadcrumbs/ActiveBreadcrumbs";
 import { ThemeContext } from "../../App";
+import { setToken } from "../../redux/slices/userSlice";
 
 interface MasterPageProps {
   children: ReactNode;
@@ -35,7 +36,7 @@ const MasterPage = ({ children }: MasterPageProps) => {
 
   useEffect(() => {
     if (!isLoggedIn && !localRToken) {
-      //dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
+      dispatch(setToken(token.refreshToken));
     }
   }, [dispatch, localRToken, isLoggedIn, navigate]);
 

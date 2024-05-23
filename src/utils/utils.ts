@@ -1,4 +1,9 @@
-import { CreateProductType, RegisterFormType } from "../misc/type";
+import {
+  CreateProductType,
+  Order,
+  OrderProductType,
+  RegisterFormType,
+} from "../misc/type";
 
 export const numbersArray = (value: number): number[] => {
   return Array.from({ length: value }, (_, i) => i + 1);
@@ -37,4 +42,28 @@ export const transformToFormDataUser = (data: RegisterFormType): FormData => {
     formData.append("avatar", imagesFile);
   } else formData.append("avatar", data.UserName[0]);
   return formData;
+};
+
+export const calculateTotalSum = (orders: Order[]) => {
+  orders.map((order) => {
+    let sum = 0.0;
+    const totalPrice: number = calculateProductPrice(order.orderedProducts);
+    sum = sum + totalPrice;
+    return sum;
+  });
+};
+
+const calculateProductPrice = (products: OrderProductType[]): number => {
+  let tot = 0.0;
+  products.map((product) => {
+    tot += product.priceAtPurchase * product.quantity;
+  });
+  return tot;
+};
+
+export const transformOrders = (orders: Order[]) => {
+  return orders.map((order) => {
+    const totalPrice: number = calculateProductPrice(order.orderedProducts);
+    return { ...order, totalPrice };
+  });
 };
