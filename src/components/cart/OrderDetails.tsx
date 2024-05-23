@@ -53,6 +53,8 @@ const OrderDetails = () => {
     (state: AppState) => state.cartReducer.cart
   );
 
+  const { isLoggedIn } = useSelector((state: AppState) => state.userReducer);
+
   const removeItemHandler = (itemId: string) => {
     setItemToDelete(itemId);
     setDialogueOpen(true);
@@ -106,14 +108,23 @@ const OrderDetails = () => {
       </Snackbar>
       <StyledOrderDetList>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          {!isLoggedIn && (
+            <ListItem>
+              <Typography variant="h5">
+                You must login to place an order
+              </Typography>
+            </ListItem>
+          )}
           <ListItem>
             <StyledCartHeader>My Cart</StyledCartHeader>
           </ListItem>
-          <ListItem sx={{ mx: "2%" }}>
-            <Typography sx={{ color: "blue" }} onClick={handleOpenModal}>
-              Select Address
-            </Typography>
-          </ListItem>
+          {isLoggedIn && (
+            <ListItem sx={{ mx: "2%" }}>
+              <Typography sx={{ color: "blue" }} onClick={handleOpenModal}>
+                Select Address
+              </Typography>
+            </ListItem>
+          )}
         </Box>
         <StyledDivider />
         {cartData.map((item) => (
