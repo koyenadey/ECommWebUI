@@ -10,7 +10,7 @@ import MasterPage from "../components/master-page/MasterPage";
 import { AppState, useAppDispatch } from "../redux/store";
 import { useSelector } from "react-redux";
 import fetchUser from "../redux/thunks/fetchUser";
-import { ATOKEN_URL, LOGGEDIN_USERURL } from "../constants";
+import { LOGGEDIN_USERURL } from "../constants";
 import fetchAcessToken from "../redux/thunks/fetchAccessToken";
 import { StyledContainer } from "../styles/styles";
 

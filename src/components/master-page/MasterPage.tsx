@@ -9,8 +9,6 @@ import { AppState, useAppDispatch } from "../../redux/store";
 import Footer from "../footer/Footer";
 import NavigationBar from "../navigation/NavBar";
 import { useNavigate } from "react-router-dom";
-import fetchAcessToken from "../../redux/thunks/fetchAccessToken";
-import { ATOKEN_URL } from "../../constants";
 import ActiveBreadcrumbs from "../breadcrumbs/ActiveBreadcrumbs";
 import { ThemeContext } from "../../App";
 import { setToken } from "../../redux/slices/userSlice";

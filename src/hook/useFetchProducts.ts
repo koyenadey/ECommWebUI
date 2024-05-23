@@ -2,12 +2,7 @@ import { useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import { useAppDispatch } from "../redux/store";
-import {
-  GETCATPRD_COUNTURL,
-  GETCATPROD,
-  GETURL,
-  GET_COUNTURL,
-} from "../constants";
+import { GETCATPRD_COUNTURL, GETURL, GET_COUNTURL } from "../constants";
 import fetchProducts from "../redux/thunks/fetchProducts";
 import fetchProductCount from "../redux/thunks/fetchProductCount";
 
