@@ -9,8 +9,8 @@
 ![Static Badge](https://img.shields.io/badge/Azure-MS?style=flat&logo=microsoftazure&logoColor=blue&labelColor=white&color=white)
 
 **ModaMorph** is a e-commerce application that enables people to shop a range of products from Clothes,Electronics,Furnitures,Shoes & Miscellenous categories.
-**ModaMorph** is built using `React` and [platzi fake store api](https://fakeapi.platzi.com/en/about/introduction/).
-This is a multi page application with all code written in `Typescript` and all styles in `MaterialUI`.
+**ModaMorph** is built using `React` and [Asp.Net Core Framework](https://modamorph.azurewebsites.net/swagger/index.html).
+This is a multi page application with all code written in `Typescript` and all styles in `MaterialUI` for front end and the backend with Asp.Net core.
 ModaMorph is equipped with `accessibility` and `responsiveness` for Small screen upto 650px Medium Screen upt0 900px, Large screen upto 1024 and extra large 1200px and up.
 
 **Purpose -** At **Modamorph**, our main purpose is to redefine the online shopping experience for our valued customers. Whether you're a tech-savvy individual, a busy professional, or a discerning shopper seeking the latest trends, our platform caters to all your needs with a user-friendly interface and a diverse array of products.
@@ -19,7 +19,7 @@ ModaMorph is equipped with `accessibility` and `responsiveness` for Small screen
 
 The site not only facilitates consumers to buy products online, but also enables business admins/backend agents to administor products, users and range of other things.
 
-Just dive into **[Modamorph](https://modamorph.netlify.app/)** to see it in live!
+Just dive into **[Modamorph](https://shop-modamorph.netlify.app/)** to see it in live!
 
 ## Table of contents
 
@@ -39,10 +39,8 @@ Just dive into **[Modamorph](https://modamorph.netlify.app/)** to see it in live
   - [Data flow](#data-flow)
   - [Component structure](#components-structure)
 - [Testing](#testing)
-  - [Test application manually](#test-manually)
   - [Run automated tests based on `jest` test framework](#run-automated-tests)
-- [Deployment](#deployment)
-  - [Step-by-step deployment process](#netlify-deployment-steps)
+- [Acknowledgement](#acknowledgement)
 
 ## Detailed information and instructions
 
@@ -91,7 +89,7 @@ To start ModaMorph application, type below in terminal
 
 ### How to use
 
-- To check admin features login using email caroles.castro@mail.com & password **Admin123** or john.doe@mail.com & password **Admin123**
+- To check admin features login using email `caroles.castro@mail.com` & password **Admin123** or `john.doe@mail.com` & password **Admin123**
 
 - Typing a product `name` in the search box fetches the result if found.
 
@@ -235,10 +233,6 @@ ModaMorph hosts all the types related to the application.
 
 ## Testing
 
-### Test manually
-
-The application is deployed in netlify at [this] link. So you can navigate though the pages and try out featues as per [usage guidelines](#usage-guidelines) mentioned.
-
 ### Run automated tests
 
 Automated testing is done using **jest** testing library.
@@ -250,32 +244,7 @@ To run tests open terminal and run below from project folder
 
 This project is deployed and hosted on netlify platform. Deploying a React project to Netlify is a straightforward process thanks to its seamless integration with Git.
 
-### Netlify deployment steps
+### Acknowledgement
 
-- Connect Your Repository to Netlify:
-
-  - Go to the Netlify dashboard.
-    Click on the "New site from Git" button.
-  - Select your Git hosting service GitHub.
-  - Authorize Netlify to access your repository.
-  - Choose the repository
-
-- Configure Deployment Settings:
-
-  - Netlify will detect your project's build settings automatically.
-  - Ensure that the build command is set to npm run build, and the publish directory is set to build.
-
-- Deploy Your Site:
-
-  - Once the settings are configured, click on the "Deploy site" button.
-  - Netlify will start the deployment process, which may take a few moments depending on the size of your project.
-
-- View Your Deployed Site:
-
-  - Once the deployment is complete, Netlify will provide you with a unique URL for your deployed site.
-
-- Continuous Deployment:
-  - Netlify supports continuous deployment, meaning whenever you push changes to your Git repository, Netlify will automatically build and deploy your updated site.
-  - You can configure additional settings for branch deploys, build hooks, and more from the Netlify dashboard.
-
-That's it! React project is now deployed to Netlify and can be accesses through the link shown in netlify screen.
+I would like to thank my teacher Alia, Maryam & Andrea for unwavering support and
+providing us with knowledge required.
