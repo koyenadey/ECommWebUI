@@ -91,6 +91,8 @@ To start ModaMorph application, type below in terminal
 
 ### How to use
 
+- To check admin features login using email caroles.castro@mail.com & password **Admin123** or john.doe@mail.com & password **Admin123**
+
 - Typing a product `name` in the search box fetches the result if found.
 
 - Data is by default sorted in `ascending order` but can also be sorted in `descending order` on `price` field. Sorting is on entire data set as of now because the `api` being used does not provides the information of metadata. This functionality will be replaced in the upcoming feature where a dedicated `api` with metadata features will be used.

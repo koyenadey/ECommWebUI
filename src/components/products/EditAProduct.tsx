@@ -76,7 +76,7 @@ const EditAProduct = () => {
                 value={product?.id}
                 margin="normal"
                 InputLabelProps={{
-                  shrink: !product?.id, // Shrink label if value is present
+                  shrink: !!product?.id, // Shrink label if value is present
                 }}
               />
               <TextField
@@ -89,7 +89,7 @@ const EditAProduct = () => {
                 value={product?.name}
                 margin="normal"
                 InputLabelProps={{
-                  shrink: !product?.name, // Shrink label if value is present
+                  shrink: !!product?.name, // Shrink label if value is present
                 }}
               />
               <TextField
@@ -104,7 +104,7 @@ const EditAProduct = () => {
                 value={product?.description}
                 margin="normal"
                 InputLabelProps={{
-                  shrink: !product?.description, // Shrink label if value is present
+                  shrink: !!product?.description, // Shrink label if value is present
                 }}
               />
               <TextField
@@ -117,7 +117,7 @@ const EditAProduct = () => {
                 value={product?.category.name}
                 margin="normal"
                 InputLabelProps={{
-                  shrink: !product?.description, // Shrink label if value is present
+                  shrink: !!product?.description, // Shrink label if value is present
                 }}
               />
               <FormControl fullWidth margin="normal">
@@ -135,7 +135,7 @@ const EditAProduct = () => {
                   required
                   fullWidth
                   InputLabelProps={{
-                    shrink: !product?.price, // Shrink label if value is present
+                    shrink: !!product?.price, // Shrink label if value is present
                   }}
                   error={!!errors?.price}
                   helperText={errors?.price?.message}
@@ -160,7 +160,7 @@ const EditAProduct = () => {
                   required
                   fullWidth
                   InputLabelProps={{
-                    shrink: !product?.inventory, // Shrink label if value is present
+                    shrink: !!product?.inventory, // Shrink label if value is present
                   }}
                   error={!!errors?.inventory}
                   helperText={errors?.inventory?.message}
