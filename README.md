@@ -1,5 +1,13 @@
 # Welcome to Modamorph - One stop destination for your Online Shopping
 
+## Technologies used:
+
+![Static Badge](https://img.shields.io/badge/React-Js?style=flat&logo=react&logoColor=blue&labelColor=black&color=white)
+![Static Badge](https://img.shields.io/badge/MUI-styles?style=flat&logo=MUI&logoColor=blue&labelColor=white&color=blue)
+![Static Badge](https://img.shields.io/badge/Redux-Js?style=flat&logo=redux&logoColor=8A2BE2&labelColor=white&color=white)
+![Static Badge](https://img.shields.io/badge/Typescript-React?style=flat&logo=typescript&logoColor=blue&labelColor=white&color=white)
+![Static Badge](https://img.shields.io/badge/Azure-MS?style=flat&logo=microsoftazure&logoColor=blue&labelColor=white&color=white)
+
 **ModaMorph** is a e-commerce application that enables people to shop a range of products from Clothes,Electronics,Furnitures,Shoes & Miscellenous categories.
 **ModaMorph** is built using `React` and [platzi fake store api](https://fakeapi.platzi.com/en/about/introduction/).
 This is a multi page application with all code written in `Typescript` and all styles in `MaterialUI`.
