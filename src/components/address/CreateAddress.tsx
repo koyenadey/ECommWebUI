@@ -15,6 +15,8 @@ import { SaveButton } from "../../styles/styles";
 import updateAddress from "../../redux/thunks/updateAddress";
 import { USER_ADDRESSURL } from "../../constants";
 import createAddress from "../../redux/thunks/createAddress";
+import { useEffect, useState } from "react";
+import SuccessModal from "../products/SuccessModal";
 
 export type AddressCreateFormInput = {
   userId: string;
@@ -33,6 +35,20 @@ const CreateAddress = () => {
   const dispatch = useAppDispatch();
 
   const token = localStorage.getItem("refresh-token");
+
+  const [isSuccess, setIsSuceess] = useState<boolean>(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSuccessModalOpen(true);
+    }
+  }, [isSuccess]);
+
+  const handleClose = () => {
+    setIsSuccessModalOpen(false);
+    navigate("/profile");
+  };
 
   const userId: string | undefined = useSelector(
     (state: AppState) => state.userReducer.user
@@ -64,7 +80,7 @@ const CreateAddress = () => {
           token,
         })
       );
-      if (result) navigate("/profile");
+      if (result) setIsSuceess(true);
     }
   };
 
@@ -215,6 +231,7 @@ const CreateAddress = () => {
           </Box>
         </form>
       </Paper>
+      <SuccessModal open={isSuccessModalOpen} onClose={handleClose} />
     </Box>
   );
 };

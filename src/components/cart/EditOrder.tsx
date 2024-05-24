@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SaveButton } from "../../styles/styles";
 import { AppState, useAppDispatch } from "../../redux/store";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,12 +20,27 @@ import { UpdateOrderType } from "../../misc/type";
 import fetchOrder from "../../redux/thunks/fetchOrder";
 import { useSelector } from "react-redux";
 import MasterPage from "../master-page/MasterPage";
+import SuccessModal from "../products/SuccessModal";
 
 const EditOrder = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const token = localStorage.getItem("refresh-token");
+
+  const [isSuccess, setIsSuceess] = useState<boolean>(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSuccessModalOpen(true);
+    }
+  }, [isSuccess]);
+
+  const handleClose = () => {
+    setIsSuccessModalOpen(false);
+    navigate("/order-history");
+  };
 
   useEffect(() => {
     if (token)
@@ -58,7 +73,9 @@ const EditOrder = () => {
             token,
           })
         ).unwrap();
-        if (result) navigate("/order-history");
+        if (result) {
+          setIsSuceess(true);
+        }
       } catch (err) {}
     }
   };
@@ -162,6 +179,7 @@ const EditOrder = () => {
           </form>
         </Paper>
       </Box>
+      <SuccessModal open={isSuccessModalOpen} onClose={handleClose} />
     </MasterPage>
   );
 };

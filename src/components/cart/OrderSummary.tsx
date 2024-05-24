@@ -20,7 +20,7 @@ import {
   StyledSubTot,
 } from "../../styles/styles";
 import { AppState, useAppDispatch } from "../../redux/store";
-import { ReactEventHandler } from "react";
+import { ReactEventHandler, useEffect, useState } from "react";
 import {
   CreateOrdersType,
   OrderedProductsType,
@@ -29,9 +29,25 @@ import {
 import createOrder from "../../redux/thunks/createOrder";
 import { ORDER_GETURL } from "../../constants";
 import { removeFromCart, resetCart } from "../../redux/slices/cartSlice";
+import SuccessModal from "../products/SuccessModal";
 
 const OrderSummary = () => {
   const navigate = useNavigate();
+
+  const [isSuccess, setIsSuceess] = useState<boolean>(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSuccessModalOpen(true);
+    }
+  }, [isSuccess]);
+
+  const handleClose = () => {
+    setIsSuccessModalOpen(false);
+    dispatch(resetCart());
+    navigate("/order-history");
+  };
 
   const dispatch = useAppDispatch();
 
@@ -75,60 +91,62 @@ const OrderSummary = () => {
       createOrder({ baseUrl: `${ORDER_GETURL}`, order, token })
     );
     if (result) {
-      navigate("/");
-      dispatch(resetCart());
+      setIsSuceess(true);
     }
   };
 
   return (
-    <List
-      sx={{
-        width: "30%",
-        margin: "2%",
-      }}
-    >
-      <ListItem>
-        <ListItemText>
-          <StyledCartSumm>Order Summary</StyledCartSumm>
-        </ListItemText>
-      </ListItem>
-      <StyledDivider />
-      <ListItem>
-        <ListItemText>
-          <StyledSubTot variant="subtitle1">Subtotal</StyledSubTot>
-          <StyledEstiDel>Estimate Delivery</StyledEstiDel>
-        </ListItemText>
-        <ListItemText>
-          <StyledSubTot variant="subtitle1">{subTotal}€</StyledSubTot>
-        </ListItemText>
-      </ListItem>
-      <StyledDivider />
-      <ListItem>
-        <ListItemText>
-          <StyledCartTot>Total</StyledCartTot>
-        </ListItemText>
-        <ListItemText>
-          <StyledCartTotVal>{subTotal}€</StyledCartTotVal>
-        </ListItemText>
-      </ListItem>
-      <StyledDivider />
-      <ListItem>
-        <EditButton
-          disabled={isDisabled}
-          variant="contained"
-          color="info"
-          onClick={handleSubmit}
-        >
-          Checkout
-        </EditButton>
-      </ListItem>
-      <ListItem>
-        <ListItemIcon sx={{ cursor: "pointer" }}>
-          <StyledLock />
-          <StyledCheckOut component="span">Secure Checkout</StyledCheckOut>
-        </ListItemIcon>
-      </ListItem>
-    </List>
+    <>
+      <List
+        sx={{
+          width: "30%",
+          margin: "2%",
+        }}
+      >
+        <ListItem>
+          <ListItemText>
+            <StyledCartSumm>Order Summary</StyledCartSumm>
+          </ListItemText>
+        </ListItem>
+        <StyledDivider />
+        <ListItem>
+          <ListItemText>
+            <StyledSubTot variant="subtitle1">Subtotal</StyledSubTot>
+            <StyledEstiDel>Estimate Delivery</StyledEstiDel>
+          </ListItemText>
+          <ListItemText>
+            <StyledSubTot variant="subtitle1">{subTotal}€</StyledSubTot>
+          </ListItemText>
+        </ListItem>
+        <StyledDivider />
+        <ListItem>
+          <ListItemText>
+            <StyledCartTot>Total</StyledCartTot>
+          </ListItemText>
+          <ListItemText>
+            <StyledCartTotVal>{subTotal}€</StyledCartTotVal>
+          </ListItemText>
+        </ListItem>
+        <StyledDivider />
+        <ListItem>
+          <EditButton
+            disabled={isDisabled}
+            variant="contained"
+            color="info"
+            onClick={handleSubmit}
+          >
+            Checkout
+          </EditButton>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon sx={{ cursor: "pointer" }}>
+            <StyledLock />
+            <StyledCheckOut component="span">Secure Checkout</StyledCheckOut>
+          </ListItemIcon>
+        </ListItem>
+      </List>
+      <SuccessModal open={isSuccessModalOpen} onClose={handleClose} />
+    </>
   );
 };
 

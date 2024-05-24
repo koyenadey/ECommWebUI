@@ -19,6 +19,7 @@ import updateProduct from "../../redux/thunks/updateProduct";
 import { useForm } from "react-hook-form";
 import { Product, UpdateProductType } from "../../misc/type";
 import { useSelector } from "react-redux";
+import SuccessModal from "./SuccessModal";
 
 const EditAProduct = () => {
   const { id } = useParams();
@@ -27,9 +28,23 @@ const EditAProduct = () => {
   const dispatch = useAppDispatch();
   const token = localStorage.getItem("refresh-token");
 
+  const [isSuccess, setIsSuceess] = useState<boolean>(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
+
   const product: Product | undefined = useSelector(
     (state: AppState) => state.productReducer.productDetails
   );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSuccessModalOpen(true);
+    }
+  }, [isSuccess]);
+
+  const handleClose = () => {
+    setIsSuccessModalOpen(false);
+    navigate("/dashboard");
+  };
 
   const initialValues = {
     price: product?.price,
@@ -52,7 +67,9 @@ const EditAProduct = () => {
             token,
           })
         ).unwrap();
-        if (result) navigate("/dashboard");
+        if (result) {
+          setIsSuceess(true);
+        }
       } catch (err) {}
     }
   };
@@ -184,6 +201,7 @@ const EditAProduct = () => {
           </form>
         </Paper>
       </Box>
+      <SuccessModal open={isSuccessModalOpen} onClose={handleClose} />
     </MasterPage>
   );
 };

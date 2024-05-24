@@ -14,6 +14,8 @@ import { useForm } from "react-hook-form";
 import { SaveButton } from "../../styles/styles";
 import updateAddress from "../../redux/thunks/updateAddress";
 import { USER_ADDRESSURL } from "../../constants";
+import { useEffect, useState } from "react";
+import SuccessModal from "../products/SuccessModal";
 
 export type AddressEditFormInput = {
   addressLine: string;
@@ -30,6 +32,20 @@ const EditAddress = () => {
   const dispatch = useAppDispatch();
 
   const token = localStorage.getItem("refresh-token") ?? "";
+
+  const [isSuccess, setIsSuceess] = useState<boolean>(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSuccessModalOpen(true);
+    }
+  }, [isSuccess]);
+
+  const handleClose = () => {
+    setIsSuccessModalOpen(false);
+    navigate("/profile");
+  };
 
   const address: AddressType | undefined = useSelector(
     (state: AppState) => state.userReducer.addresses
@@ -50,15 +66,17 @@ const EditAddress = () => {
     formState: { errors },
   } = useForm<AddressEditFormInput>({ defaultValues: initialValues });
 
-  const submitHandler = (data: AddressEditFormInput) => {
-    dispatch(
-      updateAddress({
-        baseUrl: `${USER_ADDRESSURL}/${id}`,
-        address: data,
-        token,
-      })
-    );
-    navigate("/profile");
+  const submitHandler = async (data: AddressEditFormInput) => {
+    try {
+      const result = await dispatch(
+        updateAddress({
+          baseUrl: `${USER_ADDRESSURL}/${id}`,
+          address: data,
+          token,
+        })
+      );
+      if (result) setIsSuceess(true);
+    } catch (err) {}
   };
 
   return (
@@ -196,6 +214,7 @@ const EditAddress = () => {
           </Box>
         </form>
       </Paper>
+      <SuccessModal open={isSuccessModalOpen} onClose={handleClose} />
     </Box>
   );
 };
