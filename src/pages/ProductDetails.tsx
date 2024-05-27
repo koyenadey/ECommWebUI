@@ -321,7 +321,7 @@ const ProductDetails = () => {
             </>
           )}
           {tabValue === "reviews" && (
-            <div>
+            <Box>
               <StyledReviews variant="h5" component="h2" gutterBottom>
                 Reviews
               </StyledReviews>
@@ -343,7 +343,10 @@ const ProductDetails = () => {
               <Button variant="contained" color="primary" type="submit">
                 SUBMIT
               </Button>
-            </div>
+              <Button variant="contained" color="primary" type="submit">
+                SUBMIT
+              </Button>
+            </Box>
           )}
         </Container>
       </Box>

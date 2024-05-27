@@ -87,6 +87,10 @@ To start ModaMorph application, type below in terminal
 
 `npm build` - To build the application to deploy to the production.
 
+### Deployed Links
+
+- [BackendAPI](https://modamorph.azurewebsites.net/swagger/index.html)
+
 ### How to use
 
 - To check admin features login using email `caroles.castro@mail.com` & password **Admin123** or `john.doe@mail.com` & password **Admin123**
@@ -123,11 +127,11 @@ To start ModaMorph application, type below in terminal
 
 ModaMorph uses the following features -
 
-- **Searching** : ModaMorph is enabled to search data accross the data set and is enabled with `Lazy Loading` and `debounce` features for performance optimisation.
+- **Searching** : ModaMorph is enabled to search data with title or price and is enabled with `Lazy Loading` and `debounce` features for performance optimisation.
 
-- **Sorting** : ModaMorph is enabled to sort the data based on **brewery name** in both `ascending` and `descending order`. This feature also supports `Lazy Loading`
+- **Sorting** : ModaMorph is enabled to sort the data based on **title** and **price** in both `ascending` and `descending order`. This feature also supports `Lazy Loading`
 
-- **Pagination** : ModaMorph is enabled to **progressive pagination** based on search / sort functionalities accordingly.
+- **Pagination** : ModaMorph is enabled to **progressive pagination** based on search / sort functionalities wher total product count is updated accordingly coming from backend.
 
 - **ScrollToTop** : ModaMorph is enabled to **progressive traversal** based on the options selected accordingly. Selecting `AboutUs` traverses to the exact location of the paragraph where it is situated in the Page and not a generic location.
 
@@ -172,6 +176,10 @@ ModaMorph uses the following features -
 `Cart Page`
 
 ![Cart](./readme_images/user_cart_web.png)
+
+`Cart Address Selection`
+
+![Cart](./readme_images/cartaddressselection.png)
 
 `Admin Page`
 
@@ -219,13 +227,29 @@ This page is used to register a user in the application using email and a passwo
 
 This page is responsible for listing all the products pertaining top a category selected or All products if selected. Each product listed has an eye button that redirects to the details page where user can added the product to the cart.
 
+![Products - Clothes](./readme_images/AllProducts.png)
+
+`Product Details`
+
+![Product Details](./readme_images/ProductDetails.png)
+
 ### Profile
 
 This page is only available if the user logs in and can be customer or admin. This page is available to both and they can update their name or email information is they want to.
 
+`User Address Web Layout`
+
+![Address](./readme_images/user_address_web.png)
+
+`User Address Mobile Layout`
+
+![Address](./readme_images/user_address_mobile.png)
+
 ### AboutUs
 
 This page contains the history of the application and few FAQs like Shippinmg information and all.
+
+![About-Us](./readme_images/aboutus.png)
 
 ### hooks
 
