@@ -13,6 +13,7 @@ import Header from "../home/Header";
 import Footer from "../home/Footer";
 import fetchAllCategories from "../../redux/thunks/fetchAllCategories";
 import { CATGET_URL } from "../../constants";
+import { Category } from "../../misc/type";
 
 interface MasterPageProps {
   children: ReactNode;
@@ -33,10 +34,16 @@ const MasterPage = ({ children }: MasterPageProps) => {
     refreshToken: localRToken as string,
   };
 
+  const categories: Category[] = useSelector(
+    (state: AppState) => state.productReducer.categories
+  );
+
   useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(fetchAllCategories(CATGET_URL));
+    }
     if (!isLoggedIn && !localRToken) {
       dispatch(setToken(token.refreshToken));
-      dispatch(fetchAllCategories(CATGET_URL));
     }
   }, [dispatch, localRToken, isLoggedIn, navigate]);
 
