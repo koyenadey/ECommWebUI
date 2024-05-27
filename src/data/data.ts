@@ -104,3 +104,13 @@ export const modalMessageWarning =
   "Are you sure you want to delete this address? Once deleted the address could not be recovered!";
 export const modalMessageFailed =
   "This address is used as your residential address for digital purchases. To delete this address, first set a different residential address for your digital purchases.";
+
+export const userMenuData = [
+  { type: "Profile", url: "/profile", state: "" },
+  { type: "Order History", url: "/order-history", state: "" },
+  { type: "About Us", url: "/aboutus", state: "aboutus" },
+  { type: "Shipping & Returns", url: "/aboutus", state: "shipping" },
+  { type: "Customer Care", url: "/aboutus", state: "customercare" },
+  //{ type: "LogOut", url: "/" },
+];
+export const userDashboardUrl = "/dashboard";

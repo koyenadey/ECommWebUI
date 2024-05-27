@@ -17,7 +17,8 @@ const initialState = {
   error: "",
   productCount: 0,
   searchText: "",
-  sortType: "asc",
+  sortType: "byPrice",
+  sortOrder: "asc",
   deletedId: "",
 };
 
@@ -48,7 +49,8 @@ describe("Product Reducer", () => {
       productCount: mockProducts.length,
       error: "",
       searchText: "",
-      sortType: "asc",
+      sortType: "byPrice",
+      sortOrder: "asc",
       isDeleted: false,
     });
   });
@@ -66,7 +68,8 @@ describe("Product Reducer", () => {
       productCount: 0,
       error: "",
       searchText: "",
-      sortType: "asc",
+      sortType: "byPrice",
+      sortOrder: "asc",
       isDeleted: false,
     });
   });

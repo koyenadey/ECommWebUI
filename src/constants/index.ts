@@ -1,3 +1,4 @@
+//const baseUrl = "http://localhost:5240/";
 const baseUrl = "https://modamorph.azurewebsites.net/";
 //swagger : https://modamorph.azurewebsites.net/swagger/index.html
 

@@ -14,6 +14,7 @@ const getTheme = (mode: "dark" | "light") =>
         xl: 1200,
       },
     },
+    spacing: 8, // This sets the base spacing to 8px
   });
 
 export default getTheme;

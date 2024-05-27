@@ -17,6 +17,7 @@ type InitialState = {
   productCount: number;
   searchText: string;
   sortType: string;
+  sortOrder: string;
   deletedId: string;
 };
 
@@ -28,7 +29,8 @@ const initialState: InitialState = {
   error: "",
   productCount: 0,
   searchText: "",
-  sortType: "asc",
+  sortType: "byPrice",
+  sortOrder: "asc",
   deletedId: "",
 };
 
@@ -41,6 +43,9 @@ const productSlice = createSlice({
     },
     addSortType: (state, action: PayloadAction<string>) => {
       state.sortType = action.payload;
+    },
+    addSortOrder: (state, action: PayloadAction<string>) => {
+      state.sortOrder = action.payload;
     },
   },
 
@@ -242,6 +247,7 @@ const productSlice = createSlice({
 });
 
 const productReducer = productSlice.reducer;
-export const { addSearchText, addSortType } = productSlice.actions;
+export const { addSearchText, addSortType, addSortOrder } =
+  productSlice.actions;
 
 export default productReducer;

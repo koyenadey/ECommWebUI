@@ -201,3 +201,8 @@ export type UpdateOrderType = {
   status: string;
   dateOfDelivery: Date;
 };
+
+export type BreadCrumbsType = {
+  label: string;
+  href: string;
+};

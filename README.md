@@ -93,7 +93,9 @@ To start ModaMorph application, type below in terminal
 
 - Typing a product `name` in the search box fetches the result if found.
 
-- Data is by default sorted in `ascending order` but can also be sorted in `descending order` on `price` field. Sorting is on entire data set as of now because the `api` being used does not provides the information of metadata. This functionality will be replaced in the upcoming feature where a dedicated `api` with metadata features will be used.
+- Data is by default sorted in `ascending order by title` but can also be sorted in `descending/ ascending order` on `price` field. Sorting is done dynamically by backend api on `title` or `price`.
+
+- To check the backend API [refer here](https://github.com/koyenadey/ECommWebApi)
 
 - Clicking on the logo navigates to the home page.
 
@@ -139,39 +141,45 @@ ModaMorph uses the following features -
 
 ### Screenshots
 
-`Home Page`
+`Home Page Web view`
 
-![HomePage](./readme_images/HomePage.png)
+![HomePage](./readme_images/HomePageWeb.png)
+
+`Home Page Mobile view`
+
+![HomePage](./readme_images/HomePageMobile.png)
 
 `Login Page`
 
-![Login Page](./readme_images/Login.png)
+![Login Page](./readme_images/LoginPage.png)
 
-`Register Page`
+`Products Page - All Products`
 
-![Register Page](./readme_images/Register.png)
-
-`Products Page - Category Cothes`
-
-![Products - Clothes](./readme_images/Products_ClothesCategory.png)
+![Products - Clothes](./readme_images/AllProducts.png)
 
 `Product Details`
 
 ![Product Details](./readme_images/ProductDetails.png)
 
+`User Address Web Layout`
+
+![Address](./readme_images/user_address_web.png)
+
+`User Address Mobile Layout`
+
+![Address](./readme_images/user_address_mobile.png)
+
 `Cart Page`
 
-![Cart](./readme_images/Cart.png)
+![Cart](./readme_images/user_cart_web.png)
 
 `Admin Page`
 
-![Admin-Users](./readme_images/AdminDashboard-Users.png)
-
-![Admin-Products](./readme_images/AdminDashboard-Products.png)
+![Admin-Users](./readme_images/user_dashboard.png)
 
 `About Us Page`
 
-![About-Us](./readme_images/AboutUs.png)
+![About-Us](./readme_images/aboutus.png)
 
 ## Architecture and design
 

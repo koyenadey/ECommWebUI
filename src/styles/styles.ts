@@ -21,8 +21,14 @@ import {
   Divider,
   Select,
   Pagination,
+  Toolbar,
+  Grid,
+  Accordion,
+  ImageList,
+  Avatar,
 } from "@mui/material";
 import { InputBase } from "@mui/material";
+import modaMorphModel from "../images/model1.jpg";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import LockIcon from "@mui/icons-material/Lock";
@@ -49,10 +55,10 @@ export const NavBar = styled(AppBar)(({ theme }) => ({
 })) as typeof AppBar;
 
 export const StyledDarkMode = styled(DarkModeIcon)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#001200",
 }));
 export const StyledLightMode = styled(Brightness5Icon)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#001200",
 }));
 
 export const StyledMenuIcon = styled(MenuIcon)(({ theme }) => ({
@@ -78,10 +84,20 @@ export const Heading = styled(Typography)(({ theme }) => ({
   },
 })) as typeof Typography;
 
+export const CustomFooter = styled(Box)(({ theme }) => ({
+  backgroundColor: "#2272A1",
+  color: "white",
+  padding: "4%4%",
+
+  [theme.breakpoints.down("sm")]: {},
+})) as typeof Box;
+
 export const StyledFooter = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#393b39" : "#d9d9d9",
-  height: "50vh",
-  width: "100%",
+  backgroundColor: theme.palette.mode === "dark" ? "#393b39" : "##2272A1",
+  //backgroundColor: "#2272A1",
+  color: "white",
+  padding: "4%4%",
+  //width: "100%",
 
   [theme.breakpoints.down("sm")]: {},
 })) as typeof Box;
@@ -100,7 +116,7 @@ export const StyledInformation = styled(Box)(({ theme }) => ({
 
 export const StyledBtnFooter = styled(Button)(({ theme }) => ({
   margin: "3rem 1rem",
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+  color: theme.palette.mode === "dark" ? "white" : "black",
   opacity: "60%",
   fontFamily: "Roboto, sans-serif",
   textAlign: "center",
@@ -237,8 +253,8 @@ export const SubscribeText = styled(TextField)(({ theme }) => ({
 export const SubscribeBtn = styled(Button)(({ theme }) => ({
   margin: "3% 2%",
   padding: "1%",
-  backgroundColor: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
-  color: theme.palette.mode === "dark" ? "#393b39" : "#f2f2f2",
+  backgroundColor: theme.palette.mode === "dark" ? "white" : "black",
+  color: theme.palette.mode === "dark" ? "black" : "white",
   width: "20%",
 
   "&:hover": {
@@ -264,7 +280,7 @@ export const SubscribeBtn = styled(Button)(({ theme }) => ({
 })) as typeof Button;
 
 export const StyledFacebookIcon = styled(FacebookIcon)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
+  color: theme.palette.mode === "dark" ? "white" : "black",
   margin: "3% 2%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "5% 2%",
@@ -284,7 +300,7 @@ export const StyledFacebookIcon = styled(FacebookIcon)(({ theme }) => ({
 }));
 
 export const StyledInstagramIcon = styled(InstagramIcon)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
+  color: theme.palette.mode === "dark" ? "white" : "black",
   margin: "3% 2%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "5% 2%",
@@ -304,7 +320,7 @@ export const StyledInstagramIcon = styled(InstagramIcon)(({ theme }) => ({
 }));
 
 export const StyledYoutubeIcon = styled(YouTubeIcon)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
+  color: theme.palette.mode === "dark" ? "white" : "black",
   margin: "3% 2%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "5% 2%",
@@ -323,13 +339,13 @@ export const StyledYoutubeIcon = styled(YouTubeIcon)(({ theme }) => ({
   },
 }));
 export const StyledCopyrightIcon = styled(CopyrightIcon)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#666666",
+  color: theme.palette.mode === "dark" ? "white" : "black",
   fontSize: "90%",
   opacity: "40%",
 }));
 
 export const StyledCopyrightText = styled("span")(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#f2f2f2" : "#393b39",
+  color: theme.palette.mode === "dark" ? "white" : "black",
   opacity: "40%",
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "3% 2%",
@@ -1032,3 +1048,391 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
   marginTop: "2%",
   marginX: "auto",
 })) as typeof Container;
+
+export const CustomOutlinedButton = styled(Button)(() => ({
+  borderColor: "white",
+  color: "white",
+  padding: "1%3%",
+  "&:hover": {
+    borderColor: "white",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    color: "black",
+  },
+})) as typeof Button;
+
+export const CustomFilledButton = styled(Button)(() => ({
+  backgroundColor: "white",
+  color: "black",
+  padding: "1%3%",
+  marginRight: "2%",
+  "&:hover": {
+    backgroundColor: "black",
+    color: "white",
+  },
+})) as typeof Button;
+
+export const LogoContainer = styled(Box)({
+  position: "absolute",
+  bottom: "20px",
+  left: "50%",
+  transform: "translateX(-50%)",
+  display: "flex",
+  gap: "15px",
+});
+
+export const BackgroundImage = styled("img")({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  zIndex: -1,
+});
+
+export const Background = styled(Box)({
+  position: "relative",
+  color: "white",
+  padding: "50px 20px",
+  textAlign: "center",
+  height: "90vh", // 90% of the viewport height
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+}) as typeof Box;
+
+export const Section = styled(Box)(({ theme }) => ({
+  //backgroundColor: "#f0f2f5",
+  padding: `${theme.spacing(8)}px 0`, // Ensure px units are added
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems: "center",
+  flexWrap: "wrap",
+  margin: "5%0%",
+  border: `1px solid ${theme.palette.divider}`,
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+})) as typeof Box;
+
+export const Feature = styled(Box)(({ theme }) => ({
+  textAlign: "center",
+  margin: theme.spacing(2),
+  flex: "1 1 200px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+})) as typeof Box;
+
+export const Icon = styled("span")(({ theme }) => ({
+  fontSize: "3rem",
+  marginBottom: theme.spacing(1),
+}));
+
+export const FeatureIcon = styled("img")(({ theme }) => ({
+  fontSize: "3rem",
+  marginBottom: theme.spacing(1),
+  width: "30px", // Adjust the width and height as needed
+  height: "30px",
+}));
+
+export const StyledProdCard = styled(Card)(({ theme }) => ({
+  maxWidth: 345,
+  [theme.breakpoints.down("sm")]: {
+    maxWidth: "100%",
+  },
+}));
+
+export const CustomToolbar = styled(Toolbar)({
+  minHeight: "100px",
+  display: "flex",
+  alignItems: "center",
+  margin: "1%0%",
+  justifyContent: "space-between",
+  padding: "0 1rem",
+  "@media (max-width: 600px)": {
+    padding: "0 0.5rem",
+  },
+});
+
+export const CustomLink = styled(Link)({
+  fontWeight: "bolder",
+  fontSize: "1.1rem",
+  fontFamily: "sans-serif",
+  alignSelf: "center",
+  cursor: "pointer",
+  "@media (max-width: 600px)": {
+    fontSize: "0.8rem",
+    marginTop: "1%",
+  },
+}) as typeof Link;
+
+/*export const NavLinksBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: "1rem",
+  alignItems: "center",
+  [theme.breakpoints.between("xs", "sm")]: {
+    gap: "0.5rem",
+    fontSize: "0.75rem",
+    width: "100%", // Ensure it adapts to smaller screens
+    flexDirection: "column",
+  },
+  [theme.breakpoints.up("sm")]: {
+    gap: "1rem",
+    fontSize: "1rem",
+    width: "auto", // Adjust width for larger screens
+  },
+  [theme.breakpoints.up("md")]: {
+    gap: "1.5rem",
+    fontSize: "1.25rem",
+  },
+  [theme.breakpoints.up("lg")]: {
+    gap: "2rem",
+    fontSize: "1.5rem",
+  },
+  [theme.breakpoints.up("xl")]: {
+    gap: "2.5rem",
+    fontSize: "1.75rem",
+  },
+})); */
+
+export const NavLinksBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: "1rem",
+  [theme.breakpoints.between("xs", "sm")]: {
+    gap: "1rem",
+    fontSize: "0.5rem",
+    width: "50%",
+    display: "none",
+  },
+  [theme.breakpoints.between("sm", "md")]: { display: "none" },
+  [theme.breakpoints.between("md", "lg")]: {},
+  [theme.breakpoints.between("lg", "xl")]: {},
+}));
+
+export const NavLinksMobileViewBox = styled(Box)(({ theme }) => ({
+  display: "none",
+  gap: "1rem",
+  [theme.breakpoints.between("xs", "sm")]: {
+    gap: "1rem",
+    fontSize: "0.5rem",
+    width: "50%",
+    display: "flex",
+  },
+  [theme.breakpoints.between("sm", "md")]: { display: "flex" },
+  [theme.breakpoints.between("md", "lg")]: {},
+  [theme.breakpoints.between("lg", "xl")]: {},
+}));
+
+export const StyledLoginImgGrid = styled(Grid)(({ theme }) => ({
+  backgroundImage: `url(${modaMorphModel})`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  borderRadius: "8px",
+  height: "580px",
+  width: "580px",
+}));
+
+export const StyledMainGrid = styled(Grid)(({ theme }) => ({
+  width: "100%",
+  maxWidth: "1000px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  marginTop: "10vh",
+})) as typeof Grid;
+
+export const HeaderWelcomeBack = styled(Typography)(({ theme }) => ({
+  fontFamily: "Kanit, sans-serif",
+  fontWeight: "700",
+  fontSize: "40px",
+  width: "100%",
+  textAlign: "center",
+  color: "#f0f2f2",
+  mt: "30px",
+})) as typeof Typography;
+
+export const HeaderLoginBody = styled(Typography)(({ theme }) => ({
+  marginTop: "40px",
+  fontSize: "20px",
+  textAlign: "center",
+  color: "#f2f2f2",
+  width: "80%",
+  marginLeft: "auto",
+  marginRight: "auto",
+})) as typeof Typography;
+
+export const StyledLoginHeader = styled(Box)(({ theme }) => ({
+  margin: "4%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "space-around",
+  height: "100%",
+  textAlign: "center",
+})) as typeof Box;
+
+export const StyledLoginImage = styled(Typography)(({ theme }) => ({
+  fontFamily: "Kanit, sans-serif",
+  fontWeight: "700",
+  fontSize: "20px",
+  width: "100%",
+  textAlign: "center",
+})) as typeof Typography;
+
+export const StyledLoginSignupHeader = styled(Typography)(({ theme }) => ({
+  fontFamily: "Kanit, sans-serif",
+  fontSize: "15px",
+  width: "100%",
+})) as typeof Typography;
+
+export const StyledHeaderWelcomeBack = styled(Typography)(({ theme }) => ({
+  fontFamily: "Kanit, sans-serif",
+  fontWeight: "700",
+  fontSize: "40px",
+  width: "100%",
+  textAlign: "center",
+  color: "#f0f2f2",
+})) as typeof Typography;
+
+export const StyledCreateAccountBox = styled(Box)(({ theme }) => ({
+  mt: "15px",
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+  alignSelf: "center",
+})) as typeof Box;
+
+export const StyledSignInBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignSelf: "center",
+})) as typeof Box;
+
+export const StyledSignInButton = styled(Button)(({ theme }) => ({
+  marginTop: "1%",
+  marginBottom: "2%",
+  width: "150px",
+  backgroundColor: "#2172a1",
+})) as typeof Button;
+
+export const StyledSignInGoogleBtn = styled(Button)(({ theme }) => ({
+  fontFamily: "Kanit, sans-serif",
+  textTransform: "none",
+  borderColor: "#2172a1",
+  color: "#2172a1",
+  fontWeight: "400",
+  fontSize: "15px",
+})) as typeof Button;
+
+export const StyledSignInFbBtn = styled(Button)(({ theme }) => ({
+  fontFamily: "Kanit, sans-serif",
+  textTransform: "none",
+  borderColor: "#2172a1",
+  color: "#2172a1",
+  fontWeight: "400",
+  fontSize: "15px",
+})) as typeof Button;
+
+export const StyledImageList = styled(ImageList)(({ theme }) => ({
+  width: "100%",
+  height: "800px",
+  overflow: "hidden",
+  marginTop: "40px",
+})) as typeof ImageList;
+
+export const StyledProductCatParentBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  width: "100%",
+  height: "100%",
+  alignItems: "left",
+})) as typeof Box;
+
+export const StyledProductChildBox = styled(Box)(({ theme }) => ({
+  height: "35%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-around",
+  textAlign: "left",
+  marginTop: "30px",
+})) as typeof Box;
+
+export const StyledProdName = styled(Typography)(({ theme }) => ({
+  fontFamily: "Faustina, sans-serif",
+  fontSize: "40px",
+  fontWeight: "700",
+})) as typeof Typography;
+
+export const StyledProdPrice = styled(Typography)(({ theme }) => ({
+  fontFamily: "Cambay, sans-serif",
+  marginLeft: "20px",
+  fontSize: "20px",
+  color: "#686868",
+})) as typeof Typography;
+
+export const StyledProductDesc = styled(Box)(({ theme }) => ({
+  height: "40%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-around",
+  textAlign: "left",
+  marginTop: "30px",
+})) as typeof Box;
+
+export const StyledReturnsAccordian = styled(Accordion)(({ theme }) => ({
+  border: "2px solid #efefef",
+  boxShadow: "0",
+  borderRadius: "0px",
+  margin: "5px",
+})) as typeof Accordion;
+
+export const StyledDeliveryAccordian = styled(Accordion)(({ theme }) => ({
+  border: "2px solid #efefef",
+  boxShadow: "0",
+  borderRadius: "0px",
+  margin: "5px",
+  backgroundColor: "unset",
+})) as typeof Accordion;
+
+export const StyledProdDesc = styled(Typography)(({ theme }) => ({
+  fontFamily: "Cambay, sans-serif",
+  marginY: "20px",
+  fontWeight: "700",
+  fontSize: "20px",
+})) as typeof Typography;
+
+export const StyledProdSpec = styled(Typography)(({ theme }) => ({
+  fontFamily: "Cambay, sans-serif",
+  marginY: "20px",
+  fontWeight: "700",
+  fontSize: "20px",
+})) as typeof Typography;
+
+export const StyledReviews = styled(Typography)(({ theme }) => ({
+  fontFamily: "Cambay, sans-serif",
+  marginY: "20px",
+  fontWeight: "700",
+  fontSize: "20px",
+})) as typeof Typography;
+
+export const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  width: "100",
+  height: "100",
+  borderRadius: "0",
+})) as typeof Avatar;
+
+export const CustomFilledFeaturedButton = styled(Button)(() => ({
+  backgroundColor: "#2272A1",
+  color: "white",
+  padding: "1%5%",
+  marginRight: "2%",
+  "&:hover": {
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    color: "black",
+  },
+})) as typeof Button;

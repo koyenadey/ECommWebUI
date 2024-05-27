@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 
 import { AppState, useAppDispatch } from "../../redux/store";
 
-import Footer from "../footer/Footer";
-import NavigationBar from "../navigation/NavBar";
 import { useNavigate } from "react-router-dom";
-import ActiveBreadcrumbs from "../breadcrumbs/ActiveBreadcrumbs";
 import { ThemeContext } from "../../App";
 import { setToken } from "../../redux/slices/userSlice";
+import Header from "../home/Header";
+import Footer from "../home/Footer";
+import fetchAllCategories from "../../redux/thunks/fetchAllCategories";
+import { CATGET_URL } from "../../constants";
 
 interface MasterPageProps {
   children: ReactNode;
@@ -35,17 +36,17 @@ const MasterPage = ({ children }: MasterPageProps) => {
   useEffect(() => {
     if (!isLoggedIn && !localRToken) {
       dispatch(setToken(token.refreshToken));
+      dispatch(fetchAllCategories(CATGET_URL));
     }
   }, [dispatch, localRToken, isLoggedIn, navigate]);
 
   return (
     <ThemeProvider theme={getTheme(themeContext.mode)}>
-      <NavigationBar
+      <Header
         isLoggedIn={isLoggedIn}
         mode={themeContext.mode}
         toggleColorMode={themeContext.toggleMode}
       />
-      <ActiveBreadcrumbs />
       {children}
       <Footer />
     </ThemeProvider>

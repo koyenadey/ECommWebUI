@@ -1,24 +1,18 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../redux/store";
+import fetchUserAddress from "../redux/thunks/fetchUserAddress";
 
 import fetchUser from "../redux/thunks/fetchUser";
-import { AppState, useAppDispatch } from "../redux/store";
-
-import Home from "../components/home/Home";
+import { CATGET_URL, LOGGEDIN_USERURL, USER_ADDRESSURL } from "../constants";
+import fetchAllCategories from "../redux/thunks/fetchAllCategories";
 import MasterPage from "../components/master-page/MasterPage";
-import { LOGGEDIN_USERURL, USER_ADDRESSURL } from "../constants";
-import fetchUserAddress from "../redux/thunks/fetchUserAddress";
-//import fetchAcessToken from "../redux/thunks/fetchAccessToken";
+import Home from "../components/home/Home";
 
-const HomePage = () => {
+export const HomePage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const accessToken = useSelector(
-  //   (state: AppState) => state.userReducer.tokens.access_token
-  // );
   const refreshToken = localStorage.getItem("refresh-token");
-  const token = {
-    refreshToken: refreshToken ?? "",
-  };
 
   useEffect(() => {
     if (refreshToken) {
@@ -26,14 +20,9 @@ const HomePage = () => {
       dispatch(
         fetchUserAddress({ baseUrl: USER_ADDRESSURL, token: refreshToken })
       );
-      //dispatch(fetchAcessToken({ baseUrl: ATOKEN_URL, token }));
+      dispatch(fetchAllCategories(CATGET_URL));
     }
-    //  else {
-    //   if (accessToken) {
-    //     dispatch(fetchUser({ baseUrl: LOGGEDIN_USERURL, token: accessToken }));
-    //   }
-    // }
-  }, [dispatch /*accessToken*/, refreshToken]);
+  }, [dispatch, refreshToken]);
 
   return (
     <MasterPage>

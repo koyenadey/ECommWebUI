@@ -10,11 +10,13 @@ import OrderHistory from "./pages/OrderHistory";
 export interface ThemeContextType {
   mode: "light" | "dark";
   toggleMode: () => void;
+  spacing: number;
 }
 
 export const ThemeContext = createContext<ThemeContextType>({
   mode: "light",
   toggleMode: () => undefined,
+  spacing: 8,
 });
 
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
@@ -38,6 +40,7 @@ function App() {
     toggleMode: () => {
       setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
     },
+    spacing: 8,
   };
 
   return (

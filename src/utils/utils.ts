@@ -1,4 +1,7 @@
+import { amber } from "@mui/material/colors";
 import {
+  BreadCrumbsType,
+  Category,
   CreateProductType,
   Order,
   OrderProductType,
@@ -66,4 +69,13 @@ export const transformOrders = (orders: Order[]) => {
     const totalPrice: number = calculateProductPrice(order.orderedProducts);
     return { ...order, totalPrice };
   });
+};
+
+export const transFormBreadCrumbs = (
+  breadcrumbsValue: string
+): BreadCrumbsType[] => {
+  return [
+    { label: "home", href: "/" },
+    { label: "products", href: breadcrumbsValue },
+  ];
 };
