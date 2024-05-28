@@ -129,7 +129,7 @@ const Header = ({ isLoggedIn, mode, toggleColorMode }: HeaderProps) => {
               <ShoppingBagOutlined sx={{ fontSize: 30 }} />
             </Badge>
           </IconButton>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ display: "flex" }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
                 {isLoggedIn ? (
@@ -198,7 +198,7 @@ const Header = ({ isLoggedIn, mode, toggleColorMode }: HeaderProps) => {
               <ShoppingBagOutlined sx={{ fontSize: 30 }} />
             </Badge>
           </IconButton>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ display: "flex" }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
                 {isLoggedIn ? (

@@ -89,7 +89,9 @@ export const CustomFooter = styled(Box)(({ theme }) => ({
   color: "white",
   padding: "4%4%",
 
-  [theme.breakpoints.down("sm")]: {},
+  // [theme.breakpoints.down("sm")]: {
+  //   width: "50%",
+  // },
 })) as typeof Box;
 
 export const StyledFooter = styled(Box)(({ theme }) => ({
@@ -103,14 +105,16 @@ export const StyledFooter = styled(Box)(({ theme }) => ({
 })) as typeof Box;
 
 export const StyledInformation = styled(Box)(({ theme }) => ({
-  width: "60%",
   display: "flex",
   margin: "auto",
+  [theme.breakpoints.down("xs")]: {
+    //width: "20%",
+  },
   [theme.breakpoints.between("xs", "sm")]: {
     width: "60%",
   },
-  [theme.breakpoints.between("xs", "sm")]: {
-    width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    width: "60%",
   },
 })) as typeof Box;
 
@@ -121,6 +125,12 @@ export const StyledBtnFooter = styled(Button)(({ theme }) => ({
   fontFamily: "Roboto, sans-serif",
   textAlign: "center",
   fontSize: "16px",
+
+  [theme.breakpoints.down("xs")]: {
+    //margin: "1rem 1rem",
+    fontSize: "0.5rem",
+    minWidth: "0",
+  },
 
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "1rem 1rem",
@@ -472,22 +482,13 @@ export const StyledBredCrumbs = styled(Breadcrumbs)(({ theme }) => ({
   },
 }));
 
-export const StyledPrdHeader = styled(Typography)(({ theme }) => ({
-  fontSize: "1.5rem",
+export const StyledBannerHeader = styled(Typography)(({ theme }) => ({
+  fontSize: "6rem",
+  [theme.breakpoints.down("xs")]: {
+    fontSize: "3rem",
+  },
   [theme.breakpoints.between("xs", "sm")]: {
-    fontSize: "1rem",
-  },
-  [theme.breakpoints.between("sm", "md")]: {
-    fontSize: "1.3rem",
-  },
-  [theme.breakpoints.between("md", "lg")]: {
-    fontSize: "1.5rem",
-  },
-  [theme.breakpoints.between("lg", "xl")]: {
-    fontSize: "1.8rem",
-  },
-  [theme.breakpoints.up("xl")]: {
-    fontSize: "2rem",
+    fontSize: "4rem",
   },
 })) as typeof Typography;
 
@@ -1145,17 +1146,18 @@ export const StyledProdCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-export const CustomToolbar = styled(Toolbar)({
+export const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   minHeight: "100px",
   display: "flex",
   alignItems: "center",
   margin: "1%0%",
   justifyContent: "space-between",
   padding: "0 1rem",
-  "@media (max-width: 600px)": {
-    padding: "0 0.5rem",
+  [theme.breakpoints.down("sm")]: {
+    maxWidth: "30%",
+    padding: "0",
   },
-});
+}));
 
 export const CustomLink = styled(Link)({
   fontWeight: "bolder",
@@ -1168,6 +1170,13 @@ export const CustomLink = styled(Link)({
     marginTop: "1%",
   },
 }) as typeof Link;
+
+export const CustomAvatar = styled(Avatar)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    width: "50px",
+    height: "50px",
+  },
+})) as typeof Avatar;
 
 /*export const NavLinksBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -1201,6 +1210,12 @@ export const CustomLink = styled(Link)({
 export const NavLinksBox = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: "1rem",
+  [theme.breakpoints.down("xs")]: {
+    gap: "1rem",
+    fontSize: "0.5rem",
+    width: "50%",
+    display: "none",
+  },
   [theme.breakpoints.between("xs", "sm")]: {
     gap: "1rem",
     fontSize: "0.5rem",
@@ -1215,6 +1230,12 @@ export const NavLinksBox = styled(Box)(({ theme }) => ({
 export const NavLinksMobileViewBox = styled(Box)(({ theme }) => ({
   display: "none",
   gap: "1rem",
+  [theme.breakpoints.down("xs")]: {
+    // gap: "1rem",
+    // fontSize: "0.5rem",
+    // width: "50%",
+    display: "flex",
+  },
   [theme.breakpoints.between("xs", "sm")]: {
     gap: "1rem",
     fontSize: "0.5rem",
