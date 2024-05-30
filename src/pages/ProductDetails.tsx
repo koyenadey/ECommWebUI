@@ -43,6 +43,7 @@ import {
   StyledReturnsAccordian,
   StyledReviews,
 } from "../styles/styles";
+import ReviewSection from "../components/reviews/ReviewSection";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -69,29 +70,6 @@ const ProductDetails = () => {
     navigate("/checkout/cart");
   };
 
-  //   const product: Product = {
-  //     name: "Honeylane Half Zip Sweatshirt",
-  //     description:
-  //       "Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.",
-  //     price: "$150.00",
-  //     images: [
-  //       {
-  //         url: "https://jupiterx.com/wp-content/uploads/2022/12/product-woman-jacket3-1.jpg",
-  //       },
-  //       {
-  //         url: "https://jupiterx.com/wp-content/uploads/2022/12/product-woman-jacket3-2.jpg",
-  //       },
-  //       {
-  //         url: "https://jupiterx.com/wp-content/uploads/2022/12/product-woman-jacket3-3.jpg",
-  //       },
-  //       {
-  //         url: "https://jupiterx.com/wp-content/uploads/2022/12/product-woman-jacket3-4.jpg",
-  //       },
-  //     ],
-  //     category: "Women",
-  //     features: ["Free Shipping"],
-  //   };
-
   const breadcrumbsValue = location.pathname;
   const breadcrumbs = transFormBreadCrumbs(breadcrumbsValue);
 
@@ -105,10 +83,10 @@ const ProductDetails = () => {
               <StyledImageList cols={2} rowHeight={400}>
                 {product ? (
                   product.images.map((item) => (
-                    <ImageListItem key={item?.imageUrl}>
+                    <ImageListItem key={item?.productImageUrl}>
                       <img
-                        src={`${item.imageUrl}`}
-                        alt={`${item.imageUrl}`}
+                        src={`${item.productImageUrl}`}
+                        alt={`${item.productImageUrl}`}
                         loading="lazy"
                         style={{ height: "100%", width: "100%" }}
                       />
@@ -277,7 +255,7 @@ const ProductDetails = () => {
                 value="additionalInformation"
                 label="Additional Information"
               />
-              {/* <Tab value="reviews" label="Reviews" /> */}
+              <Tab value="reviews" label="Reviews" />
             </Tabs>
           </Grid>
           <Divider
@@ -321,32 +299,10 @@ const ProductDetails = () => {
             </>
           )}
           {tabValue === "reviews" && (
-            <Box>
-              <StyledReviews variant="h5" component="h2" gutterBottom>
-                Reviews
-              </StyledReviews>
-              <Rating
-                name="simple-controlled"
-                value={2}
-                onChange={() => undefined}
-              />
-              <TextField
-                required
-                id="review"
-                label="Your review"
-                multiline
-                rows={4}
-                margin="normal"
-              />
-              <TextField required id="name" label="Name" margin="normal" />
-              <TextField required id="email" label="Email" margin="normal" />
-              <Button variant="contained" color="primary" type="submit">
-                SUBMIT
-              </Button>
-              <Button variant="contained" color="primary" type="submit">
-                SUBMIT
-              </Button>
-            </Box>
+            <ReviewSection
+              productId={product?.id || ""}
+              productName={product?.name || ""}
+            />
           )}
         </Container>
       </Box>

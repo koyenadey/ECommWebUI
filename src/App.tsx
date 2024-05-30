@@ -6,18 +6,13 @@ import PrivateRoute from "./components/private/PrivateRoute";
 import OrderPagePopUp from "./components/cart/OrderPagePopUp";
 import EditUser from "./components/user/EditUser";
 import OrderHistory from "./pages/OrderHistory";
-
-export interface ThemeContextType {
-  mode: "light" | "dark";
-  toggleMode: () => void;
-  spacing: number;
-}
-
-export const ThemeContext = createContext<ThemeContextType>({
-  mode: "light",
-  toggleMode: () => undefined,
-  spacing: 8,
-});
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { useSelector } from "react-redux";
+import { AppState } from "./redux/store";
+import LoadingSpinner from "./components/master-page/LoadingSpinner";
+import UserData from "./components/profile/UserData";
+import RegisterUser from "./pages/RegisterUser";
 
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
@@ -32,20 +27,29 @@ const EditAddress = lazy(() => import("./components/address/EditAddress"));
 const CreateProduct = lazy(() => import("./components/products/CreateProduct"));
 const CreateAddress = lazy(() => import("./components/address/CreateAddress"));
 const EditOrder = lazy(() => import("./components/cart/EditOrder"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
 
 function App() {
-  const [mode, setMode] = useState<"light" | "dark">("light");
-  const initialThemeContext: ThemeContextType = {
-    mode: mode,
-    toggleMode: () => {
-      setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  const themeMode = useSelector(
+    (state: AppState) => state.userReducer.themeMode
+  );
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: themeMode,
     },
-    spacing: 8,
-  };
+    typography: {
+      fontFamily: "Nunito, Montserrat, sans-serif",
+      allVariants: {
+        fontFamily: "Nunito, Montserrat, sans-serif",
+      },
+    },
+  });
 
   return (
-    <ThemeContext.Provider value={initialThemeContext}>
-      <Suspense fallback={<div>Loading....</div>}>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
@@ -56,6 +60,10 @@ function App() {
           <Route
             path="/dashboard"
             element={<PrivateRoute Component={Dashboard} />}
+          />
+          <Route
+            path="/wishlist"
+            element={<PrivateRoute Component={Wishlist} />}
           />
           <Route
             path="/dashboard/edit/products/:id"
@@ -81,7 +89,7 @@ function App() {
             path="/orders/edit/:id"
             element={<PrivateRoute Component={EditOrder} />}
           />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<RegisterUser />} />
           <Route path="/orderpopup" element={<OrderPagePopUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/aboutus" element={<AboutUs />} />
@@ -95,7 +103,7 @@ function App() {
           <Route path="/checkout/cart" element={<Cart />} />
         </Routes>
       </Suspense>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }
 

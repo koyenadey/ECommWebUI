@@ -5,10 +5,11 @@ import { AppState } from "../redux/store";
 
 import MasterPage from "../components/master-page/MasterPage";
 
-import { Box, Typography } from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import { EditButton, FormInput } from "../styles/styles";
 import OrderDetails from "../components/cart/OrderDetails";
 import OrderSummary from "../components/cart/OrderSummary";
+import CartVertical from "../components/cart/CartVertical";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -19,18 +20,21 @@ const Cart = () => {
 
   return (
     <MasterPage>
-      <Box sx={{ display: "flex" }}>
-        <OrderDetails />
-        {cartItemCount > 0 && <OrderSummary />}
-      </Box>
+      {cartItemCount > 0 && (
+        <Box>
+          {/*<OrderDetails />
+          <OrderSummary />*/}
+          <CartVertical />
+        </Box>
+      )}
 
       {cartItemCount === 0 && (
-        <FormInput>
-          <Typography component="blockquote">The cart is empty</Typography>
-          <EditButton onClick={() => navigate("/products/all")}>
+        <Box width="100%" textAlign="center" marginY="150px">
+          <Typography component="blockquote">Your cart is empty. No products to display. Start shopping to continue checkout.</Typography>
+          <Button variant="contained" onClick={() => navigate("/products/all")} sx={{maxWidth: "450px"}}>
             Start Shopping
-          </EditButton>
-        </FormInput>
+          </Button>
+        </Box>
       )}
     </MasterPage>
   );

@@ -6,7 +6,6 @@ import {
   CustomFilledButton,
   CustomOutlinedButton,
   LogoContainer,
-  StyledBannerHeader,
 } from "../../styles/styles";
 import { useNavigate } from "react-router-dom";
 import BannerImage from "../../images/BannerImage.jpeg";
@@ -15,16 +14,11 @@ const Banner = () => {
   const navigate = useNavigate();
   return (
     <Background component="section" aria-labelledby="banner-title">
-      <BackgroundImage src={BannerImage} alt="BannerImage" />
-      <Container maxWidth="md">
-        <StyledBannerHeader
-          variant="h1"
-          component="h1"
-          id="banner-title"
-          gutterBottom
-        >
+
+      <Container sx={{ textAlign: 'left' }}>
+        <Typography variant="h1" id="banner-title" fontWeight="600">
           Be uniquely you!
-        </StyledBannerHeader>
+        </Typography>
         <Typography variant="h6" component="p" gutterBottom>
           limited spring collections
         </Typography>

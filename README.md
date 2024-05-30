@@ -1,3 +1,5 @@
+![HomePage](./readme_images/LogoMM.png)
+
 # Welcome to Modamorph - One stop destination for your Online Shopping
 
 ## Technologies used:
@@ -7,11 +9,7 @@
 ![Static Badge](https://img.shields.io/badge/Redux-Js?style=flat&logo=redux&logoColor=8A2BE2&labelColor=white&color=white)
 ![Static Badge](https://img.shields.io/badge/Typescript-React?style=flat&logo=typescript&logoColor=blue&labelColor=white&color=white)
 ![Static Badge](https://img.shields.io/badge/Azure-MS?style=flat&logo=microsoftazure&logoColor=blue&labelColor=white&color=white)
-
-**ModaMorph** is a e-commerce application that enables people to shop a range of products from Clothes,Electronics,Furnitures,Shoes & Miscellenous categories.
-**ModaMorph** is built using `React` and [Asp.Net Core Framework](https://modamorph.azurewebsites.net/swagger/index.html).
-This is a multi page application with all code written in `Typescript` and all styles in `MaterialUI` for front end and the backend with Asp.Net core.
-ModaMorph is equipped with `accessibility` and `responsiveness` for Small screen upto 650px Medium Screen upt0 900px, Large screen upto 1024 and extra large 1200px and up.
+![Static Badge](https://img.shields.io/badge/Jest-Testing?style=flat&logo=jest&logoColor=white&labelColor=red&color=red)
 
 **Purpose -** At **Modamorph**, our main purpose is to redefine the online shopping experience for our valued customers. Whether you're a tech-savvy individual, a busy professional, or a discerning shopper seeking the latest trends, our platform caters to all your needs with a user-friendly interface and a diverse array of products.
 
@@ -45,10 +43,6 @@ Just dive into **[Modamorph](https://shop-modamorph.netlify.app/)** to see it in
 ## Detailed information and instructions
 
 ## Getting started
-
-### Prerequisites
-
-List the software, tools, and versions you need to run the project.
 
 ### Installation
 
@@ -87,10 +81,6 @@ To start ModaMorph application, type below in terminal
 
 `npm build` - To build the application to deploy to the production.
 
-### Deployed Links
-
-- [BackendAPI](https://modamorph.azurewebsites.net/swagger/index.html)
-
 ### How to use
 
 - To check admin features login using email `caroles.castro@mail.com` & password **Admin123** or `john.doe@mail.com` & password **Admin123**
@@ -103,7 +93,7 @@ To start ModaMorph application, type below in terminal
 
 - Clicking on the logo navigates to the home page.
 
-- Clicking on the person icon on the navigation bar will show the option of logging in or to see details related to the application like `About Us`,`Shipping & Returns`,`Customer Care`, `Profile`, `Login`, `Dashboard`.
+- Clicking on the person icon on the navigation bar will show the option of logging in or to see details related to the application like `About Us`,`Shipping & Returns`,`Customer Care`, `Profile`, `Login`, `Dashboard`,`Wishlist`,`OrderHistory`.
 
 - Profile is only available after you login.
 
@@ -127,21 +117,18 @@ To start ModaMorph application, type below in terminal
 
 ModaMorph uses the following features -
 
-- **Searching** : ModaMorph is enabled to search data with title or price and is enabled with `Lazy Loading` and `debounce` features for performance optimisation.
+## Architechture
 
-- **Sorting** : ModaMorph is enabled to sort the data based on **title** and **price** in both `ascending` and `descending order`. This feature also supports `Lazy Loading`
-
-- **Pagination** : ModaMorph is enabled to **progressive pagination** based on search / sort functionalities wher total product count is updated accordingly coming from backend.
-
-- **ScrollToTop** : ModaMorph is enabled to **progressive traversal** based on the options selected accordingly. Selecting `AboutUs` traverses to the exact location of the paragraph where it is situated in the Page and not a generic location.
-
-- **Filtering** : ModaMorph is enabled to **filter** products based on the categories selected. Selecting `Clothes` show the products pertaining to that category only.
-
-- **LazyLoading** : ModaMorph is enabled to **lazy load** components based on the navigation. Only the Home component is loaded by default because it is the landing page. Rest of the components are loaded on demand. This increases the efficieny of the application.
-
-- **Redux** : The application's state is centrally managed by the Redux store, offering several advantages. By utilizing Redux, we mitigate prop drilling, ensuring a cleaner and more maintainable codebase. Additionally, it establishes a single source of truth for the application's data, enhancing predictability and simplifying state management across components. This approach streamlines development and fosters scalability, ultimately contributing to a more robust and efficient application architecture.
-
-- **DarkMode** : The application is having the feature to switch to dark and light modes in the navigation bar,menu & footer.
+| Feature                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| **Architecture**              | ModaMorph is built using `React`.This is a multi page application with all code written in `Typescript` and all styles in `MaterialUI` for front end and the backend with Asp.Net core.ModaMorph is equipped with `accessibility` and `responsiveness` for Small screen upto 650px Medium Screen upt0 900px, Large screen upto 1024 and extra large 1200px and up.                                                                                                                                             |
+| **Context API for MUI theme** | The project is built using `MUI` and `Context API` to for customizing the theme accross the application and switching to dark & light mode.                                                                                                                                                                                                                                                                                                                                                                    |     |
+| **Central application state** | The application's state is centrally managed by the Redux store, offering several advantages. By utilizing Redux, we mitigate prop drilling, ensuring a cleaner and more maintainable codebase. Additionally, it establishes a single source of truth for the application's data, enhancing predictability and simplifying state management across components. This approach streamlines development and fosters scalability, ultimately contributing to a more robust and efficient application architecture. |     |
+| **Performance**               | The application is is powered by techniques such as lazy loading for reducing the load time.                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Searching**                 | ModaMorph is enabled to search data with title or price and is enabled with `debounce` features for performance optimisation.                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Sorting**                   | ModaMorph is enabled to sort the data based on **title** and **price** in both `ascending` and `descending order`. This feature also supports `Lazy Loading                                                                                                                                                                                                                                                                                                                                                    |
+| **Pagination**                | ModaMorph is enabled to **progressive pagination** based on search / sort functionalities wher total product count is updated accordingly coming from backend.                                                                                                                                                                                                                                                                                                                                                 |
+| **ScrollTosections**          | ModaMorph is enabled to **progressive traversal** based on the options selected accordingly. Selecting `AboutUs` traverses to the exact location of the paragraph where it is situated in the Page and not a generic location                                                                                                                                                                                                                                                                                  |
 
 ### Screenshots
 

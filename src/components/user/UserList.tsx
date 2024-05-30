@@ -8,6 +8,13 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemIcon,
+  IconButton,
+  Card,
+  Table,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
 } from "@mui/material";
 
 import { UserType } from "../../misc/type";
@@ -17,7 +24,9 @@ import {
   StyledDivider,
   StyledEditIcon,
   StyledListItem,
+  StyledTableHeader,
 } from "../../styles/styles";
+import EditIcon from "@mui/icons-material/Edit";
 
 const UserList = () => {
   const navigate = useNavigate();
@@ -31,24 +40,46 @@ const UserList = () => {
   );
 
   return (
-    <List>
-      {users.map((user) => (
-        <Box component="article" key={user.id} alignContent="center">
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar alt={user.userName} src={user.avatar} />
-            </ListItemAvatar>
-            <StyledListItem>{user.userName}</StyledListItem>
-            <StyledListItem>{user.email}</StyledListItem>
-            <StyledListItem>{user.role}</StyledListItem>
-            <ListItemIcon onClick={() => editRoleHandler(user.id)}>
-              <StyledEditIcon />
-            </ListItemIcon>
-          </ListItem>
-          <StyledDivider />
+    <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+      <Card sx={{ maxWidth: "750px", width: "80%" }}>
+        <Box sx={{ overflowX: "auto", width: "100%" }}>
+          <Table sx={{ width: "100%" }}>
+            <TableHead>
+              <TableRow>
+                <StyledTableHeader>Avatar</StyledTableHeader>
+                <StyledTableHeader>User name</StyledTableHeader>
+                <StyledTableHeader>User email</StyledTableHeader>
+                <StyledTableHeader>User role</StyledTableHeader>
+                <StyledTableHeader>Manage</StyledTableHeader>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.map((user) => {
+                return (
+                  <TableRow hover key={user.id}>
+                    <TableCell>
+                      <Avatar
+                        alt={user.userName}
+                        src={user.avatar}
+                        sx={{ width: "80px", height: "80px" }}
+                      />
+                    </TableCell>
+                    <TableCell>{user.userName}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.role}</TableCell>
+                    <TableCell>
+                      <IconButton onClick={() => editRoleHandler(user.id)}>
+                        <EditIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </Box>
-      ))}
-    </List>
+      </Card>
+    </Box>
   );
 };
 

@@ -1,4 +1,5 @@
 import { StyledPagination } from "../../styles/styles";
+import {Pagination} from "@mui/material";
 
 interface PagingProps {
   pageCount: number;
@@ -10,13 +11,13 @@ const Paging = (props: PagingProps) => {
   const { pageCount, pageNo, onPageChange } = props;
 
   return (
-    <StyledPagination
-      sx={{ margin: "5% 25%" }}
+    <Pagination
+      sx={{ display: "flex", justifyContent: "center" }}
       page={pageNo}
       count={pageCount}
       variant="outlined"
       shape="rounded"
-      onChange={(event, page) => onPageChange(page)}
+      onChange={(_event, page) => onPageChange(page)}
     />
   );
 };

@@ -97,9 +97,9 @@ const EditOrder = () => {
                 disabled
                 aria-disabled="true"
                 fullWidth
-                value={orderDetails?.orderId}
+                value={orderDetails?.id}
                 InputLabelProps={{
-                  shrink: !!orderDetails?.orderId, // Shrink label if value is present
+                  shrink: !!orderDetails?.id, // Shrink label if value is present
                 }}
               />
               <TextField
@@ -110,9 +110,9 @@ const EditOrder = () => {
                 disabled
                 aria-disabled="true"
                 fullWidth
-                value={orderDetails?.userName}
+                value={orderDetails?.user.userName}
                 InputLabelProps={{
-                  shrink: !!orderDetails?.userName, // Shrink label if value is present
+                  shrink: !!orderDetails?.user.userName, // Shrink label if value is present
                 }}
               />
               <FormControl fullWidth variant="outlined">

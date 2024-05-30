@@ -16,10 +16,22 @@ import {
   Pagination,
   styled,
   SelectProps,
+  IconButton,
+  Tooltip,
+  Card,
 } from "@mui/material";
 import FilterSidebar from "./FilterSideBar";
 import SimpleBreadcrumbs from "../navigation/SimpleBreadCrumbs";
-import { StyledProdCard } from "../../styles/styles";
+import {
+  CustomFormControl,
+  CustomPagination,
+  CustomSelect,
+  CustomToastContainer,
+  StyledIconButton,
+  StyledProdCard,
+  StyledProductCardContent,
+  StyledProductsCard,
+} from "../../styles/styles";
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../redux/store";
 import { transFormBreadCrumbs } from "../../utils/utils";
@@ -30,6 +42,7 @@ import {
   PAGESIZE,
   GETCATPRD_COUNTURL,
   GET_COUNTURL,
+  WISHLIST_GETURL,
 } from "../../constants";
 import fetchProducts from "../../redux/thunks/fetchProducts";
 import {
@@ -39,22 +52,17 @@ import {
 } from "../../redux/slices/productSlice";
 import { useDebouncedCallback } from "use-debounce";
 import fetchProductCount from "../../redux/thunks/fetchProductCount";
+import { AddShoppingCart, Favorite } from "@mui/icons-material";
+import { addToCart } from "../../redux/slices/cartSlice";
+import LoadingSpinner from "../master-page/LoadingSpinner";
+import addToWishlist from "../../redux/thunks/addToWishlist";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export const CustomFormControl = styled(FormControl)({
-  minWidth: 140, // Adjust width as needed
-});
-
-export const CustomSelect = styled(Select)<SelectProps>({
-  minWidth: 120, // Adjust width as needed
-});
-
-export const CustomPagination = styled(Box)({
-  display: "flex",
-  justifyContent: "center",
-  margin: "4%0%",
-});
+const notify = () => toast.success("Item added to wishlist");
 
 const Products = () => {
+  const token = localStorage.getItem("refresh-token") ?? "";
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -82,6 +90,11 @@ const Products = () => {
     (state: AppState) => state.productReducer.isLoading
   );
 
+  const wishlists = useSelector(
+    (state: AppState) => state.wishlistReducer.wishlists
+  );
+  const wishlistId = wishlists[0]?.id;
+
   const error = useSelector((state: AppState) => state.productReducer.error);
 
   const pgCount = Math.ceil(
@@ -98,6 +111,27 @@ const Products = () => {
     setSortOrder(sortChoice.split("-")[1]);
     dispatch(addSortType(sortChoice.split("-")[0]));
     dispatch(addSortOrder(sortChoice.split("-")[1]));
+  };
+
+  const addToCartHandler = (item: Product) => {
+    const productToAdd: Product = JSON.parse(JSON.stringify(item));
+    productToAdd.inventory = 1;
+
+    dispatch(addToCart(productToAdd));
+    navigate("/checkout/cart");
+  };
+
+  const wishlisItemAddHandler = async (productId: string) => {
+    const baseUrl = `${WISHLIST_GETURL}/${wishlistId}/add_product`;
+    if (wishlistId) {
+      const results = await dispatch(
+        addToWishlist({ baseUrl, token, productId })
+      );
+      if (results) {
+        //navigate("/wishlist");
+        notify();
+      }
+    }
   };
 
   const searchTextVal = useSelector(
@@ -136,7 +170,7 @@ const Products = () => {
     );
   }, [pageNo, searchTextVal, sortType, sortOrder, selectedCategory]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
   else if (error) {
     return <>{error}</>;
   }
@@ -198,35 +232,60 @@ const Products = () => {
             <Grid container spacing={4}>
               {products.map((product) => (
                 <Grid item xs={12} sm={6} md={4} key={product.id}>
-                  <StyledProdCard>
+                  <StyledProductsCard>
                     <CardMedia
                       component="img"
                       height="250"
-                      image={product.images[0].imageUrl}
+                      image={product.images[0].productImageUrl}
                       alt={product.name}
                     />
-                    <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                    <StyledProductCardContent
+                      onClick={() => navigate(`/products/${product.id}`)}
+                    >
+                      <Typography
+                        fontWeight="700"
+                        color="#2272a1"
+                        height="50px"
+                        overflow="hidden"
+                      >
                         {product.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {product.category.name}
                       </Typography>
-                      <Typography variant="body1" color="text.primary">
+                      <Typography
+                        variant="body1"
+                        color="text.primary"
+                        fontWeight="700"
+                        fontSize="15px"
+                      >
                         ${product.price}
                       </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        size="small"
-                        color="primary"
-                        aria-label={`View details of ${product.name}`}
-                        onClick={() => navigate(`/products/${product.id}`)}
+                    </StyledProductCardContent>
+                    <CardActions sx={{ marginTop: "0" }}>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        width="100%"
                       >
-                        View Details
-                      </Button>
+                        <Tooltip title="Add product to cart">
+                          <StyledIconButton
+                            onClick={() => addToCartHandler(product)}
+                          >
+                            <AddShoppingCart />
+                          </StyledIconButton>
+                        </Tooltip>
+                        <Tooltip title="Add product to wishlist">
+                          <StyledIconButton
+                            onClick={() => wishlisItemAddHandler(product.id)}
+                          >
+                            <Favorite />
+                            <CustomToastContainer />
+                          </StyledIconButton>
+                        </Tooltip>
+                      </Box>
                     </CardActions>
-                  </StyledProdCard>
+                  </StyledProductsCard>
                 </Grid>
               ))}
             </Grid>

@@ -19,7 +19,11 @@ import { setToken } from "../redux/slices/userSlice";
 import fetchOrders from "../redux/thunks/fetchOrders";
 import { useSelector } from "react-redux";
 import { Order, ReadOrder } from "../misc/type";
-import { calculateTotalSum, transformOrders } from "../utils/utils";
+import {
+  calculateTotalSum,
+  getFormattedDate,
+  transformOrders,
+} from "../utils/utils";
 import { useNavigate } from "react-router-dom";
 
 const OrderHistory: React.FC = () => {
@@ -52,7 +56,16 @@ const OrderHistory: React.FC = () => {
     <MasterPage>
       <Box sx={{ padding: 10 }}>
         <Box sx={{ padding: 2 }}>
-          <StyledCartHeader>Your Orders</StyledCartHeader>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <StyledCartHeader>Your Orders</StyledCartHeader>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => navigate(`/products/all`)}
+            >
+              Back to products
+            </Button>
+          </Box>
           {orders.length === 0 && (
             <Typography variant="body1" color="textSecondary">
               we could not find any orders placed by you.
@@ -62,36 +75,40 @@ const OrderHistory: React.FC = () => {
         {orders &&
           updatedOrders.map((order) => (
             <Card
-              key={order.orderId}
+              key={`${order.id}-card`}
               sx={{ marginBottom: 2, border: "1px solid black" }}
             >
               <CardContent>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={2}>
+                  <Grid item xs={12} sm={4}>
                     <Typography variant="body2" color="textSecondary">
                       ORDER ID
                     </Typography>
-                    <Typography variant="body1">{order.orderId}</Typography>
+                    <Typography variant="body1">{order.id}</Typography>
                   </Grid>
                   <Grid item xs={12} sm={2}>
                     <Typography variant="body2" color="textSecondary">
                       ORDER PLACED
                     </Typography>
                     <Typography variant="body1">
-                      {order.orderDate.toLocaleString()}
+                      {getFormattedDate(order.orderDate)}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={2}>
                     <Typography variant="body2" color="textSecondary">
                       TOTAL
                     </Typography>
-                    <Typography variant="body1">{order.totalPrice}</Typography>
+                    <Typography variant="body1">
+                      {order.totalPrice.toFixed(2)}
+                    </Typography>
                   </Grid>
                   <Grid item xs={12} sm={2}>
                     <Typography variant="body2" color="textSecondary">
-                      SHIP TO
+                      ORDERED BY
                     </Typography>
-                    <Typography variant="body1">{order.userName}</Typography>
+                    <Typography variant="body1">
+                      {order.user.userName}
+                    </Typography>
                   </Grid>
                   <Grid item xs={12} sm={2}>
                     <Typography variant="body2" color="textSecondary">
@@ -104,9 +121,7 @@ const OrderHistory: React.FC = () => {
                       <Button
                         variant="outlined"
                         size="small"
-                        onClick={() =>
-                          navigate(`/orders/edit/${order.orderId}`)
-                        }
+                        onClick={() => navigate(`/orders/edit/${order.id}`)}
                       >
                         Update Order
                       </Button>
@@ -115,19 +130,23 @@ const OrderHistory: React.FC = () => {
                 </Grid>
                 <Divider sx={{ my: "2%" }} />
                 {order.orderedProducts.map((item, index) => (
-                  <Box key={index} sx={{ display: "flex", marginTop: 2 }}>
-                    {/* <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    style={{ width: 100, height: 100, marginRight: 16 }}
-                  /> */}
+                  <Box
+                    key={`${item.id}-${index}`}
+                    sx={{ display: "flex", marginTop: 2 }}
+                  >
+                    <img
+                      src={item.product.images[0].productImageUrl}
+                      alt={item.product.name}
+                      style={{ width: 100, height: 100, marginRight: 16 }}
+                    />
                     <Box>
+                      <Box></Box>
                       <Typography
                         variant="body1"
                         component="div"
                         sx={{ fontWeight: "bold" }}
                       >
-                        {item.productName}
+                        {item.product.name}
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
                         {item.priceAtPurchase}

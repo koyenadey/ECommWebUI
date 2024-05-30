@@ -2,6 +2,10 @@ import React from "react";
 import { Box, Typography, Container, Icon, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 import { Feature, FeatureIcon, Section } from "../../styles/styles";
+import footerFeatureOne from '../../images/footer-feature-1.png';
+import footerFeatureTwo from '../../images/footer-feature-2.png';
+import footerFeatureThree from '../../images/footer-feature-3.png';
+import footerFeatureFour from '../../images/footer-feature-4.png';
 
 interface FooterFeaturesProps {
   spacing?: number; // Optional prop for spacing if needed
@@ -17,22 +21,22 @@ interface FeatureType {
 // Define the features
 const features: FeatureType[] = [
   {
-    icon: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2018/12/globe-free-img-100x100.png",
+    icon: footerFeatureOne,
     title: "Worldwide Shipping",
     description: "We offer worldwide shipping on all orders.",
   },
   {
-    icon: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2018/12/quality-free-img-100x100.png",
+    icon: footerFeatureTwo,
     title: "Best Quality",
     description: "Our products are of the highest quality.",
   },
   {
-    icon: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2018/12/tag-free-img-100x100.png",
+    icon: footerFeatureThree,
     title: "Best Offers",
     description: "We provide the best offers on our products.",
   },
   {
-    icon: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2018/12/lock-free-img-100x100.png",
+    icon: footerFeatureFour,
     title: "Secure Payments",
     description: "Your payments are secure with us.",
   },

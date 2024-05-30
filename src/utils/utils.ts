@@ -7,6 +7,7 @@ import {
   OrderProductType,
   RegisterFormType,
 } from "../misc/type";
+import { CreateReview } from "../components/reviews/ReviewSection";
 
 export const numbersArray = (value: number): number[] => {
   return Array.from({ length: value }, (_, i) => i + 1);
@@ -78,4 +79,31 @@ export const transFormBreadCrumbs = (
     { label: "home", href: "/" },
     { label: "products", href: breadcrumbsValue },
   ];
+};
+
+export const transformToReviewForm = (data: CreateReview): FormData => {
+  const formData = new FormData();
+
+  formData.append("rating", data.rating.toString());
+  formData.append("comment", data.comment);
+  formData.append("userId", data.userId);
+  formData.append("orderedProductId", data.orderProductId);
+
+  return formData;
+};
+
+export const getFormattedDate = (dateString: Date): string => {
+  const date = new Date(dateString);
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  };
+  // Format the date using Intl.DateTimeFormat
+  return new Intl.DateTimeFormat("en-US", options).format(date);
 };

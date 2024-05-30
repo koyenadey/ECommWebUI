@@ -13,7 +13,7 @@ export type CreateCategory = Omit<Category, "id">;
 
 type ProductImage = {
   productId: string;
-  imageUrl: string;
+  productImageUrl: string;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -158,28 +158,29 @@ export type OrderAddressType = {
 };
 
 export type OrderProductType = {
+  id: string;
   productId: string;
-  productName: string;
+  product: Product;
   quantity: number;
   priceAtPurchase: number;
 };
 
 export type Order = {
-  orderId: string;
+  id: string;
   orderDate: Date;
   status: string;
-  userName: string;
+  user: UserType;
   dateOfDelivery: Date;
   address: OrderAddressType;
   orderedProducts: OrderProductType[];
 };
 
 export type ReadOrder = {
-  orderId: string;
+  id: string;
   orderDate: Date;
   totalPrice: number;
   status: string;
-  userName: string;
+  user: UserType;
   dateOfDelivery: Date;
   address: OrderAddressType;
   orderedProducts: OrderProductType[];
@@ -206,3 +207,14 @@ export type BreadCrumbsType = {
   label: string;
   href: string;
 };
+
+export interface WishlistItem {
+  id: string;
+  product: Product;
+}
+export interface WishlistType {
+  id: string;
+  name: string;
+  user: UserType;
+  wishlistItems: WishlistItem[];
+}

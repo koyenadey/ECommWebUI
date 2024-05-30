@@ -19,6 +19,15 @@ import {
   Divider,
   Button,
   Box,
+  ListItemText,
+  IconButton,
+  Card,
+  Table,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableBody,
+  CardActions,
 } from "@mui/material";
 
 import {
@@ -26,9 +35,13 @@ import {
   StyledDivider,
   StyledEditIcon,
   StyledListItem,
+  StyledTableHeader,
 } from "../../styles/styles";
 import fetchProductCount from "../../redux/thunks/fetchProductCount";
 import fetchProduct from "../../redux/thunks/fetchProduct";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PostAdd from "@mui/icons-material/PostAdd";
 
 const ProductsListForEdit = () => {
   const navigate = useNavigate();
@@ -97,46 +110,67 @@ const ProductsListForEdit = () => {
   const pageCount = Math.ceil(totalProds / pageSize);
 
   return (
-    <Box>
-      <CartDialogue isOpen={dialogueIsOpen} onClose={confirmDeleteHandler} />
-      <Button
-        sx={{ margin: "2%" }}
-        variant="outlined"
-        onClick={() => navigate(`/dashboard/create/product`)}
-      >
-        Add Product
-      </Button>
-      <Divider />
-      <List>
-        {products.map((product) => (
-          <Box component="article" key={product.id} alignContent="center">
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar
-                  variant="square"
-                  alt={product.name}
-                  src={product.images[0].imageUrl}
-                />
-              </ListItemAvatar>
-              <StyledListItem>{product.name}</StyledListItem>
-              <StyledListItem>{product.category.name}</StyledListItem>
-              <StyledListItem>{product.price}€</StyledListItem>
-              <ListItemIcon onClick={() => editProductHandler(product.id)}>
-                <StyledEditIcon />
-              </ListItemIcon>
-              <ListItemIcon onClick={() => deleteProductHandler(product.id)}>
-                <StyledDeleteIcon />
-              </ListItemIcon>
-            </ListItem>
-            <StyledDivider />
-          </Box>
-        ))}
-      </List>
-      <Paging
-        pageCount={pageCount}
-        pageNo={pageNo}
-        onPageChange={pageChangeHandler}
-      />
+    <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+      <Card sx={{ maxWidth: "850px", width: "80%", borderRadius: "10px" }}>
+        <Box sx={{ overflowX: "auto", width: "100%" }}>
+          <Table sx={{ width: "100%" }}>
+            <TableHead>
+              <TableRow>
+                <StyledTableHeader></StyledTableHeader>
+                <StyledTableHeader>Product name</StyledTableHeader>
+                <StyledTableHeader>Product category</StyledTableHeader>
+                <StyledTableHeader>Product price</StyledTableHeader>
+                <StyledTableHeader>Manage</StyledTableHeader>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((product) => {
+                return (
+                  <TableRow hover key={product.id}>
+                    <TableCell>
+                      <Avatar
+                        alt={product.name}
+                        src={product.images[0].productImageUrl}
+                        sx={{ width: "80px", height: "80px" }}
+                      />
+                    </TableCell>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>{product.category.name}</TableCell>
+                    <TableCell>{product.price}</TableCell>
+                    <TableCell>
+                      <IconButton
+                        onClick={() => editProductHandler(product.id)}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => deleteProductHandler(product.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
+        <CardActions sx={{ justifyContent: "space-between", marginY: "5px" }}>
+          <Button
+            variant="outlined"
+            startIcon={<PostAdd />}
+            onClick={() => navigate(`/dashboard/create/product`)}
+          >
+            Add new
+          </Button>
+          <Paging
+            pageCount={pageCount}
+            pageNo={pageNo}
+            onPageChange={pageChangeHandler}
+          />
+        </CardActions>
+        <CartDialogue isOpen={dialogueIsOpen} onClose={confirmDeleteHandler} />
+      </Card>
     </Box>
   );
 };

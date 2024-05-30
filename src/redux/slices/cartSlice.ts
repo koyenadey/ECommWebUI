@@ -25,6 +25,8 @@ const cartSlice = createSlice({
         state.cart.push(action.payload);
       } else product.inventory += action.payload.inventory;
 
+      console.log(state.cart[0].inventory);
+
       state.quantity = state.cart.reduce((acc, curr) => {
         return acc + curr.inventory;
       }, 0);

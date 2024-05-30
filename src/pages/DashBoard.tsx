@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Container, Divider, Tab, Tabs, Typography } from "@mui/material";
 
 import useFetchProducts from "../hook/useFetchProducts";
 import UserList from "../components/user/UserList";
@@ -40,21 +40,38 @@ const Dashboard = () => {
 
   return (
     <MasterPage>
-      <StyledContainer component="div" aria-label="products">
-        <Typography variant="h4">
-          {value[0].toUpperCase().concat(value.substring(1))} List
-        </Typography>
-        <Tabs
-          value={value}
-          onChange={changeTabHandler}
-          textColor="inherit"
-          indicatorColor="primary"
+      <Box margin="2%" aria-label="products">
+        <Typography
+          variant="h4"
+          fontWeight="600"
+          textAlign="center"
+          color="#2272a1"
         >
-          <Tab value="users" label="User" />
-          <Tab value="products" label="Products" />
-        </Tabs>
+          Admin dashboard - Manage your data, easily!
+        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+          <Tabs
+            value={value}
+            onChange={changeTabHandler}
+            textColor="inherit"
+            indicatorColor="primary"
+            sx={{ fontWeight: "700" }}
+          >
+            <Tab value="users" label="Manage user List" />
+            <Tab value="products" label="Manage product List" />
+          </Tabs>
+        </Box>
+        <Divider
+          sx={{
+            borderWidth: "1px",
+            marginTop: "-1px",
+            marginBottom: "50px",
+            width: "100%",
+          }}
+        />
+
         <Box>{value === "users" ? <UserList /> : <ProductsList />}</Box>
-      </StyledContainer>
+      </Box>
     </MasterPage>
   );
 };

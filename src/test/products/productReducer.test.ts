@@ -20,6 +20,7 @@ const initialState = {
   sortType: "byPrice",
   sortOrder: "asc",
   deletedId: "",
+  featuredProducts: [],
 };
 
 beforeAll(() => {

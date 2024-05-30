@@ -13,6 +13,7 @@ import { AddressType } from "../../misc/type";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import { CustomToastContainer } from "../../styles/styles";
 
 const AddressList = () => {
   const navigate = useNavigate();

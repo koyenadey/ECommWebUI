@@ -108,8 +108,8 @@ const Products1 = () => {
           {paginatedData.map((item) => (
             <ImageListItem key={item.id}>
               <img
-                srcSet={`${item.images[0].imageUrl}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
-                src={`${item.images[0].imageUrl}?w=80&h=80&fit=crop&auto=format`}
+                srcSet={`${item.images[0].productImageUrl}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
+                src={`${item.images[0].productImageUrl}?w=80&h=80&fit=crop&auto=format`}
                 alt={item.name}
                 loading="lazy"
               />

@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect } from "react";
+import React, { ReactNode, useContext, useEffect } from "react";
 import { ThemeProvider } from "@emotion/react";
 import getTheme from "../../styles/customTheme";
 
@@ -7,23 +7,27 @@ import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../redux/store";
 
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../../App";
 import { setToken } from "../../redux/slices/userSlice";
 import Header from "../home/Header";
-import Footer from "../home/Footer";
 import fetchAllCategories from "../../redux/thunks/fetchAllCategories";
-import { CATGET_URL } from "../../constants";
-import { Category } from "../../misc/type";
+import { CATGET_URL, ORDER_GETURL } from "../../constants";
+import BannerImage from "../../images/BannerImage.jpeg";
+import { BackgroundImage } from "../../styles/styles";
+import { styled } from "@mui/material";
+import { Box } from "@mui/system";
+import fetchOrders from "../../redux/thunks/fetchOrders";
+import AppFooter from "../home/AppFooter";
 
 interface MasterPageProps {
   children: ReactNode;
 }
 
 const MasterPage = ({ children }: MasterPageProps) => {
-  const themeContext = useContext(ThemeContext);
-
   const isLoggedIn = useSelector(
     (state: AppState) => state.userReducer.isLoggedIn
+  );
+  const themeMode = useSelector(
+    (state: AppState) => state.userReducer.themeMode
   );
 
   const navigate = useNavigate();
@@ -34,29 +38,23 @@ const MasterPage = ({ children }: MasterPageProps) => {
     refreshToken: localRToken as string,
   };
 
-  const categories: Category[] = useSelector(
-    (state: AppState) => state.productReducer.categories
-  );
-
   useEffect(() => {
-    if (categories.length === 0) {
-      dispatch(fetchAllCategories(CATGET_URL));
-    }
     if (!isLoggedIn && !localRToken) {
       dispatch(setToken(token.refreshToken));
+      dispatch(fetchAllCategories(CATGET_URL));
+    } else {
+      dispatch(
+        fetchOrders({ baseUrl: ORDER_GETURL, token: token.refreshToken })
+      );
     }
   }, [dispatch, localRToken, isLoggedIn, navigate]);
 
   return (
-    <ThemeProvider theme={getTheme(themeContext.mode)}>
-      <Header
-        isLoggedIn={isLoggedIn}
-        mode={themeContext.mode}
-        toggleColorMode={themeContext.toggleMode}
-      />
+    <Box>
+      <Header isLoggedIn={isLoggedIn} mode={themeMode} />
       {children}
-      <Footer />
-    </ThemeProvider>
+      <AppFooter />
+    </Box>
   );
 };
 

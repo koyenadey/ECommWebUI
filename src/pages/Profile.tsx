@@ -6,7 +6,7 @@ import ProfileEditForm from "../components/profile/ProfileEditForm";
 import ProfileDisplayForm from "../components/profile/ProfileDisplayForm";
 import useFetchToken from "../hook/useFetchUser";
 import { Box, Tab, Tabs } from "@mui/material";
-import { StyledContainer } from "../styles/styles";
+import { CustomToastContainer, StyledContainer } from "../styles/styles";
 import AddressList from "../components/address/AddressList";
 import { AppState, useAppDispatch } from "../redux/store";
 import fetchUserAddress from "../redux/thunks/fetchUserAddress";

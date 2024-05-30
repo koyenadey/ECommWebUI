@@ -15,6 +15,9 @@ import { AppState, useAppDispatch } from "../../redux/store";
 import RemovalModal from "./RemovalModal";
 import deleteUserAddress from "../../redux/thunks/deleteUserAddress";
 import { USER_ADDRESSURL } from "../../constants";
+import setDefaultAddress from "../../redux/thunks/setDefaultAddress";
+import { ToastContainer, toast } from "react-toastify";
+import { CustomToastContainer } from "../../styles/styles";
 
 interface AddressCardProps {
   address: AddressType;
@@ -53,8 +56,16 @@ const AddressCard = (props: AddressCardProps) => {
       } catch (err) {}
     }
   };
-  const editAddressHandler = () => {
+  const editAddressHandler = (selectedAddress: string) => {
+    handleRadioChange(selectedAddress);
     navigate(`/address/edit/${address.id}`);
+  };
+
+  const defaultAddressHandler = async (selectedAddress: string) => {
+    handleRadioChange(selectedAddress);
+
+    const baseUrl = `${USER_ADDRESSURL}/${selectedAddress}/setdefault`;
+    const result = await dispatch(setDefaultAddress({ baseUrl, token }));
   };
 
   return (
@@ -115,7 +126,7 @@ const AddressCard = (props: AddressCardProps) => {
           <Button
             size="small"
             aria-label={`edit address for ${address.user.userName}`}
-            onClick={editAddressHandler}
+            onClick={() => editAddressHandler(address.id)}
           >
             Edit
           </Button>
@@ -126,12 +137,15 @@ const AddressCard = (props: AddressCardProps) => {
           >
             Remove
           </Button>
-          <Button
-            size="small"
-            aria-label={`set ${address.user.userName}'s address as default`}
-          >
-            Set as Default
-          </Button>
+          {userDefAddrId !== address.id && (
+            <Button
+              size="small"
+              aria-label={`set ${address.user.userName}'s address as default`}
+              onClick={() => defaultAddressHandler(address.id)}
+            >
+              Set as Default
+            </Button>
+          )}
         </CardActions>
       </Card>
       <RemovalModal open={open} handleClose={handleClose} address={address} />

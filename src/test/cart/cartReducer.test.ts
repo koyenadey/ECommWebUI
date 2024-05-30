@@ -22,7 +22,7 @@ const mockCart: Product[] = [
     images: [
       {
         productId: "1",
-        imageUrl: "example1.jpg",
+        productImageUrl: "example1.jpg",
         id: "1",
         createdAt: "",
         updatedAt: "",
@@ -57,7 +57,7 @@ describe("Cart Reducer", () => {
       images: [
         {
           productId: "1",
-          imageUrl: "example1.jpg",
+          productImageUrl: "example1.jpg",
           id: "1",
           createdAt: "",
           updatedAt: "",

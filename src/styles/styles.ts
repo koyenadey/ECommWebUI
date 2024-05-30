@@ -1,5 +1,4 @@
 import { Link as RLink } from "react-router-dom";
-
 import { Box, styled } from "@mui/system";
 import {
   AppBar,
@@ -26,6 +25,9 @@ import {
   Accordion,
   ImageList,
   Avatar,
+  CardContent,
+  FormControl,
+  SelectProps,
 } from "@mui/material";
 import { InputBase } from "@mui/material";
 import modaMorphModel from "../images/model1.jpg";
@@ -43,6 +45,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import modaMorphModel2 from "../images/model3.jpeg";
+import modaMorphLogo from "../images/moda-morph.png";
+import BannerImage from "../images/BannerImage.jpeg";
+import { ToastContainer } from "react-toastify";
 
 export const StyledLink = styled(RLink)(({ theme }) => ({
   fontFamily: "Roboto, sans-serif",
@@ -89,9 +95,7 @@ export const CustomFooter = styled(Box)(({ theme }) => ({
   color: "white",
   padding: "4%4%",
 
-  // [theme.breakpoints.down("sm")]: {
-  //   width: "50%",
-  // },
+  [theme.breakpoints.down("sm")]: {},
 })) as typeof Box;
 
 export const StyledFooter = styled(Box)(({ theme }) => ({
@@ -105,16 +109,14 @@ export const StyledFooter = styled(Box)(({ theme }) => ({
 })) as typeof Box;
 
 export const StyledInformation = styled(Box)(({ theme }) => ({
+  width: "60%",
   display: "flex",
   margin: "auto",
-  [theme.breakpoints.down("xs")]: {
-    //width: "20%",
-  },
   [theme.breakpoints.between("xs", "sm")]: {
     width: "60%",
   },
-  [theme.breakpoints.up("sm")]: {
-    width: "60%",
+  [theme.breakpoints.between("xs", "sm")]: {
+    width: "100%",
   },
 })) as typeof Box;
 
@@ -125,12 +127,6 @@ export const StyledBtnFooter = styled(Button)(({ theme }) => ({
   fontFamily: "Roboto, sans-serif",
   textAlign: "center",
   fontSize: "16px",
-
-  [theme.breakpoints.down("xs")]: {
-    //margin: "1rem 1rem",
-    fontSize: "0.5rem",
-    minWidth: "0",
-  },
 
   [theme.breakpoints.between("xs", "sm")]: {
     margin: "1rem 1rem",
@@ -482,13 +478,22 @@ export const StyledBredCrumbs = styled(Breadcrumbs)(({ theme }) => ({
   },
 }));
 
-export const StyledBannerHeader = styled(Typography)(({ theme }) => ({
-  fontSize: "6rem",
-  [theme.breakpoints.down("xs")]: {
-    fontSize: "3rem",
-  },
+export const StyledPrdHeader = styled(Typography)(({ theme }) => ({
+  fontSize: "1.5rem",
   [theme.breakpoints.between("xs", "sm")]: {
-    fontSize: "4rem",
+    fontSize: "1rem",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    fontSize: "1.3rem",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    fontSize: "1.5rem",
+  },
+  [theme.breakpoints.between("lg", "xl")]: {
+    fontSize: "1.8rem",
+  },
+  [theme.breakpoints.up("xl")]: {
+    fontSize: "2rem",
   },
 })) as typeof Typography;
 
@@ -1044,7 +1049,7 @@ export const StyledPagination = styled(Pagination)(({ theme }) => ({
 })) as typeof Pagination;
 
 export const StyledContainer = styled(Container)(({ theme }) => ({
-  border: "1px solid black",
+  // border: "1px solid black",
   marginBottom: "2%",
   marginTop: "2%",
   marginX: "auto",
@@ -1081,15 +1086,20 @@ export const LogoContainer = styled(Box)({
   gap: "15px",
 });
 
-export const BackgroundImage = styled("img")({
+export const BackgroundImage = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: 0,
   left: 0,
   width: "100%",
   height: "100%",
   objectFit: "cover",
+  backgroundImage: `url(${BannerImage})`,
   zIndex: -1,
-});
+  backgroundPosition: "right",
+  [theme.breakpoints.down("sm")]: {
+    backgroundPosition: "center",
+  },
+}));
 
 export const Background = styled(Box)({
   position: "relative",
@@ -1135,8 +1145,11 @@ export const Icon = styled("span")(({ theme }) => ({
 export const FeatureIcon = styled("img")(({ theme }) => ({
   fontSize: "3rem",
   marginBottom: theme.spacing(1),
-  width: "30px", // Adjust the width and height as needed
-  height: "30px",
+  width: "40px", // Adjust the width and height as needed
+  height: "40px",
+  backgroundColor: "#f2f0f0",
+  borderRadius: "20px",
+  lineHeight: "20px",
 }));
 
 export const StyledProdCard = styled(Card)(({ theme }) => ({
@@ -1146,37 +1159,22 @@ export const StyledProdCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-export const CustomToolbar = styled(Toolbar)(({ theme }) => ({
+export const CustomToolbar = styled(Toolbar)({
   minHeight: "100px",
+  width: "100%",
   display: "flex",
   alignItems: "center",
-  margin: "1%0%",
   justifyContent: "space-between",
-  padding: "0 1rem",
-  [theme.breakpoints.down("sm")]: {
-    maxWidth: "30%",
-    padding: "0",
-  },
-}));
+  padding: "10px",
+});
 
 export const CustomLink = styled(Link)({
-  fontWeight: "bolder",
-  fontSize: "1.1rem",
-  fontFamily: "sans-serif",
-  alignSelf: "center",
   cursor: "pointer",
-  "@media (max-width: 600px)": {
-    fontSize: "0.8rem",
-    marginTop: "1%",
+  fontWeight: "800",
+  "&:hover": {
+    color: "#d7d7d7",
   },
 }) as typeof Link;
-
-export const CustomAvatar = styled(Avatar)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    width: "50px",
-    height: "50px",
-  },
-})) as typeof Avatar;
 
 /*export const NavLinksBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -1208,41 +1206,18 @@ export const CustomAvatar = styled(Avatar)(({ theme }) => ({
 })); */
 
 export const NavLinksBox = styled(Box)(({ theme }) => ({
-  display: "flex",
+  display: "none",
   gap: "1rem",
-  [theme.breakpoints.down("xs")]: {
-    gap: "1rem",
-    fontSize: "0.5rem",
-    width: "50%",
-    display: "none",
-  },
-  [theme.breakpoints.between("xs", "sm")]: {
-    gap: "1rem",
-    fontSize: "0.5rem",
-    width: "50%",
-    display: "none",
-  },
-  [theme.breakpoints.between("sm", "md")]: { display: "none" },
-  [theme.breakpoints.between("md", "lg")]: {},
-  [theme.breakpoints.between("lg", "xl")]: {},
+  [theme.breakpoints.between("xs", "sm")]: {},
+  [theme.breakpoints.between("sm", "md")]: {},
+  [theme.breakpoints.up("md")]: { display: "flex" },
 }));
 
 export const NavLinksMobileViewBox = styled(Box)(({ theme }) => ({
   display: "none",
   gap: "1rem",
-  [theme.breakpoints.down("xs")]: {
-    // gap: "1rem",
-    // fontSize: "0.5rem",
-    // width: "50%",
-    display: "flex",
-  },
-  [theme.breakpoints.between("xs", "sm")]: {
-    gap: "1rem",
-    fontSize: "0.5rem",
-    width: "50%",
-    display: "flex",
-  },
-  [theme.breakpoints.between("sm", "md")]: { display: "flex" },
+  [theme.breakpoints.down("md")]: { display: "flex" },
+  [theme.breakpoints.between("sm", "md")]: {},
   [theme.breakpoints.between("md", "lg")]: {},
   [theme.breakpoints.between("lg", "xl")]: {},
 }));
@@ -1265,16 +1240,6 @@ export const StyledMainGrid = styled(Grid)(({ theme }) => ({
   marginTop: "10vh",
 })) as typeof Grid;
 
-export const HeaderWelcomeBack = styled(Typography)(({ theme }) => ({
-  fontFamily: "Kanit, sans-serif",
-  fontWeight: "700",
-  fontSize: "40px",
-  width: "100%",
-  textAlign: "center",
-  color: "#f0f2f2",
-  mt: "30px",
-})) as typeof Typography;
-
 export const HeaderLoginBody = styled(Typography)(({ theme }) => ({
   marginTop: "40px",
   fontSize: "20px",
@@ -1296,7 +1261,6 @@ export const StyledLoginHeader = styled(Box)(({ theme }) => ({
 })) as typeof Box;
 
 export const StyledLoginImage = styled(Typography)(({ theme }) => ({
-  fontFamily: "Kanit, sans-serif",
   fontWeight: "700",
   fontSize: "20px",
   width: "100%",
@@ -1304,18 +1268,16 @@ export const StyledLoginImage = styled(Typography)(({ theme }) => ({
 })) as typeof Typography;
 
 export const StyledLoginSignupHeader = styled(Typography)(({ theme }) => ({
-  fontFamily: "Kanit, sans-serif",
   fontSize: "15px",
   width: "100%",
 })) as typeof Typography;
 
 export const StyledHeaderWelcomeBack = styled(Typography)(({ theme }) => ({
-  fontFamily: "Kanit, sans-serif",
-  fontWeight: "700",
   fontSize: "40px",
+  fontWeight: "800",
   width: "100%",
   textAlign: "center",
-  color: "#f0f2f2",
+  color: "#f2f0f0",
 })) as typeof Typography;
 
 export const StyledCreateAccountBox = styled(Box)(({ theme }) => ({
@@ -1327,10 +1289,13 @@ export const StyledCreateAccountBox = styled(Box)(({ theme }) => ({
 })) as typeof Box;
 
 export const StyledSignInBox = styled(Box)(({ theme }) => ({
+  marginTop: "20px",
   width: "100%",
   display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
   alignSelf: "center",
+  alignItems: "center",
 })) as typeof Box;
 
 export const StyledSignInButton = styled(Button)(({ theme }) => ({
@@ -1340,22 +1305,10 @@ export const StyledSignInButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#2172a1",
 })) as typeof Button;
 
-export const StyledSignInGoogleBtn = styled(Button)(({ theme }) => ({
-  fontFamily: "Kanit, sans-serif",
+export const StyledSignInSocialBtn = styled(Button)(({ theme }) => ({
   textTransform: "none",
   borderColor: "#2172a1",
   color: "#2172a1",
-  fontWeight: "400",
-  fontSize: "15px",
-})) as typeof Button;
-
-export const StyledSignInFbBtn = styled(Button)(({ theme }) => ({
-  fontFamily: "Kanit, sans-serif",
-  textTransform: "none",
-  borderColor: "#2172a1",
-  color: "#2172a1",
-  fontWeight: "400",
-  fontSize: "15px",
 })) as typeof Button;
 
 export const StyledImageList = styled(ImageList)(({ theme }) => ({
@@ -1390,10 +1343,8 @@ export const StyledProdName = styled(Typography)(({ theme }) => ({
 })) as typeof Typography;
 
 export const StyledProdPrice = styled(Typography)(({ theme }) => ({
-  fontFamily: "Cambay, sans-serif",
   marginLeft: "20px",
   fontSize: "20px",
-  color: "#686868",
 })) as typeof Typography;
 
 export const StyledProductDesc = styled(Box)(({ theme }) => ({
@@ -1421,21 +1372,18 @@ export const StyledDeliveryAccordian = styled(Accordion)(({ theme }) => ({
 })) as typeof Accordion;
 
 export const StyledProdDesc = styled(Typography)(({ theme }) => ({
-  fontFamily: "Cambay, sans-serif",
   marginY: "20px",
   fontWeight: "700",
   fontSize: "20px",
 })) as typeof Typography;
 
 export const StyledProdSpec = styled(Typography)(({ theme }) => ({
-  fontFamily: "Cambay, sans-serif",
   marginY: "20px",
   fontWeight: "700",
   fontSize: "20px",
 })) as typeof Typography;
 
 export const StyledReviews = styled(Typography)(({ theme }) => ({
-  fontFamily: "Cambay, sans-serif",
   marginY: "20px",
   fontWeight: "700",
   fontSize: "20px",
@@ -1457,3 +1405,206 @@ export const CustomFilledFeaturedButton = styled(Button)(() => ({
     color: "black",
   },
 })) as typeof Button;
+
+export const RegisterGridContainer = styled(Grid)(() => ({
+  width: "100%",
+  maxWidth: "1000px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  marginTop: "10vh",
+}));
+
+export const RegisterGridImageWrapper = styled(Grid)(() => ({
+  backgroundImage: `url(${modaMorphModel2})`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  borderRadius: "8px",
+  height: "750px",
+  width: "580px",
+}));
+
+const styledFlexColumnCenter: { [s: string]: string } = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+export const RegisterGridImageItemsWrapper = styled(Grid)(() => ({
+  ...styledFlexColumnCenter,
+  height: "100%",
+}));
+
+export const RegisterBoxFormItemsWrapper = styled(Box)(() => ({
+  ...styledFlexColumnCenter,
+  marginLeft: "20px",
+  marginRight: "20px",
+  justifyContent: "space-around",
+  height: "100%",
+}));
+
+export const RegisterBoxSigupMethodWrapper = styled(Box)(() => ({
+  ...styledFlexColumnCenter,
+  justifyContent: "space-between",
+  width: "100%",
+  height: "50%",
+}));
+
+export const RegisterBoxSigupMethodHeader = styled(Box)(() => ({
+  ...styledFlexColumnCenter,
+  width: "100%",
+}));
+
+export const StyledImageUploadButton = styled(Button)(() => ({
+  textTransform: "none",
+  width: "100%",
+  marginTop: "5px",
+  fontWeight: "700",
+})) as typeof Button;
+
+export const StyledCreateAccountButton = styled(Button)(() => ({
+  marginTop: "10px",
+  marginBottom: "10px",
+  width: "200px",
+  backgroundColor: "#2172a1",
+})) as typeof Button;
+
+export const StyledSignupAvatar = styled(Avatar)(() => ({
+  marginTop: "10px",
+  marginBottom: "10px",
+  backgroundColor: "#2172a1",
+}));
+
+export const StyledSignupButtonWrapperBox = styled(Box)(() => ({
+  ...styledFlexColumnCenter,
+  width: "100%",
+  marginTop: "15px",
+}));
+
+export const CustomFormControl = styled(FormControl)({
+  minWidth: 140,
+});
+
+export const CustomSelect = styled(Select)<SelectProps>({
+  minWidth: 120,
+});
+
+export const CustomPagination = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  margin: "4%0%",
+});
+
+export const StyledProductsCard = styled(Card)({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+});
+
+export const StyledProductCardContent = styled(CardContent)({
+  paddingBottom: "0",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#9c27b0",
+  },
+});
+
+export const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  background: "#2272a1",
+  color: "#f0f0f0",
+  "&:hover": {
+    background: theme.palette.info.light,
+    color:
+      theme.palette.mode === "dark" ? theme.palette.common.black : "#f0f0f0",
+  },
+  padding: "8px",
+  borderRadius: "50%",
+}));
+
+export const StyledTableHeader = styled(TableCell)({
+  fontWeight: "700",
+  fontSize: "16px",
+});
+
+export const CustomToastContainer = styled(ToastContainer)`
+  .Toastify__toast--success {
+    background: rgba(
+      73,
+      238,
+      15,
+      0.5
+    ) !important; /* Set the desired transparency */
+  }
+`;
+export const PageContainer = styled(Container)({
+  marginTop: "20px",
+  marginBottom: "50px",
+});
+
+export const StyledWishlistButton = styled(IconButton)(({ theme }) => ({
+  background: "#2272a1",
+  color: "#f0f0f0",
+  "&:hover": {
+    background: theme.palette.info.light,
+    color:
+      theme.palette.mode === "dark" ? theme.palette.common.black : "#f0f0f0",
+  },
+  padding: "8px",
+  borderRadius: "50%",
+}));
+
+export const StyledWishlistCard = styled(Card)({
+  maxWidth: "345px",
+  height: "380px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+});
+
+export const StyledWishlistCardContent = styled(CardContent)({
+  paddingBottom: "0",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#9c27b0",
+  },
+});
+export const StyledCartContainer = styled(Box)(({ theme }) => ({
+  //padding: '20px',
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+  backgroundColor: theme.palette.mode === "dark" ? "black" : "#f0f0f0",
+  width: "100%",
+  paddingBottom: "50px",
+}));
+
+export const StyledBox = styled(Box)(({ theme }) => ({
+  padding: "40px",
+  width: "80%",
+  boxShadow: "1px 1px 1px #4e4e4e",
+  backgroundColor: theme.palette.mode === "dark" ? "#2e2e2e" : "#fefefe",
+  borderRadius: "8px",
+  maxWidth: "1000px",
+}));
+
+export const StyledImage = styled("img")({
+  width: "80px",
+  height: "80px",
+  borderRadius: "10px",
+});
+
+export const StyledCartItem = styled(Grid)({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "10px 0",
+});
+
+export const StyledCartItemQuamtityGrid = styled(Grid)({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+});

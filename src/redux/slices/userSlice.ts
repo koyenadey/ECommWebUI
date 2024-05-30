@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { AddressType, UserType } from "../../misc/type";
+import { AddressType, Product, UserType } from "../../misc/type";
 import { Token } from "../../misc/type";
 
 import fetchUser from "../thunks/fetchUser";
@@ -14,6 +14,9 @@ import updateAddress from "../thunks/updateAddress";
 import fetchDefaultAddress from "../thunks/fetchDefaultAddress";
 import deleteUserAddress from "../thunks/deleteUserAddress";
 import checkEmailExists from "../thunks/checkEmailExists";
+import fetchWishlist from "../thunks/fetchWishlist";
+import exp from "constants";
+import setDefaultAddress from "../thunks/setDefaultAddress";
 
 type InitialState = {
   user: UserType | undefined;
@@ -23,6 +26,7 @@ type InitialState = {
   tokens: Token;
   isLoading: boolean;
   isLoggedIn: boolean;
+  themeMode: "light" | "dark";
   error: string;
   emailExist: boolean;
 };
@@ -38,6 +42,7 @@ const initialState: InitialState = {
   isLoading: true,
   error: "",
   isLoggedIn: false,
+  themeMode: "light",
   emailExist: false,
 };
 
@@ -57,6 +62,9 @@ const userSlice = createSlice({
     },
     setToken: (state, action: PayloadAction<string>) => {
       state.tokens.refreshToken = action.payload;
+    },
+    setThemeMode: (state, action: PayloadAction<"light" | "dark">) => {
+      state.themeMode = action.payload;
     },
   },
   extraReducers(builder) {
@@ -409,9 +417,37 @@ const userSlice = createSlice({
         error: payload.message,
       };
     });
+
+    builder.addCase(setDefaultAddress.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    });
+
+    builder.addCase(
+      setDefaultAddress.fulfilled,
+      (state, action: PayloadAction<AddressType>) => {
+        return {
+          ...state,
+          isLoading: false,
+          defaultAddId: action.payload.id,
+          error: "",
+        };
+      }
+    );
+
+    builder.addCase(setDefaultAddress.rejected, (state, action) => {
+      const payload = action.payload as { message: string };
+      return {
+        ...state,
+        isLoading: false,
+        error: payload.message,
+      };
+    });
   },
 });
 
 const userReducer = userSlice.reducer;
-export const { resetLogin, setToken } = userSlice.actions;
+export const { resetLogin, setToken, setThemeMode } = userSlice.actions;
 export default userReducer;

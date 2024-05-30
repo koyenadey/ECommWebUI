@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { AppState, useAppDispatch } from "../redux/store";
 import createUserLogin from "../redux/thunks/createUserLogin";
 import { USER_LOGINURL } from "../constants";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -30,8 +30,7 @@ import {
   StyledMainGrid,
   StyledSignInBox,
   StyledSignInButton,
-  StyledSignInFbBtn,
-  StyledSignInGoogleBtn,
+  StyledSignInSocialBtn,
 } from "../styles/styles";
 
 type InitialValues = {
@@ -92,7 +91,7 @@ const Login = () => {
       </StyledLoginImgGrid>
       <Grid item xs={12} sm={7} md={6}>
         <StyledLoginHeader>
-          <Avatar sx={{ m: 1, bgcolor: "#2172a1" }}>
+          <Avatar sx={{ bgcolor: "#2172a1" }}>
             <LockOutlinedIcon />
           </Avatar>
           <StyledLoginImage component="h1">Sign in</StyledLoginImage>
@@ -100,7 +99,7 @@ const Login = () => {
             Dont have an account yet?{" "}
             <Link onClick={() => navigate("/register")}>Sign-up</Link> here
           </StyledLoginSignupHeader>
-          <Box sx={{ mt: 1 }}>
+          <Box>
             <form onSubmit={handleSubmit(submitHandler)}>
               <FormControl fullWidth>
                 <TextField
@@ -165,31 +164,39 @@ const Login = () => {
                 <StyledSignInButton type="submit" variant="contained">
                   Sign In
                 </StyledSignInButton>
+                <Button variant="text" sx={{ textTransform: "none" }}>
+                  <Link
+                    onClick={() => navigate("/")}
+                    sx={{ textDecoration: "none", mt: 0 }}
+                  >
+                    Cancel and go back
+                  </Link>
+                </Button>
               </StyledSignInBox>
             </form>
           </Box>
-          <Box>
+          <Box width="100%">
             <Divider>
               <Chip label="Or" size="small" />
             </Divider>
-            <Grid container spacing={2} sx={{ mt: "10px" }}>
-              <Grid item xs={12}>
-                <StyledSignInGoogleBtn
+            <Grid container spacing={2} marginTop="10px">
+              <Grid item xs={12} xl={12}>
+                <StyledSignInSocialBtn
                   variant="outlined"
                   startIcon={<GoogleIcon />}
                   fullWidth
                 >
                   Sign in with Google
-                </StyledSignInGoogleBtn>
+                </StyledSignInSocialBtn>
               </Grid>
-              <Grid item xs={12}>
-                <StyledSignInFbBtn
+              <Grid item xs={12} xl={12}>
+                {/*<StyledSignInSocialBtn
                   variant="outlined"
                   startIcon={<FacebookIcon />}
                   fullWidth
                 >
                   Sign in with Facebook
-                </StyledSignInFbBtn>
+                </StyledSignInSocialBtn>*/}
               </Grid>
             </Grid>
           </Box>

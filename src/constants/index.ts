@@ -27,3 +27,9 @@ export const CATGET_URL = baseUrl + "api/v1/categories";
 
 //Orders
 export const ORDER_GETURL = baseUrl + "api/v1/orders";
+
+//Reviews
+export const REVIEW_GETURL = baseUrl + "api/v1/reviews";
+
+//Wishlist
+export const WISHLIST_GETURL = baseUrl + "api/v1/wishlists";

@@ -18,7 +18,6 @@ import {
   CardMedia,
   Divider,
   MenuItem,
-  Typography,
 } from "@mui/material";
 import OrderPagePopUp from "../../components/cart/OrderPagePopUp";
 import {
@@ -26,7 +25,7 @@ import {
   StyledDetailsHeader,
   StyledPrdDesc,
   StyledPrdDetails,
-  //StyledPrdHeader,
+  StyledPrdHeader,
   StyledPrice,
   StyledQtyDdl,
   StyledSubTotalPrice,
@@ -86,12 +85,12 @@ const ProductDetails1 = () => {
             component="img"
             alt={productDetails?.name}
             height="20%"
-            image={productDetails?.images[0].imageUrl}
+            image={productDetails?.images[0].productImageUrl}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <StyledPrdHeader gutterBottom variant="h5" component="div">
               {productDetails?.name}
-            </Typography>
+            </StyledPrdHeader>
             <StyledPrdDesc variant="body2" color="text.secondary" m={2}>
               {productDetails?.description}
             </StyledPrdDesc>

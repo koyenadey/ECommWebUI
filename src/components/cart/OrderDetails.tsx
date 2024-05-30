@@ -157,8 +157,8 @@ const OrderDetails = () => {
                 <img
                   height="10%"
                   width="20%"
-                  srcSet={`${item.images[0].imageUrl}?w=50&h=50&fit=crop&auto=format&dpr=5 20x`}
-                  src={`${item.images[0].imageUrl}?w=50&h=50&fit=crop&auto=format`}
+                  srcSet={`${item.images[0].productImageUrl}?w=50&h=50&fit=crop&auto=format&dpr=5 20x`}
+                  src={`${item.images[0].productImageUrl}?w=50&h=50&fit=crop&auto=format`}
                   alt={item.name}
                   loading="lazy"
                 />

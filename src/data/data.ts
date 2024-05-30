@@ -9,7 +9,7 @@ export let mockProducts: Product[] = [
     images: [
       {
         productId: "1",
-        imageUrl: "example1.jpg",
+        productImageUrl: "example1.jpg",
         id: "1",
         createdAt: "",
         updatedAt: "",
@@ -35,7 +35,7 @@ export let mockProducts: Product[] = [
     images: [
       {
         productId: "1",
-        imageUrl: "example1.jpg",
+        productImageUrl: "example1.jpg",
         id: "1",
         createdAt: "",
         updatedAt: "",
@@ -106,42 +106,11 @@ export const modalMessageFailed =
   "This address is used as your residential address for digital purchases. To delete this address, first set a different residential address for your digital purchases.";
 
 export const userMenuData = [
-  { type: "Profile", url: "/profile", state: "" },
-  { type: "Order History", url: "/order-history", state: "" },
+  //{ type: "Profile", url: "/profile", state: "" },
+  //{ type: "Order History", url: "/order-history", state: "" },
   { type: "About Us", url: "/aboutus", state: "aboutus" },
   { type: "Shipping & Returns", url: "/aboutus", state: "shipping" },
   { type: "Customer Care", url: "/aboutus", state: "customercare" },
   //{ type: "LogOut", url: "/" },
 ];
 export const userDashboardUrl = "/dashboard";
-
-export const products = [
-  {
-    id: "6c37e6fe-03f2-43eb-8f2f-e44a47659e8d",
-    name: "Lilac crop top",
-    price: "$59.99",
-    image:
-      "https://res.cloudinary.com/dpdhvztg3/image/upload/v1716768336/63a5055c-2557-4ffa-935b-fc898c41b8b3.jpg",
-  },
-  {
-    id: "33beb0b9-6a80-4288-8b60-375066ef036b",
-    name: "Yellow culottes",
-    price: "$48.99",
-    image:
-      "https://res.cloudinary.com/dpdhvztg3/image/upload/v1716768459/9075f767-4ec5-41fe-9a33-f7a7e6a43c01.jpg",
-  },
-  {
-    id: "198ffbd1-7396-4000-a16a-cd5b0e934c33",
-    name: "Magenta boots",
-    price: "$69.99",
-    image:
-      "https://res.cloudinary.com/dpdhvztg3/image/upload/v1716767610/MagentaBoot_kitrk0.webp",
-  },
-  {
-    id: "e30486c0-5d7a-4540-a8f3-4537b80293d8",
-    name: "Blue Denim Jacket",
-    price: "$29.99",
-    image:
-      "https://res.cloudinary.com/dpdhvztg3/image/upload/v1716767610/Denim_jacket_ixb4iq.webp",
-  },
-];

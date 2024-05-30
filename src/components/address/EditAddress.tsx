@@ -206,7 +206,7 @@ const EditAddress = () => {
               <Button
                 variant="outlined"
                 color="secondary"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/profile")}
               >
                 Cancel
               </Button>

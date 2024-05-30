@@ -128,7 +128,7 @@ const orderSlice = createSlice({
 
     builder.addCase(updateOrder.fulfilled, (state, action) => {
       const updatedOrders = state.orders.filter(
-        (o) => o.orderId !== action.payload.orderId
+        (o) => o.id !== action.payload.id
       );
       updatedOrders.push(action.payload);
       return {
