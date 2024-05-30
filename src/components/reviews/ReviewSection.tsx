@@ -22,6 +22,7 @@ import fetchReviews from "../../redux/thunks/fetchReviews";
 import createReview from "../../redux/thunks/createReview";
 import { REVIEW_GETURL } from "../../constants";
 import { transformToReviewForm } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 const SectionContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -86,6 +87,8 @@ const CustomAccordion = styled(Accordion)({
 });
 
 const ReviewSection = (props: ReviewSectionProps) => {
+  const navigate = useNavigate();
+  const [expanded, setExpanded] = React.useState<string | false>(false);
   const token = localStorage.getItem("refresh-token") ?? "";
   const reviews = useSelector((state: AppState) => state.reviewReducer.reviews);
   const userId = useSelector((state: AppState) => state.userReducer.user?.id);
@@ -129,7 +132,10 @@ const ReviewSection = (props: ReviewSectionProps) => {
     const review = transformToReviewForm(data);
 
     try {
-      dispatch(createReview({ baseUrl: `${REVIEW_GETURL}`, token, review }));
+      const result = await dispatch(
+        createReview({ baseUrl: `${REVIEW_GETURL}`, token, review })
+      );
+      if (result) navigate("/products/all");
     } catch (err) {
       console.log(err);
     }

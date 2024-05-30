@@ -19,6 +19,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MasterPage from "../components/master-page/MasterPage";
 import Avatar from "@mui/material/Avatar";
 import {
+  AddShoppingCart,
   Favorite,
   FavoriteOutlined,
   PreviewOutlined,
@@ -147,7 +148,7 @@ const Wishlist = () => {
                         aria-label="addtocart"
                         onClick={() => addToCartHandler(item.product)}
                       >
-                        <FavoriteOutlined />
+                        <AddShoppingCart />
                       </StyledWishlistButton>
                     </Tooltip>
                   </Box>
