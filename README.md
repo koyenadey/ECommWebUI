@@ -120,15 +120,15 @@ ModaMorph uses the following features -
 ## Architechture
 
 | Feature                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| **Architecture**              | ModaMorph is built using `React`.This is a multi page application with all code written in `Typescript` and all styles in `MaterialUI` for front end and the backend with Asp.Net core.ModaMorph is equipped with `accessibility` and `responsiveness` for Small screen upto 650px Medium Screen upt0 900px, Large screen upto 1024 and extra large 1200px and up.                                                                                                                                             |
-| **Context API for MUI theme** | The project is built using `MUI` and `Context API` to for customizing the theme accross the application and switching to dark & light mode.                                                                                                                                                                                                                                                                                                                                                                    |     |
-| **Central application state** | The application's state is centrally managed by the Redux store, offering several advantages. By utilizing Redux, we mitigate prop drilling, ensuring a cleaner and more maintainable codebase. Additionally, it establishes a single source of truth for the application's data, enhancing predictability and simplifying state management across components. This approach streamlines development and fosters scalability, ultimately contributing to a more robust and efficient application architecture. |     |
-| **Performance**               | The application is is powered by techniques such as lazy loading for reducing the load time.                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Searching**                 | ModaMorph is enabled to search data with title or price and is enabled with `debounce` features for performance optimisation.                                                                                                                                                                                                                                                                                                                                                                                  |
-| **Sorting**                   | ModaMorph is enabled to sort the data based on **title** and **price** in both `ascending` and `descending order`. This feature also supports `Lazy Loading                                                                                                                                                                                                                                                                                                                                                    |
-| **Pagination**                | ModaMorph is enabled to **progressive pagination** based on search / sort functionalities wher total product count is updated accordingly coming from backend.                                                                                                                                                                                                                                                                                                                                                 |
-| **ScrollTosections**          | ModaMorph is enabled to **progressive traversal** based on the options selected accordingly. Selecting `AboutUs` traverses to the exact location of the paragraph where it is situated in the Page and not a generic location                                                                                                                                                                                                                                                                                  |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Architecture**              | ModaMorph is built using `React`. This is a multi-page application with all code written in `TypeScript` and all styles in `MaterialUI` for the front end, and the backend is built with ASP.NET Core. ModaMorph is equipped with `accessibility` and `responsiveness` for small screens up to 650px, medium screens up to 900px, large screens up to 1024px, and extra-large screens 1200px and up.                                                                                                           |
+| **Context API for MUI theme** | The project is built using `MUI` and `Context API` for customizing the theme across the application and switching between dark and light modes.                                                                                                                                                                                                                                                                                                                                                                |
+| **Central application state** | The application's state is centrally managed by the Redux store, offering several advantages. By utilizing Redux, we mitigate prop drilling, ensuring a cleaner and more maintainable codebase. Additionally, it establishes a single source of truth for the application's data, enhancing predictability and simplifying state management across components. This approach streamlines development and fosters scalability, ultimately contributing to a more robust and efficient application architecture. |
+| **Performance**               | The application is powered by techniques such as lazy loading to reduce load time.                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Searching**                 | ModaMorph enables data search by title or price and is equipped with `debounce` features for performance optimization.                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Sorting**                   | ModaMorph enables data sorting based on **title** and **price** in both `ascending` and `descending` order. This feature also supports `lazy loading`.                                                                                                                                                                                                                                                                                                                                                         |
+| **Pagination**                | ModaMorph is enabled with **progressive pagination** based on search/sort functionalities, with the total product count updated accordingly from the backend.                                                                                                                                                                                                                                                                                                                                                  |
+| **ScrollToSections**          | ModaMorph is enabled with **progressive traversal** based on the options selected. Selecting `AboutUs` traverses to the exact location of the paragraph where it is situated on the page and not a generic location.                                                                                                                                                                                                                                                                                           |
 
 ### Screenshots
 
@@ -142,11 +142,16 @@ ModaMorph uses the following features -
 
 `Login Page`
 
-![Login Page](./readme_images/LoginPage.png)
+![Login Page](./readme_images/login.png)
+
+`Register Page`
+
+![Register Page](./readme_images/register.png)
+![RegisterWithEmail](./readme_images/register1.png)
 
 `Products Page - All Products`
 
-![Products - Clothes](./readme_images/AllProducts.png)
+![Products - Clothes](./readme_images/productsPage.png)
 
 `Product Details`
 
@@ -162,11 +167,17 @@ ModaMorph uses the following features -
 
 `Cart Page`
 
-![Cart](./readme_images/user_cart_web.png)
+![Cart](./readme_images/cart.png)
 
-`Cart Address Selection`
+![Cart](./readme_images/cartwithorderbtn.png)
 
-![Cart](./readme_images/cartaddressselection.png)
+`Order History`
+
+![OrderHistoryPage](./readme_images/orderhistory.png)
+
+`Wish List`
+
+![Wishlist](./readme_images/wishlist.png)
 
 `Admin Page`
 
@@ -198,23 +209,30 @@ ModaMorph hosts all the visual components of the UI layer. The project utilizes 
 
 This is the landing page with navigation bar and footer. It also has menu and option to switch to dark mode.
 
+![HomePage](./readme_images/HomePageWeb.png)
+
 ### DashBoard
 
 This page is available only for the admins. Once a user who is admin logs in can see the dasboard that has list of all users and products and can add, delete or update products.
+![Dashboard](./readme_images/user_dashboard.png)
 
 ### Login
 
 This page is used for Login to the application using email & password and also has a option to register if new user.
 
+![LoginPage](./readme_images/login.png)
+
 ### Register
 
 This page is used to register a user in the application using email and a password. Currently google login is not available, but it will be available in the upcoming features.
+
+![RegisterPage](./readme_images/register.png)
 
 ### ProductsPage
 
 This page is responsible for listing all the products pertaining top a category selected or All products if selected. Each product listed has an eye button that redirects to the details page where user can added the product to the cart.
 
-![Products - Clothes](./readme_images/AllProducts.png)
+![Products - Clothes](./readme_images/productsPage.png)
 
 `Product Details`
 
@@ -222,7 +240,7 @@ This page is responsible for listing all the products pertaining top a category 
 
 ### Profile
 
-This page is only available if the user logs in and can be customer or admin. This page is available to both and they can update their name or email information is they want to.
+This page is only available if the user logs in and can be customer or admin. This page is available to both and they can update their name or adresses information is they want to.
 
 `User Address Web Layout`
 
@@ -231,6 +249,18 @@ This page is only available if the user logs in and can be customer or admin. Th
 `User Address Mobile Layout`
 
 ![Address](./readme_images/user_address_mobile.png)
+
+### OrderHistory
+
+This page contains the order history of the user with all details like order total and delivery status and all.
+
+![OrderHistory](./readme_images/orderhistory.png)
+
+### Wishlist
+
+This page contains the all the products that users want to add to their wishlist.
+
+![Wishlist](./readme_images/wishlist.png)
 
 ### AboutUs
 
